@@ -274,7 +274,7 @@ function updatePlayer(p, dt) {
 
   // peligros del suelo
   const pc = txOf(p.x), pr = tyOf(p.y), tiles = G.room.tiles;
-  if (!fly && !P.has('socks') && inGrid(pc, pr) && tiles[pr * COLS + pc] === T.SPIKE) hurtPlayer(2, 'Unos pinchos');
+  if (!fly && !P.has('socks') && inGrid(pc, pr) && tiles[pr * COLS + pc] === T.SPIKE && hurtPlayer(2, 'Unos pinchos') && G.room.type === 'sacrifice') G.sacrifice();
   if (!P.has('fireimmune')) for (let r = pr - 1; r <= pr + 1; r++) for (let c = pc - 1; c <= pc + 1; c++) {
     if (!inGrid(c, r) || tiles[r * COLS + c] !== T.FIRE) continue;
     const bx = X0 + c * TILE, by = Y0 + r * TILE;
@@ -973,18 +973,37 @@ function endETear(t) {
   G.effects.push({ type: 'splash', x: t.x, y: t.y - Math.max(0, t.z), t: 0, max: 0.22, color: t.color, r: t.r });
 }
 
+// ---------- Bestiario ----------
+// Apunta que se ha visto un enemigo o jefe (se guarda al momento) y suma derrotas (se guardan con el resto de datos).
+function bestiarySee(id) {
+  const b = Store.data.bestiary || (Store.data.bestiary = {});
+  if (b[id] == null) { b[id] = 0; Store.save(); }
+}
+function bestiaryKill(id) {
+  const b = Store.data.bestiary;
+  if (b && b[id] != null) b[id]++;
+}
+
 // ---------- Enemigos ----------
 function makeEnemy(type, x, y, o = {}) {
   const d = EN[type] || { hp: 10, r: 12, speed: 60 };
-  const sc = 1 + G.floorIdx * 0.2;
+  if (!o.noSeen && EN[type]) bestiarySee(type);
+  const sc = 1 + G.floorIdx * DIFFICULTY.hpPerFloor;
   const e = {
     type, x, y, vx: 0, vy: 0, kx: 0, ky: 0, r: d.r, hp: d.hp * sc, maxHp: d.hp * sc,
     flying: !!d.fly, speed: d.speed, t: Math.random() * 1.5, t2: rr(0.8, 2.2), state: 0,
     flash: 0, dead: false, champ: false, boss: false, contact: true, slow: 0,
     spawnT: o.spawnT != null ? o.spawnT : 0.5, z: 0, anim: Math.random() * 10, face: 1, kb: 1, dirx: 0, diry: 0, hit: null,
   };
-  if (o.champ) { e.champ = true; e.hp *= 2; e.maxHp *= 2; e.r *= 1.12; }
+  if (o.champ) {
+    const kind = typeof o.champ === 'string' && CHAMPIONS[o.champ] ? o.champ : pickChampion(), ch = CHAMPIONS[kind];
+    e.champ = kind; e.hp *= ch.hp; e.maxHp *= ch.hp; e.r *= ch.r;
+    if (ch.speed) e.speed *= ch.speed;
+  }
   if (type === 'host') e.shielded = true;
+  if (d.armor) { e.armor = true; e.hd = Math.random() * TAU; }
+  if (d.kb !== undefined) e.kb = d.kb;
+  if (d.immune) e.immune = true;
   return e;
 }
 function spawnEnemy(type, x, y) { const e = makeEnemy(type, x, y, { spawnT: 0.15 }); G.enemies.push(e); return e; }
@@ -995,8 +1014,9 @@ function bossPos(side, off) {
   return { x: CX - D.dx * off, y: CY - D.dy * off * 0.55 };
 }
 
-function makeBoss(id, side) {
+function makeBoss(id, side, quiet) {
   const b = BOSSES[id];
+  if (!quiet) bestiarySee(id);
   const final = id === 'mama' || id === 'corazon';
   const sc = final ? 1 : 1 + G.floorIdx * 0.22;
   const pos = id === 'corazon' ? { x: CX, y: CY } : bossPos(side, id === 'masa' ? 170 : 120);
@@ -1030,14 +1050,32 @@ function applyStatus(e, k, s, dmg) {
   e[k] = Math.max(e[k] || 0, s);
 }
 
+// Fase 2 de un jefe: al bajar del 50 % de vida suelta un grito (anillo de 12 lágrimas rojas), sacude la pantalla y queda
+// protegido 1 s; a partir de ahí lleva un aura roja. Cada jefe añade sus ataques propios con `e.hp < e.maxHp * 0.5` en BEHAV
+function startPhase2(e) {
+  e.phase2 = true; e.p2T = 1; e.shielded = true; e.flash = 0.3;
+  const off = Math.random() * TAU;
+  for (let i = 0; i < 12; i++) { const a = off + i * TAU / 12; eTear(e.x, e.y - 8, Math.cos(a) * 120, Math.sin(a) * 120, { boss: true, color: '#ff5a40', src: e.name }); }
+  G.shake = Math.max(G.shake, 0.4); Sfx.play('roar');
+  G.effects.push({ type: 'poof', x: e.x, y: e.y - 8, t: 0, max: 0.6, r: e.r + 20 });
+  G.showBanner(e.name, '¡Se enfurece!', 1.6);
+}
+
 function updateEnemy(e, dt) {
   e.anim += dt;
   if (e.flash > 0) e.flash -= dt;
+  if (e.boss && !e.parent && !e.phase2 && e.hp < e.maxHp * 0.5 && !e.dead) startPhase2(e);
+  if (e.p2T > 0) { e.p2T -= dt; if (e.p2T <= 0) e.shielded = false; }
   for (const k of ['poison', 'burn', 'bleed']) {
     if (!(e[k] > 0)) continue;
     e[k] -= dt; e[k + 'T'] -= dt;
     if (e[k + 'T'] <= 0) { e[k + 'T'] = 0.4; damageEnemy(e, e[k + 'Dmg'], null, true); if (e.dead) return; }
     if (e[k] <= 0) e[k + 'Dmg'] = 0;
+  }
+  if (e.immune) { e.slow = e.freeze = e.fear = e.charm = e.confuse = 0; e.kx = e.ky = 0; }   // inmune a empuje y a estados
+  if (e.champ === 'regen') {   // campeón regenerador: tras 1,5 s sin daño recupera un 8 % de vida máxima por segundo
+    e.rgT = e.flash > 0 ? 0 : (e.rgT || 0) + dt;
+    if (e.rgT > 1.5 && e.hp < e.maxHp) e.hp = Math.min(e.maxHp, e.hp + e.maxHp * 0.08 * dt);
   }
   let sdt = dt;
   if (e.slow > 0) { e.slow -= dt; sdt *= 0.5; }
@@ -1077,7 +1115,17 @@ function updateEnemy(e, dt) {
 
 function damageEnemy(e, dmg, src, silent, force) {
   if (e.dead) return;
-  if ((e.shielded || e.untargetable) && !force) return;
+  if ((e.shielded || e.untargetable || (e.parent && e.parent.shielded)) && !force) return;
+  // armadura: los golpes con dirección (lágrimas, láseres, cuchillos) que llegan de frente rebotan;
+  // veneno, fuego, explosiones y golpes por detrás o de lado hacen daño normal
+  if (e.armor && src && !force) {
+    const l = Math.hypot(src.vx, src.vy);
+    if (l > 0 && (src.vx * Math.cos(e.hd) + src.vy * Math.sin(e.hd)) / l < -0.3) {
+      Sfx.play('tink'); e.flash = 0.05;
+      G.effects.push({ type: 'poof', x: e.x + Math.cos(e.hd) * e.r, y: e.y + Math.sin(e.hd) * e.r - 4, t: 0, max: 0.2, r: 7 });
+      return;
+    }
+  }
   const tgt = e.parent || e;
   if (tgt.dead) return;
   tgt.hp -= dmg; e.flash = 0.09; tgt.flash = 0.09;
@@ -1093,11 +1141,12 @@ function damageEnemy(e, dmg, src, silent, force) {
 function killEnemy(e) {
   if (e.dead) return;
   if (e.type === 'globin' && e.state !== 'goo') {
-    Object.assign(e, { state: 'goo', hp: 7 * (1 + G.floorIdx * 0.2), t2: 4, contact: false, vx: 0, vy: 0, poison: 0, burn: 0, bleed: 0 });
+    Object.assign(e, { state: 'goo', hp: 7 * (1 + G.floorIdx * DIFFICULTY.hpPerFloor), t2: 4, contact: false, vx: 0, vy: 0, poison: 0, burn: 0, bleed: 0 });
     bloodBurst(e.x, e.y, 6); Sfx.play('kill');
     return;
   }
   e.dead = true;
+  if (!e.parent) bestiaryKill(e.type);
   G.run.kills++;
   const big = e.boss ? 3 : 1;
   bloodBurst(e.x, e.y - 6, Math.round((6 + e.r * 0.6) * big), e.type === 'boomfly' ? '#7a3a10' : '#7d0f12');
@@ -1108,7 +1157,12 @@ function killEnemy(e) {
     case 'mulligan': for (let i = 0; i < 3; i++) spawnEnemy('afly', e.x + rr(-8, 8), e.y + rr(-8, 8)); break;
     case 'bigspider': for (let i = 0; i < 2; i++) spawnEnemy('spider', e.x + rr(-8, 8), e.y + rr(-8, 8)); break;
     case 'hive': for (let i = 0; i < 3; i++) spawnEnemy('afly', e.x + rr(-8, 8), e.y + rr(-8, 8)); break;
+    case 'jelly': for (let i = 0; i < 2; i++) spawnEnemy('jellet', e.x + rr(-8, 8), e.y + rr(-8, 8)); break;
   }
+  if (e.type === 'mine') explode(e.x, e.y, 50, 25, true, 'Una mina');
+  if (e.type === 'pira' && e.fires) { for (const i of e.fires) if (G.room.tiles[i] === T.FIRE) { G.room.tiles[i] = T.EMPTY; G.room.thp[i] = 0; } G.flowT = 0; }
+  if (e.champ === 'volatile') explode(e.x, e.y, 55, 20, true, 'Un campeón explosivo');
+  if (e.champ === 'toxic') for (let i = 0; i < 3; i++) G.creeps.push({ x: e.x + rr(-14, 14), y: e.y + rr(-8, 8) + 6, r: rr(20, 26), t: 5, max: 5, col: '#58b24a', src: 'Un campeón tóxico' });
   if (e.champ) spawnPickup(Math.random() < 0.7 ? 'heart' : 'soul', e.x, e.y);
   if (e.segs) for (const s of e.segs) if (!s.dead) { s.dead = true; bloodBurst(s.x, s.y, 8); addDecal({ type: 'blood', x: s.x, y: s.y, r: 14, rot: Math.random() * TAU }); }
   if (e.boss && !e.parent) {
@@ -1655,7 +1709,17 @@ function touchStatic(pk) {
       else if (p.maxRed >= h && (p.maxRed > h || p.soul + p.black > 0)) { p.maxRed -= h; clampHearts(p); }
       else if (p.soul + p.black >= 6 && (p.soul + p.black > 6 || p.maxRed > 0)) { let n = 6; const s = Math.min(p.soul, n); p.soul -= s; n -= s; p.black -= n; }
       else return;
-      pk.hprice = null; G.run.devilTaken = true; Sfx.play('devil');
+      pk.hprice = null; Sfx.play('devil');
+    } else if (pk.sprice) {
+      const n = pk.sprice, halves = n * 2, have = p.soul + p.black;
+      if (p.lost) { /* gratis para The Lost */ }
+      else if (p.keeper || P.has('poundflesh')) { const c = 15 * n; if (p.coins < c) return; p.coins -= c; }
+      else if (have >= halves && (have > halves || p.red > 0)) { let h = halves; const s = Math.min(p.soul, h); p.soul -= s; h -= s; p.black -= h; }
+      else return;
+      pk.sprice = null; Sfx.play('devil');
+    } else if (pk.kprice) {
+      if (!p.lost) { if (p.keys < pk.kprice) return; p.keys -= pk.kprice; }
+      pk.kprice = null; Sfx.play('unlock');
     } else if (pk.price != null) {
       if (P.has('poundflesh') && pk.shop) { if (p.maxRed < 1 || p.maxRed === 1 && p.soul + p.black === 0) return; p.maxRed--; clampHearts(p); }
       else { const c = shopPrice(pk); if (p.coins < c) return; p.coins -= c; }
@@ -1731,7 +1795,7 @@ function updateCreeps(dt) {
   const p = G.player, P = p.passive;
   for (const c of G.creeps) {
     c.t -= dt;
-    if (!isFlying(p) && !P.has('socks') && c.t > 0.3 && Math.hypot(p.x - c.x, p.y - c.y) < c.r * 0.8 + 3) hurtPlayer(dmgUnit(true), c.src);
+    if (!isFlying(p) && !P.has('socks') && c.t > 0.3 && Math.hypot(p.x - c.x, p.y - c.y) < c.r * 0.8 + 3) hurtPlayer(dmgUnit(!c.small), c.src);
   }
   G.creeps = G.creeps.filter(c => c.t > 0);
   for (const c of G.pcreeps) {

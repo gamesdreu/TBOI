@@ -10,22 +10,56 @@ const THEMES = {
 };
 
 const FLOORS = [
-  { name: 'Sótano I', theme: 'basement', bosses: ['gloton', 'zumbido', 'gusano'] },
-  { name: 'Sótano II', theme: 'basement', bosses: ['gloton', 'zumbido', 'gusano'] },
-  { name: 'Cuevas I', theme: 'caves', bosses: ['masa', 'llorona', 'gusano', 'gloton'] },
-  { name: 'Cuevas II', theme: 'caves', bosses: ['masa', 'llorona', 'zumbido', 'gloton'] },
-  { name: 'Profundidades I', theme: 'depths', bosses: ['masa', 'llorona', 'gloton', 'gusano'] },
+  { name: 'Sótano I', theme: 'basement', bosses: ['gloton', 'zumbido', 'gusano', 'babosa', 'gtopo'] },
+  { name: 'Sótano II', theme: 'basement', bosses: ['gloton', 'zumbido', 'gusano', 'babosa', 'gtopo'] },
+  { name: 'Cuevas I', theme: 'caves', bosses: ['masa', 'llorona', 'gusano', 'gloton', 'coloso', 'rey'] },
+  { name: 'Cuevas II', theme: 'caves', bosses: ['masa', 'llorona', 'zumbido', 'gloton', 'coloso', 'rey'] },
+  { name: 'Profundidades I', theme: 'depths', bosses: ['masa', 'llorona', 'gloton', 'gusano', 'carcelero', 'pira'] },
   { name: 'Profundidades II', theme: 'depths', bosses: ['mama'] },
-  { name: 'Útero I', theme: 'womb', bosses: ['masa', 'llorona', 'zumbido', 'gusano'] },
+  { name: 'Útero I', theme: 'womb', bosses: ['masa', 'llorona', 'zumbido', 'gusano', 'coagulo', 'placenta'] },
   { name: 'Útero II', theme: 'womb', bosses: ['corazon'] },
 ];
 
 const ENEMY_POOLS = {
-  basement: [['fly', 3], ['afly', 3], ['pooter', 2], ['gaper', 3], ['horf', 2], ['clotty', 2], ['spider', 2], ['charger', 1], ['hopper', 2]],
-  caves: [['afly', 2], ['pooter', 2], ['gaper', 2], ['spider', 2], ['charger', 2], ['hopper', 2], ['boomfly', 2], ['host', 2], ['fatty', 1], ['mulligan', 2], ['bigspider', 1], ['clotty', 1]],
-  depths: [['gaper', 2], ['host', 3], ['fatty', 2], ['mulligan', 2], ['globin', 3], ['bigspider', 2], ['hive', 2], ['boomfly', 2], ['leaper', 2], ['clotty', 2], ['charger', 1]],
-  womb: [['globin', 3], ['leaper', 3], ['hive', 2], ['host', 3], ['fatty', 2], ['boomfly', 2], ['afly', 3], ['bigspider', 2], ['clotty', 2], ['charger', 2]],
+  basement: [['fly', 3], ['afly', 3], ['pooter', 2], ['gaper', 3], ['horf', 2], ['clotty', 2], ['spider', 2], ['charger', 1], ['hopper', 2],
+    ['cross', 1.5], ['jelly', 1.5], ['mole', 1.2], ['slug', 1.5]],
+  caves: [['afly', 2], ['pooter', 2], ['gaper', 2], ['spider', 2], ['charger', 2], ['hopper', 2], ['boomfly', 2], ['host', 2], ['fatty', 1], ['mulligan', 2], ['bigspider', 1], ['clotty', 1],
+    ['shell', 1.5], ['miner', 1.3], ['blinker', 1.2], ['mortar', 1.4]],
+  depths: [['gaper', 2], ['host', 3], ['fatty', 2], ['mulligan', 2], ['globin', 3], ['bigspider', 2], ['hive', 2], ['boomfly', 2], ['leaper', 2], ['clotty', 2], ['charger', 1],
+    ['summoner', 1.3], ['laser', 1.2], ['enrager', 1.5], ['phaser', 1.3]],
+  womb: [['globin', 3], ['leaper', 3], ['hive', 2], ['host', 3], ['fatty', 2], ['boomfly', 2], ['afly', 3], ['bigspider', 2], ['clotty', 2], ['charger', 2],
+    ['healer', 1.3], ['relentless', 1.2], ['spiral', 1.3], ['merger', 1.5]],
 };
+
+// Recompensas propias de cada jefe y mini-jefe (ver docs/JEFES.md): objetos extra que suelta al caer, además de lo común
+// (el objeto de jefe, o los dos de Mamá, el corazón o alma y la trampilla; en los mini-jefes, el objeto de jefe y el corazón).
+// Cada clave es un tipo de recogible de PK_R (gen.js): coin, nickel, heart, half, soul, black, bomb, bomb2, key, pill, card,
+// battery, chest, gchest. El Corazón no entra: su recompensa es el trofeo.
+const BOSS_DROPS = {
+  gloton: ['heart', 'heart'], zumbido: ['coin', 'coin', 'coin', 'bomb'], gusano: ['key', 'key'], masa: ['soul', 'soul'],
+  llorona: ['card', 'pill'], mama: ['soul', 'soul'],
+  babosa: ['chest'], gtopo: ['bomb', 'bomb', 'coin'], coloso: ['gchest'], rey: ['bomb2', 'key'],
+  carcelero: ['key', 'key', 'key'], pira: ['black', 'bomb'], coagulo: ['heart', 'heart', 'half'], placenta: ['chest', 'soul'],
+  mfly: ['coin', 'coin'], mgolem: ['bomb2'], mshaman: ['card', 'pill'], mcrab: ['key', 'key'],
+};
+
+// Escala de dificultad (ver docs/DIFICULTAD.md y tools/difficulty.mjs). La vida de cada enemigo se multiplica por
+// 1 + piso × hpPerFloor; el presupuesto de enemigos de una sala normal es (base + piso × perFloor + azar × spread) × celdas
+// budgetFloorMul corrige el presupuesto de cada piso (1 = sin cambio) para que el tiempo de limpieza suba de forma
+// pareja: las reservas de Profundidades I y Cuevas I tienen enemigos más duros y sin él darían un escalón
+const DIFFICULTY = { hpPerFloor: 0.2, budgetBase: 2.2, budgetPerFloor: 0.75, budgetSpread: 1.8, budgetFloorMul: [1, 1, 0.94, 1, 0.87, 0.92, 1, 1] };
+
+// Variantes de campeón (cualquier enemigo puede serlo). w = peso al sortear; hp y r multiplican la vida y el radio;
+// speed multiplica la velocidad. Efectos propios: veloz (más rápido), explosivo (explota al morir), tóxico (deja
+// charcos al morir) y regenerador (se cura si lleva 1,5 s sin recibir daño), en entities.js. color: aura en pantalla
+const CHAMPIONS = {
+  tough:    { name: 'Resistente', w: 3, hp: 2, r: 1.12, color: '#d83a40' },
+  swift:    { name: 'Veloz', w: 2, hp: 1.4, r: 1.05, speed: 1.5, color: '#4cc4e8' },
+  volatile: { name: 'Explosivo', w: 2, hp: 1.5, r: 1.12, color: '#ff9b2f' },
+  toxic:    { name: 'Tóxico', w: 2, hp: 1.5, r: 1.12, color: '#6bd45a' },
+  regen:    { name: 'Regenerador', w: 2, hp: 1.6, r: 1.1, color: '#ff86cf' },
+};
+function pickChampion() { return weighted(Object.keys(CHAMPIONS).map(k => [k, CHAMPIONS[k].w])); }
 
 // hp base, radio, velocidad, coste en "puntos de dificultad", vuela
 const EN = {
@@ -46,16 +80,58 @@ const EN = {
   bigspider: { name: 'Araña gigante', hp: 16, r: 12, speed: 150, cost: 1.5 },
   hive:      { name: 'Colmena', hp: 24, r: 15, speed: 20, cost: 2 },
   leaper:    { name: 'Brincador', hp: 18, r: 12, speed: 0, cost: 1.5 },
+  // Sótano: dispara en cruz y alterna con diagonales / se divide al morir / se entierra y emerge a disparar / deja un rastro viscoso
+  cross:     { name: 'Aspa', hp: 14, r: 11, speed: 28, cost: 1.2 },
+  jelly:     { name: 'Gelatina', hp: 18, r: 14, speed: 40, cost: 2.2 },
+  jellet:    { name: 'Gelatinita', hp: 5, r: 8, speed: 85, cost: 0.4 },
+  mole:      { name: 'Topo', hp: 12, r: 11, speed: 95, cost: 1.8 },
+  slug:      { name: 'Baboso', hp: 16, r: 12, speed: 34, cost: 1.4 },
+  // Cuevas: acorazado (solo recibe lágrimas por detrás o los costados) / siembra minas / se desvanece y reaparece / lanza proyectiles en arco
+  shell:     { name: 'Escarabajo', hp: 20, r: 13, speed: 42, cost: 2.3, armor: true },
+  miner:     { name: 'Minero', hp: 14, r: 12, speed: 55, cost: 1.5 },
+  mine:      { name: 'Mina', hp: 6, r: 8, speed: 0, cost: 0 },
+  blinker:   { name: 'Parpadeo', hp: 12, r: 11, speed: 0, cost: 1.7 },
+  mortar:    { name: 'Mortero', hp: 16, r: 12, speed: 0, cost: 1.5 },
+  // Profundidades: invoca sombras / ojo de piedra con láser avisado / se enfurece al quedar solo / se funde con la roca
+  summoner:  { name: 'Invocador', hp: 22, r: 13, speed: 34, cost: 2.6 },
+  shade:     { name: 'Sombra', hp: 4, r: 7, speed: 95, cost: 0.3 },
+  laser:     { name: 'Vigía', hp: 20, r: 13, speed: 0, cost: 1.7 },
+  enrager:   { name: 'Furioso', hp: 18, r: 12, speed: 46, cost: 1.5 },
+  phaser:    { name: 'Espectro', hp: 16, r: 12, speed: 52, cost: 1.6 },
+  // Útero: cura a los demás / lento pero no se le puede empujar ni frenar / dispara espirales / dos se funden en uno más fuerte
+  healer:    { name: 'Sanador', hp: 18, r: 12, speed: 38, cost: 2.2 },
+  relentless: { name: 'Imparable', hp: 40, r: 15, speed: 26, cost: 3.3, kb: 0, immune: true },
+  spiral:    { name: 'Espiral', hp: 20, r: 12, speed: 18, cost: 1.7 },
+  merger:    { name: 'Gemelo', hp: 10, r: 9, speed: 64, cost: 0.9 },
+  fused:     { name: 'Gemelos fundidos', hp: 24, r: 16, speed: 46, cost: 0 },
+  ball:      { name: 'Bola de cadena', hp: 1, r: 14, speed: 0, cost: 0 },   // parte del Carcelero
+  // Mini-jefes (mini: true): jefes pequeños de la sala de mini-jefe; se crean con boss = true (barra de vida, sin
+  // empuje, contacto de jefe) y dejan la recompensa de la sala al caer. Vida de partida ×(1 + 0,2 por piso)
+  mfly:      { name: 'Moscardón', hp: 100, r: 18, speed: 70, cost: 0, fly: true, mini: true },
+  mgolem:    { name: 'Gólem menor', hp: 150, r: 22, speed: 34, cost: 0, mini: true },
+  mshaman:   { name: 'Chamán', hp: 100, r: 16, speed: 0, cost: 0, mini: true },
+  mcrab:     { name: 'Cangrejo', hp: 130, r: 20, speed: 70, cost: 0, mini: true },
 };
+// Qué mini-jefes pueden salir en cada tema
+const MINIBOSS_POOLS = { basement: ['mfly', 'mcrab'], caves: ['mgolem', 'mcrab'], depths: ['mshaman', 'mcrab', 'mgolem'], womb: ['mfly', 'mshaman'] };
 
+// title: epíteto que se muestra en la presentación del jefe (y en el bestiario)
 const BOSSES = {
-  gloton:  { name: 'Glotón', hp: 250, r: 34 },
-  zumbido: { name: 'Señor Zumbido', hp: 160, r: 30, fly: true },
-  gusano:  { name: 'Gusano Gemelo', hp: 170, r: 15 },
-  masa:    { name: 'La Masa', hp: 420, r: 44 },
-  llorona: { name: 'La Llorona', hp: 340, r: 30 },
-  mama:    { name: 'Mamá', hp: 640, r: 1 },
-  corazon: { name: 'El Corazón', hp: 1100, r: 40 },
+  gloton:  { name: 'Glotón', title: 'El que nunca se sacia', hp: 250, r: 34 },
+  zumbido: { name: 'Señor Zumbido', title: 'Rey del enjambre', hp: 160, r: 30, fly: true },
+  gusano:  { name: 'Gusano Gemelo', title: 'Dos cuerpos, un hambre', hp: 170, r: 15 },
+  babosa:  { name: 'Reina Babosa', title: 'Soberana del légamo', hp: 210, r: 34 },
+  gtopo:   { name: 'Gran Topo', title: 'Habitante del subsuelo', hp: 190, r: 28 },
+  coloso:  { name: 'Coloso de Piedra', title: 'Montaña que camina', hp: 300, r: 38 },
+  rey:     { name: 'Rey Minero', title: 'Señor de las galerías', hp: 260, r: 30 },
+  carcelero: { name: 'Carcelero', title: 'Guardián de las cadenas', hp: 320, r: 32 },
+  pira:    { name: 'Pira Viviente', title: 'Hoguera sin fin', hp: 280, r: 30 },
+  coagulo: { name: 'Coágulo Mayor', title: 'Sangre que rebota', hp: 330, r: 36 },
+  placenta: { name: 'Placenta', title: 'Órgano que late', hp: 300, r: 34 },
+  masa:    { name: 'La Masa', title: 'Carne sin forma', hp: 420, r: 44 },
+  llorona: { name: 'La Llorona', title: 'Lamento eterno', hp: 340, r: 30 },
+  mama:    { name: 'Mamá', title: 'Ojo que todo lo ve', hp: 640, r: 1 },
+  corazon: { name: 'El Corazón', title: 'Latido final', hp: 1100, r: 40 },
 };
 
 /* ---------- Píldoras ---------- */

@@ -169,6 +169,33 @@ for (const [key, name, kind, spec, note] of ITEM_DB) {
 }
 for (const k of ITEM_IDS) ITEMS[k].desc = itemDesc(k);
 
+// ---------- Categorías (filtros del menú de trucos) ----------
+// cats: qué mejora un objeto. Las estadísticas solo cuentan si suben (dmg+0.5, tps*1.2…), no si bajan.
+const CAT_LABELS = { life: 'Vida', dmg: 'Daño', tps: 'Cadencia', spd: 'Velocidad', rng: 'Alcance', sht: 'Vel. disparo', lck: 'Suerte', tear: 'Lágrimas', res: 'Recursos', map: 'Mapa' };
+const CAT_LIFE_FLAGS = new Set(['regen', 'mitre', 'scapular', 'maggybow', 'vampire', 'mantle', 'wafer', 'isaacheart', 'emptyheart', 'soullocket', 'candyheart', 'gullet', 'blanket', 'toothnail']);
+const CAT_MAP_FLAGS = new Set(['compass', 'map', 'bluemap', 'xray', 'mind']);
+const CAT_TEAR_FLAGS = new Set(['homing', 'pierce', 'spectral', 'bounce', 'big', 'poison', 'slow', 'fear', 'charm', 'confuse', 'freeze', 'burn', 'bleed', 'split', 'quad',
+  'bones', 'burst', 'continuum', 'creephit', 'holy', 'electric', 'knock', 'shieldtears', 'teeth', 'needle', 'x2', 'x3', 'x4', 'wiz', 'loki', 'back', 'sore', 'analog',
+  'randtear', 'multihit', 'orbitear', 'auratear', 'stickybomb', 'firepepper', 'acid', 'blood', 'keeperhead', 'greed', 'flatstone', 'pencil', 'kidney', 'evileye']);
+const CAT_LIFE_FX = new Set(['heal', 'soul', 'black', 'hp', 'convert', 'paw', 'peeler', 'magicskin']);
+
+function itemCats(it) {
+  const s = it.spec, c = new Set();
+  const lifeFx = e => CAT_LIFE_FX.has(e.split(':')[0]);
+  for (const o of s.ops) {
+    if (o.t === 'stat') { if ((o.op === '+' && o.v > 0) || (o.op === '*' && o.v > 1)) c.add(o.k); }
+    else if (o.t === 'res') c.add(['coin', 'bomb', 'key'].includes(o.k) ? 'res' : 'life');
+    else if (o.t === 'heal' || o.t === 'setmax' || o.t === 'revive') c.add('life');
+    else if (o.t === 'drop') c.add('res');
+    else if (o.t === 'mode') c.add('tear');
+    else if (o.t === 'flag') { if (CAT_LIFE_FLAGS.has(o.k)) c.add('life'); if (CAT_TEAR_FLAGS.has(o.k)) c.add('tear'); if (CAT_MAP_FLAGS.has(o.k)) c.add('map'); }
+    else if (o.t === 'event' && o.fx.some(lifeFx)) c.add('life');
+  }
+  if (s.use && s.use.some(lifeFx)) c.add('life');
+  return c;
+}
+for (const k of ITEM_IDS) ITEMS[k].cats = itemCats(ITEMS[k]);
+
 // ---------- Aplicar a un jugador ----------
 function addHp(p, kind, n) {
   if (p.lost) return;
@@ -467,7 +494,7 @@ const EFX = {
   blackhole: (p) => { const d = Input.lastDir; G.holes.push({ x: p.x + d.x * 80, y: p.y + d.y * 80, t: 4, tick: 0 }); },
   sprinkler: (p) => { addFamiliar('sprinkler', true, { x: p.x, y: p.y }); },
   glasscannon: (p) => { const d = Input.lastDir; const t = makeTear(p.x, p.y, d.x * 420, d.y * 420, p, p.dmg * 10, { range: 700 }); t.fx.pierce = true; t.fx.spectral = true; t.r = 14; G.tears.push(t); if (p.red > 1 && !G.run.god) { p.red = Math.max(1, p.red - 4); } },
-  coupon: () => { const L = G.room.pickups.filter(pk => pk.price != null || pk.hprice); if (!L.length) return false; const pk = pick(L); pk.price = null; pk.hprice = null; poofAt(pk.x, pk.y); },
+  coupon: () => { const L = G.room.pickups.filter(pk => pk.price != null || pk.hprice || pk.sprice || pk.kprice); if (!L.length) return false; const pk = pick(L); pk.price = null; pk.hprice = null; pk.sprice = null; pk.kprice = null; poofAt(pk.x, pk.y); },
   keeperbox: (p) => { const s = G.freeSpot(p.x + 40, p.y); if (Math.random() < 0.4) G.room.pickups.push(mkPickup('item', s.x, s.y, { item: pickItem('shop'), price: 15, shop: true })); else G.room.pickups.push(mkPickup(pick(['heart', 'bomb', 'key', 'soul']), s.x, s.y, { price: 5, shop: true })); },
   telekinesis: (p) => { for (const t of G.etears) { const a = Math.atan2(t.y - p.y, t.x - p.x); const sp = Math.hypot(t.vx, t.vy); G.tears.push(makeTear(t.x, t.y, Math.cos(a) * sp, Math.sin(a) * sp, p, 5, { plain: true, range: 300 })); t.dead = true; } },
   pushback: (p) => { for (const e of liveEnemies()) { const d = dist(e, p) || 1; if (d < 110) { e.kx += (e.x - p.x) / d * 500; e.ky += (e.y - p.y) / d * 500; } } for (const t of G.etears) if (dist(t, p) < 110) t.dead = true; G.pcreeps.push({ x: p.x, y: p.y, r: 50, t: 1, max: 1, dmg: 0, kind: 'gas' }); },

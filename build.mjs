@@ -5,7 +5,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = dirname(fileURLToPath(import.meta.url));
-const ORDER = ['util', 'audio', 'input', 'data', 'items_db', 'chars', 'gen', 'entities', 'enemies', 'items', 'render', 'game'];
+const ORDER = ['util', 'audio', 'input', 'data', 'items_db', 'chars', 'rooms', 'gen', 'entities', 'enemies', 'items', 'render', 'game'];
 const js = ORDER.map(f => `/* ---- ${f}.js ---- */\n` + readFileSync(join(root, 'src', f + '.js'), 'utf8')).join('\n');
 if (js.includes('</script')) throw new Error('El código contiene </script>');
 

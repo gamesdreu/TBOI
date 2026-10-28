@@ -30,6 +30,7 @@ Se juega mejor con el móvil en horizontal, aunque también funciona en vertical
 | Cambiar activo (Mochila) | F | Botón pequeño junto al objeto | RT |
 | Trucos | T o º | Pausa → Trucos | — |
 | Pausa | P / Esc | Botón de pausa | Start |
+| Bestiario | B (título y pausa) | Botón «Bestiario» del título | — |
 | Silencio | M | En la pausa | Select |
 
 Con objetos que cargan el disparo (Azufre, Tech X, Batido de chocolate, Cuchillo de Mamá, Fetus épico…)
@@ -50,13 +51,38 @@ mantén la dirección de disparo y suéltala para lanzar el ataque.
   lágrimas explosivas…), más de 100 familiares, objetos activos, resurrecciones y efectos al recibir
   daño, matar o entrar en una sala. Los objetos más complejos están simplificados y lo indican en su
   descripción.
-- **17 enemigos y 7 jefes**: Glotón, Señor Zumbido, Gusano Gemelo, La Masa, La Llorona, Mamá y El Corazón.
+- **38 enemigos, 4 mini-jefes y 15 jefes**, todos de diseño original (nombre, comportamiento y dibujo
+  propios):
+  - Cada tema tiene su reserva: el Sótano, las Cuevas, las Profundidades y el Útero suman 4 enemigos
+    nuevos cada uno (cruces, gelatinas que se dividen, topos, escarabajos acorazados, minas, invocadores,
+    láseres, sanadores, gemelos que se funden…). Cinco más (gelatinita, mina, sombra, gemelos fundidos y
+    bola de cadena) solo los crean otros enemigos.
+  - **5 variantes de campeón** con efecto y aura propios: Resistente, Veloz, Explosivo, Tóxico y
+    Regenerador.
+  - **15 jefes**: Glotón, Señor Zumbido, Gusano Gemelo, Reina Babosa, Gran Topo, Coloso de Piedra, Rey
+    Minero, Carcelero, Pira Viviente, Coágulo Mayor, Placenta, La Masa, La Llorona, Mamá y El Corazón. Cada
+    tramo tiene varios posibles, con su propia arena; todos entran en una **fase 2** al bajar del 50 % de
+    vida y sueltan **recompensas propias** además del objeto de jefe. Antes de cada combate hay una
+    pantalla de presentación con su epíteto.
+  - **4 mini-jefes** (Moscardón, Gólem menor, Chamán y Cangrejo) para la sala de mini-jefe.
+  - Su vida y el número de enemigos por sala escalan con el piso (ver `docs/DIFICULTAD.md`).
+- **Salas**: 33 plantillas hechas a mano (22 con enemigos colocados), 27 salas de jefe (11 diseños
+  distintos para los 7 originales y arenas propias para los nuevos) y generación por estilos propia de
+  cada tema. Hay **salas grandes** (2×1, 1×2, en L y 2×2) con cámara que sigue al jugador y cuatro
+  **salas especiales** nuevas: reto (oleadas), sacrificio (pinchos con recompensa), biblioteca y mini-jefe.
 - Tienda, sala del tesoro, sala secreta (se abre con bombas), tratos con el diablo, salas del ángel,
   cofres, baterías, rocas marcadas, barriles explosivos, fuegos, pinchos y fosos.
+- **Tratos del diablo y del ángel** con reglas de aparición documentadas (daño recibido, racha de
+  jefes sin daño, salas especiales visitadas, tratos aceptados y objetos que la modifican), ofertas
+  variadas (corazones, almas, monedas o llaves; pasivos y activos) y la probabilidad actual visible en
+  la pausa y en el menú de trucos. Ver `docs/TRATOS.md`.
+- **Bestiario** (tecla B, o botón en el título): enemigos, mini-jefes y jefes que has visto, con su
+  vida, dónde aparecen y cuántas veces los has derrotado.
 - **22 cartas del tarot** y **17 efectos de píldora** que se identifican al tomarlas.
 - **Estadísticas en pantalla** (velocidad, lágrimas, daño, alcance, velocidad de disparo y suerte), con
   el cambio en verde o rojo al coger un objeto. Se pueden ocultar desde la pausa.
-- **Menú de trucos** (tecla T o desde la pausa): coger cualquiera de los 718 objetos, invencibilidad,
+- **Menú de trucos** (tecla T o desde la pausa): coger cualquiera de los 718 objetos (con filtros por mejora: vida, daño,
+  cadencia, velocidad, alcance, suerte, efectos de lágrima, recursos… y la ficha de lo que hace cada uno), invencibilidad,
   daño ×5, matar a todos, recursos, curar, cargar el activo, revelar el mapa, ir al jefe o pasar de piso.
   Las partidas con trucos no cuentan como victoria.
 
@@ -77,3 +103,17 @@ principio del archivo) y se combinan con los nombres de la wiki (`tools/wiki/ite
 ```bash
 node tools/gen-items.mjs
 ```
+
+Herramientas de comprobación (todas terminan con `0 problemas` si está bien) y documentación del
+contenido:
+
+| Comando | Qué hace |
+| --- | --- |
+| `node tools/check-enemies.mjs` | Cada enemigo y jefe tiene datos, comportamiento, dibujo y recompensa. |
+| `node tools/check-rooms.mjs` | Plantillas y salas de jefe: tamaño, símbolos, puertas y zona del jefe. |
+| `node tools/check-floors.mjs` | Genera cientos de pisos y revisa salas, puertas y salas grandes. |
+| `node tools/difficulty.mjs` | Tabla de dificultad por enemigo y por piso (`docs/DIFICULTAD.md`). |
+| `node tools/sim-deals.mjs` | Simula partidas y mide los tratos del diablo y del ángel (`docs/TRATOS.md`). |
+
+Los jefes, mini-jefes y sus recompensas están resumidos en `docs/JEFES.md`, y la lista de tareas de
+contenido, con el registro de lo hecho, en `docs/TAREAS.md`.

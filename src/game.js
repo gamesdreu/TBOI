@@ -9,11 +9,12 @@ const G = {
   enemies: [], tears: [], etears: [], bombs: [], effects: [], parts: [], beams: [], creeps: [],
   familiars: [], blueflies: [], trail: [], pendingBooms: [], pcreeps: [], lights: [], missiles: [], holes: [], rings: [], eyes: [],
   shake: 0, banner: null, floorBanner: 0, slowTime: 0, flow: null, flowT: 0, shooter: null,
-  bg: null, bgCtx: null, bgRoom: null, bgScale: 1, vig: null, snapA: null, snapB: null,
+  bg: null, bgCtx: null, bgRoom: null, bgScale: 1, vig: null, snapA: null, snapB: null, camX: 0, camY: 0,
   trans: null, fade: null, intro: null, pendingIntro: null, prevRoom: null, prevSide: null, lastSide: null,
   menuSel: 0, menuButtons: [], menuT: { s: 1, ox: 0, oy: 0 }, mw: RW, mh: RH,
   run: null, charSel: 0, charTab: 0, deadT: 0, endT: 0,
   cheatSel: 0, cheatPage: 0, cheatFilter: 0, cheatMsg: null, cheatItem: null,
+  bestTab: 0, bestSel: 0, bestFrom: 'title',
 
   init() {
     Store.load();
@@ -128,6 +129,7 @@ const G = {
         break;
       case 'paused': this.updateMenu(this.pauseOptions(), id => this.pauseAction(id), true); break;
       case 'cheats': this.updateCheats(dt); break;
+      case 'bestiary': this.updateBestiary(); break;
       case 'dying':
         this.deadT += dt; updateParticles(dt);
         if (this.deadT > 1.5) { this.state = 'dead'; this.endT = 0; this.menuSel = 0; }
@@ -147,6 +149,7 @@ const G = {
     if (this.slowTime > 0) this.slowTime -= dt;
     updatePlayer(p, dt);
     if (this.state !== 'playing' && this.state !== 'fade') return;
+    this.updateCamera();
     this.trail.unshift({ x: p.x, y: p.y });
     if (this.trail.length > 200) this.trail.length = 200;
     if (--this.flowT <= 0) { this.flowT = 12; this.flow = computeFlow(this.room.tiles, txOf(p.x), tyOf(p.y)); }
@@ -176,29 +179,48 @@ const G = {
 
   playerBounds(p) {
     const room = this.room, r = p.r;
-    const inX = Math.abs(p.x - CX) < 16, inY = Math.abs(p.y - CY) < 16;
     let minX = X0 + r, maxX = X1 - r, minY = Y0 + r, maxY = Y1 - r;
-    const op = k => room.doors[k] && this.doorOpen(room.doors[k]);
-    if (inX && op('up')) minY = Y0 - 30;
-    if (inX && op('down')) maxY = Y1 + 30;
-    if (inY && op('left')) minX = X0 - 30;
-    if (inY && op('right')) maxX = X1 + 30;
+    // al alinearse con una puerta abierta se puede salir del recinto por ella
+    for (const k of DIRNAMES) {
+      const d = room.doors[k], D = DIRS[k];
+      if (!d || !this.doorOpen(d) || (D.dy ? Math.abs(p.x - D.x) : Math.abs(p.y - D.y)) >= 16) continue;
+      if (D.dy < 0) minY = Y0 - 30; else if (D.dy > 0) maxY = Y1 + 30; else if (D.dx < 0) minX = X0 - 30; else maxX = X1 + 30;
+    }
     p.x = clamp(p.x, minX, maxX); p.y = clamp(p.y, minY, maxY);
-    if (p.y < Y0 + r || p.y > Y1 - r) p.x = clamp(p.x, CX - 13, CX + 13);
-    if (p.x < X0 + r || p.x > X1 - r) p.y = clamp(p.y, CY - 13, CY + 13);
+    // dentro del hueco de la puerta solo se avanza por el pasillo
+    const gapV = p.y < Y0 + r || p.y > Y1 - r, gapH = p.x < X0 + r || p.x > X1 - r;
+    if (gapV || gapH) {
+      let best = null, bd = Infinity;
+      for (const k of DIRNAMES) {
+        const D = DIRS[k];
+        if (!room.doors[k] || !(gapV ? D.dy : D.dx)) continue;
+        const dd = gapV ? Math.abs(p.x - D.x) : Math.abs(p.y - D.y);
+        if (dd < bd) { bd = dd; best = D; }
+      }
+      if (best && gapV) p.x = clamp(p.x, best.x - 13, best.x + 13);
+      else if (best) p.y = clamp(p.y, best.y - 13, best.y + 13);
+    }
     if (room.cleared) for (const k of DIRNAMES) {
       const d = room.doors[k];
       if (!d || !d.locked) continue;
       const D = DIRS[k];
-      const near = D.dx ? (Math.abs(p.y - CY) < 18 && Math.abs(p.x - D.x) < r + 4) : (Math.abs(p.x - CX) < 18 && Math.abs(p.y - D.y) < r + 4);
+      const near = D.dx ? (Math.abs(p.y - D.y) < 18 && Math.abs(p.x - D.x) < r + 4) : (Math.abs(p.x - D.x) < 18 && Math.abs(p.y - D.y) < r + 4);
       if (!near) continue;
       if (p.keys > 0) { p.keys--; d.locked = false; Sfx.play('unlock'); }
       else if (p.passive.has('paytoplay') && p.coins > 0) { p.coins--; d.locked = false; Sfx.play('coin'); }
     }
-    if (p.y < Y0 - 8) this.goDoor('up');
-    else if (p.y > Y1 + 8) this.goDoor('down');
-    else if (p.x < X0 - 8) this.goDoor('left');
-    else if (p.x > X1 + 8) this.goDoor('right');
+    for (const k of DIRNAMES) {
+      const D = DIRS[k];
+      if (!room.doors[k] || !(D.dy < 0 ? p.y < Y0 - 8 : D.dy > 0 ? p.y > Y1 + 8 : D.dx < 0 ? p.x < X0 - 8 : p.x > X1 + 8)) continue;
+      if ((D.dy ? Math.abs(p.x - D.x) : Math.abs(p.y - D.y)) < 20) { this.goDoor(k); return; }
+    }
+  },
+
+  // La cámara sigue al jugador dentro de las salas más grandes que la pantalla
+  updateCamera() {
+    const p = this.player;
+    this.camX = clamp(p.x - RW / 2, 0, Math.max(0, WW - RW));
+    this.camY = clamp(p.y - RH / 2, 0, Math.max(0, WH - RH));
   },
   doorOpen(d) {
     const merc = this.player && this.player.passive.has('mercurius') && this.room.type !== 'boss';
@@ -215,7 +237,8 @@ const G = {
     this.run = {
       seed, pool: new Set(ITEM_IDS.filter(id => Object.keys(ITEMS[id].pools).length)),
       bossesUsed: [], pillMap: PILL_COLORS.map((_, i) => order[i]), pillKnown: PILL_COLORS.map(() => false),
-      kills: 0, time: 0, floorHit: false, killedBy: '', devilTaken: false, cheated: false, god: false, dmgx: false,
+      kills: 0, time: 0, floorHit: false, killedBy: '', cheated: false, god: false, dmgx: false,
+      noHitStreak: 0, dealsTaken: 0, devilDeals: 0, angelDeals: 0,   // jefes seguidos sin daño y tratos aceptados (ver dealChance)
     };
     for (const id of [...(ch.items || []), ch.active]) if (id) this.run.pool.delete(id);
     this.floorIdx = 0;
@@ -272,6 +295,7 @@ const G = {
     if (this.room && this.room !== room) { this.prevRoom = this.room; this.prevSide = this.lastSide; }
     if (this.room && this.room.type === 'devil' && room !== this.room && P.has('redemption') && !this.room.taken) { addHp(p, 'soul', 1); p.mods.dmgAdd += 1; }
     this.room = room; this.lastSide = side;
+    setRoomShape(room);
     room.visited = true; room.seen = true;
     for (const k of DIRNAMES) {
       const d = room.doors[k];
@@ -293,12 +317,15 @@ const G = {
     this.trail = [];
     for (const f of this.familiars) { f.x = p.x; f.y = p.y; }
     this.slowTime = 0;
+    this.updateCamera();
     if (!room.cleared) {
       if (room.type === 'boss') { this.enemies.push(...makeBoss(room.boss, side)); this.pendingIntro = room.boss; }
-      else for (const s of room.spawns) this.enemies.push(makeEnemy(s.type, tcx(s.c) + rr(-4, 4), tcy(s.r) + rr(-4, 4), { champ: s.champ || (P.has('champions') && Math.random() < 0.08) }));
+      else for (const s of room.spawns) this.enemies.push(this.spawnRoomEnemy(s));
       if (!this.enemies.length) room.cleared = true;
       else {
         Sfx.play('doorclose');
+        if (room.type === 'challenge') this.showBanner('¡Reto!', room.waveTotal + ' oleadas', 1.8);
+        if (room.type === 'miniboss') this.showBanner('Minijefe', EN[room.spawns[0].type].name, 1.8);
         if (P.has('camo')) for (const e of this.enemies) if (!e.boss) applyStatus(e, 'confuse', 3);
         if (P.has('pokego') && Math.random() < 0.25) { const L = this.enemies.filter(e => !e.boss); if (L.length) applyStatus(pick(L), 'charm', 999); }
         fireEvent('enter', {});
@@ -310,6 +337,12 @@ const G = {
     if (this.state !== 'title') Sfx.startMusic(room.type === 'boss' && !room.cleared ? 'boss' : 'normal');
   },
 
+  spawnRoomEnemy(s) {
+    const e = makeEnemy(s.type, tcx(s.c) + rr(-4, 4), tcy(s.r) + rr(-4, 4), { champ: s.champ || (this.player.passive.has('champions') && Math.random() < 0.08) });
+    if (EN[s.type].mini) Object.assign(e, { boss: true, kb: 0, name: EN[s.type].name });   // mini-jefe: barra de vida y contacto de jefe
+    return e;
+  },
+
   // Pedestales que cambian (Corona con falla, Tainted Isaac) y opciones extra
   prepPedestals(room) {
     const p = this.player, P = p.passive;
@@ -319,7 +352,7 @@ const G = {
       if (first) { first.choice = 'tr'; first.x -= 40; room.pickups.push(mkPickup('item', first.x + 80, first.y, { item: pickItem('treasure'), choice: 'tr' })); }
     }
     for (const pk of room.pickups) {
-      if (pk.kind !== 'item' || !pk.item || pk.cycDone || pk.price != null || pk.hprice) continue;
+      if (pk.kind !== 'item' || !pk.item || pk.cycDone || pk.price != null || pk.hprice || pk.sprice || pk.kprice) continue;
       pk.cycDone = true;
       if (P.has('glitchcrown')) { pk.cycle = [pk.item, ...Array.from({ length: 4 }, () => pickItem(this.poolForRoom()))]; pk.ci = 0; pk.ct = 0.4; pk.cycleT = 0.35; }
       else if (P.has('cycle2')) { pk.cycle = [pk.item, pickItem(this.poolForRoom())]; pk.ci = 0; pk.ct = 1; pk.cycleT = 1; }
@@ -339,9 +372,9 @@ const G = {
   goDoor(dir) {
     const d = this.room.doors[dir];
     if (!d || this.state !== 'playing') return;
-    const target = d.rooms[0] === this.room ? d.rooms[1] : d.rooms[0];
+    const i = d.rooms[0] === this.room ? 1 : 0, target = d.rooms[i];
     this.renderWorldTo(this.snapA);
-    this.enterRoom(target, OPP[dir]);
+    this.enterRoom(target, d.slots ? d.slots[i] : OPP[dir]);
     this.renderWorldTo(this.snapB);
     this.trans = { dir, t: 0, dur: 0.3 };
     this.state = 'slide';
@@ -366,8 +399,25 @@ const G = {
     return { treasure: 'treasure', shop: 'shop', boss: 'boss', devil: 'devil', angel: 'angel', secret: 'secret' }[t] || 'treasure';
   },
 
+  // Cada pinchazo en la sala de sacrificio da una recompensa; la sexta es un objeto y retira los pinchos
+  sacrifice() {
+    const room = this.room, n = ++room.sacs, x = tcx(6), y = tcy(1);
+    if (n >= 6) {
+      room.pickups.push(mkPickup('item', x, y, { item: pickItem('treasure') }));
+      for (let i = 0; i < room.tiles.length; i++) if (room.tiles[i] === T.SPIKE) room.tiles[i] = T.EMPTY;
+      this.buildBg();
+      this.showBanner('Sacrificio completado', '', 2);
+    } else spawnPickup(['coin', 'heart', 'key', 'bomb', 'gchest'][n - 1], x, y);
+  },
+
   clearRoom() {
     const room = this.room, p = this.player, P = p.passive;
+    if (room.waves && room.waves.length) {
+      for (const s of room.waves.shift()) this.enemies.push(this.spawnRoomEnemy(s));
+      this.showBanner('Oleada ' + (room.waveTotal - room.waves.length) + '/' + room.waveTotal, '', 1.4);
+      Sfx.play('doorclose');
+      return;
+    }
     room.cleared = true;
     Sfx.play('door');
     if (p.active && !P.has('volt45')) {
@@ -380,6 +430,14 @@ const G = {
     if (P.has('deathlist') && Math.random() < 0.15) p.mods[pick(['dmgAdd', 'tpsAdd', 'spdAdd'])] += 0.2;
     fireEvent('clear', {});
     if (room.type === 'boss') { this.bossRewards(); return; }
+    if (room.type === 'challenge' || room.type === 'miniboss') {
+      const s = this.freeSpot(CX, CY);
+      if (room.type === 'miniboss' || Math.random() < 0.5) room.pickups.push(mkPickup('item', s.x, s.y, { item: pickItem(room.type === 'miniboss' ? 'boss' : 'treasure') }));
+      else spawnPickup('gchest', s.x, s.y);
+      spawnPickup('heart', s.x + 50, s.y);
+      if (room.type === 'miniboss') this.spawnBossDrops(room.spawns[0].type);
+      return;
+    }
     if (room.type !== 'normal') return;
     let chance = clamp(0.38 + p.luck * 0.05, 0.1, 0.85);
     if (P.has('contract')) chance *= 0.67;
@@ -392,6 +450,32 @@ const G = {
       const a = spawnPickup(kind, s.x - 30, s.y, { pop: false }), b = spawnPickup(randomRewardKind(), s.x + 30, s.y, { pop: false });
       a.choice = b.choice = 'opt' + this.time;
     } else for (let i = 0; i < n; i++) spawnPickup(kind, s.x, s.y);
+  },
+
+  // Objetos extra propios de un jefe o mini-jefe (BOSS_DROPS), repartidos alrededor del centro de la sala
+  spawnBossDrops(id) {
+    for (const kind of BOSS_DROPS[id] || []) {
+      const s = this.freeSpot(CX + rr(-80, 80), CY + rr(-10, 60));
+      spawnPickup(kind, s.x, s.y);
+    }
+  },
+
+  // La partida tal como la ve dealChance cuando cae el jefe de este piso (la racha ya cuenta este piso)
+  dealState() {
+    const run = this.run;
+    return Object.assign({}, run, {
+      noHitStreak: run.floorHit ? 0 : run.noHitStreak + 1,
+      specialsSeen: this.floor.rooms.filter(r => r.visited && DEAL_SPECIAL_TYPES.includes(r.type)).length,
+    });
+  },
+
+  // Línea para la pausa y los trucos: probabilidad de trato al derrotar al jefe de este piso y su reparto
+  dealText() {
+    if (this.floorIdx < 1) return 'Tratos: no hay en el primer piso';
+    if (this.floorIdx === FLOORS.length - 1) return 'Tratos: no hay tras el jefe final';
+    const d = dealChance(this.dealState(), id => this.player.passive.has(id)), pct = v => Math.round(v * 100) + ' %';
+    if (d.both) return `Tratos tras el jefe: ${pct(d.chance)}  ·  diablo y ángel a la vez`;
+    return `Tratos tras el jefe: ${pct(d.chance)}  ·  ángel ${pct(d.angelShare)} / diablo ${pct(1 - d.angelShare)}`;
   },
 
   bossRewards() {
@@ -413,37 +497,31 @@ const G = {
       room.pickups.push(mkPickup('item', s1.x + 35, s1.y, { item: pickItem('boss'), choice: 'boss' }));
     } else room.pickups.push(mkPickup('item', s1.x, s1.y, { item: pickItem('boss') }));
     spawnPickup(Math.random() < 0.6 ? 'heart' : 'soul', CX + 60, CY);
+    this.spawnBossDrops(room.boss);
     const s2 = this.freeSpot(CX, CY + 80);
     room.trapdoor = { x: s2.x, y: s2.y, t: 0, armed: false };
     if (P.has('sol')) { p.solFloor = true; healRed(p, 99); if (p.active) p.active.charge = Math.max(p.active.charge, activeMax(p)); }
+    const state = this.dealState();
+    this.run.noHitStreak = state.noHitStreak;
     if (f < 1) return;
-    let chance = this.run.floorHit ? 0.2 : 0.55;
-    if (P.has('devil')) chance += 0.15;
-    if (P.has('angel')) chance += 0.15;
-    if (P.has('devil100') || P.has('eucharist')) chance = 1;
-    if (Math.random() >= chance) return;
-    let angel = !this.run.devilTaken && Math.random() < 0.5 + (P.has('angel') ? 0.25 : 0);
-    if (P.has('eucharist')) angel = true;
-    if (P.has('devil100')) angel = false;
-    if (P.has('duality')) { this.makeDealDoor(room, true); this.makeDealDoor(room, false); }
-    else this.makeDealDoor(room, angel);
+    const deal = dealChance(state, id => P.has(id));
+    if (Math.random() >= deal.chance) return;
+    if (deal.both) { this.makeDealDoor(room, true); this.makeDealDoor(room, false); }
+    else this.makeDealDoor(room, Math.random() < deal.angelShare);
   },
 
   makeDealDoor(room, angel) {
     const free = DIRNAMES.filter(k => !room.doors[k]);
     if (!free.length) return;
     const side = pick(free);
-    const dv = makeRoom(-9, -9, angel ? 'angel' : 'devil');
+    const dv = makeRoom([[-9, -9]], angel ? 'angel' : 'devil');
     dv.cleared = true; dv.seed = (Math.random() * 1e9) | 0;
-    const door = { type: angel ? 'angel' : 'devil', locked: false, hidden: false, rooms: [room, dv] };
-    room.doors[side] = door; dv.doors[OPP[side]] = door;
+    const door = { type: angel ? 'angel' : 'devil', locked: false, hidden: false, rooms: [room, dv], slots: [side, OPP[slotBase(side)]] };
+    room.doors[side] = door; dv.doors[door.slots[1]] = door;
     const fires = angel ? [] : [[1, 1], [11, 1], [1, 5], [11, 5]];
     for (const [c, r] of fires) dv.tiles[r * COLS + c] = T.FIRE;
-    const cols = Math.random() < 0.5 ? [4, 8] : [3, 6, 9];
-    for (const c of cols) {
-      if (angel) dv.pickups.push(mkPickup('item', tcx(c), tcy(3), { item: pickItem('angel'), choice: 'angel' }));
-      else dv.pickups.push(mkPickup('item', tcx(c), tcy(3), { item: pickItem('devil'), hprice: Math.random() < 0.4 ? 1 : 2 }));
-    }
+    const offer = dealOffer(angel), cols = { 1: [6], 2: [4, 8], 3: [3, 6, 9] }[offer.length];
+    offer.forEach((o, i) => dv.pickups.push(mkPickup('item', tcx(cols[i]), tcy(3), o)));
     Sfx.play(angel ? 'secret' : 'devil');
     this.showBanner(angel ? 'Se abre una puerta celestial...' : 'Se abre una puerta oscura...', '', 2.2);
   },
@@ -452,7 +530,10 @@ const G = {
     const p = this.player, it = ITEMS[id];
     const old = giveItemTo(p, id);
     p.holdItem = id; p.holdT = 1.1;
-    if (this.room && (this.room.type === 'devil' || this.room.type === 'angel')) this.room.taken = true;
+    if (this.room && (this.room.type === 'devil' || this.room.type === 'angel')) {
+      if (!this.room.taken) { this.run.dealsTaken++; this.run[this.room.type === 'devil' ? 'devilDeals' : 'angelDeals']++; }
+      this.room.taken = true;
+    }
     this.showBanner(it.name, it.desc.length > 70 ? it.desc.slice(0, 68) + '…' : it.desc);
     Sfx.play('item');
     return old;
@@ -478,7 +559,7 @@ const G = {
     else target = pick(rooms.filter(r => r.type !== 'secret'));
     if (!target) return false;
     if (kind === 'prev' && this.room.type !== 'boss') this.room.cleared = this.room.cleared;
-    const side = kind === 'prev' && this.prevSide ? this.prevSide : DIRNAMES.find(k => target.doors[k] && !target.doors[k].hidden) || null;
+    const side = kind === 'prev' && this.prevSide ? this.prevSide : Object.keys(target.doors).find(k => !target.doors[k].hidden) || null;
     this.startFade(0.6, () => this.enterRoom(target, side));
   },
   teleportRandom() { return this.teleport('random'); },
@@ -549,6 +630,7 @@ const G = {
   updateMenu(opts, act, isPause) {
     if (isPause && Input.take('pause')) { this.state = 'playing'; return; }
     if (isPause && Input.take('cheats')) { this.openCheats(); return; }
+    if (isPause && Input.take('bestiary')) { this.openBestiary(); return; }
     if (!isPause && Input.take('restart')) { act('again'); return; }
     const n = opts.length;
     if (Input.take('up') || Input.take('fup') || Input.take('left') || Input.take('fleft')) { this.menuSel = (this.menuSel + n - 1) % n; Sfx.play('select'); }
@@ -582,9 +664,11 @@ const G = {
     if (Input.take('up') || Input.take('fup')) sel(i - cols);
     if (Input.take('down') || Input.take('fdown')) sel(i + cols);
     if (Input.take('pill') || Input.take('swap')) this.switchTab();
+    if (Input.take('bestiary')) { this.openBestiary(); return; }
     if (Input.take('confirm') || Input.take('active') || Input.take('bomb')) { this.startRun(); return; }
     const hit = this.tapHit();
     if (hit === 'play') this.startRun();
+    else if (hit === 'bestiary') this.openBestiary();
     else if (hit === 'tab0' || hit === 'tab1') { if (+hit.slice(3) !== this.charTab) this.switchTab(); }
     else if (hit && hit.startsWith('char')) {
       const j = +hit.slice(4);
@@ -599,22 +683,104 @@ const G = {
     Sfx.play('select');
   },
 
+  // ---------- Bestiario ----------
+  bestiaryIds(tab = this.bestTab) {
+    if (tab === 2) return Object.keys(BOSSES);
+    return Object.keys(EN).filter(id => !!EN[id].mini === (tab === 1));
+  },
+  bestiarySeen(id) { return !!Store.data.bestiary && Store.data.bestiary[id] != null; },
+  bestiaryWhere(id) {
+    const names = { basement: 'Sótano', caves: 'Cuevas', depths: 'Profundidades', womb: 'Útero' };
+    let themes;
+    if (BOSSES[id]) themes = FLOORS.filter(f => f.bosses.includes(id)).map(f => f.theme);
+    else if (EN[id].mini) themes = Object.keys(MINIBOSS_POOLS).filter(t => MINIBOSS_POOLS[t].includes(id));
+    else themes = Object.keys(ENEMY_POOLS).filter(t => ENEMY_POOLS[t].some(p => p[0] === id));
+    themes = [...new Set(themes)];
+    return themes.length ? themes.map(t => names[t]).join(', ') : 'Lo invocan otros enemigos';
+  },
+  openBestiary() {
+    this.bestFrom = this.state; this.state = 'bestiary';
+    this.bestSel = clamp(this.bestSel, 0, this.bestiaryIds().length - 1);
+    Sfx.play('select');
+  },
+  closeBestiary() { this.state = this.bestFrom; Sfx.play('select'); },
+  bestiaryGrid() { return this.portrait ? { cols: 6, cell: 54, gy: 108 } : { cols: 12, cell: 44, gy: 70 }; },
+  setBestTab(t) { if (t === this.bestTab) return; this.bestTab = t; this.bestSel = 0; Sfx.play('select'); },
+
+  updateBestiary() {
+    if (Input.take('pause') || Input.take('bestiary')) { this.closeBestiary(); return; }
+    const n = this.bestiaryIds().length, { cols } = this.bestiaryGrid();
+    const sel = j => { this.bestSel = clamp(j, 0, n - 1); Sfx.play('select'); };
+    if (Input.take('left') || Input.take('fleft')) sel(this.bestSel - 1);
+    if (Input.take('right') || Input.take('fright')) sel(this.bestSel + 1);
+    if (Input.take('up') || Input.take('fup')) sel(this.bestSel - cols);
+    if (Input.take('down') || Input.take('fdown')) sel(this.bestSel + cols);
+    if (Input.take('pill') || Input.take('swap')) this.setBestTab((this.bestTab + 1) % 3);
+    this.bestSel = clamp(this.bestSel, 0, n - 1);
+    const hit = this.tapHit();
+    if (hit === 'bback') this.closeBestiary();
+    else if (hit && hit.startsWith('btab')) this.setBestTab(+hit.slice(4));
+    else if (hit && hit.startsWith('bent')) { this.bestSel = +hit.slice(4); Sfx.play('select'); }
+  },
+
+  // Dibuja un enemigo o jefe centrado en (x, y) cabiendo en un radio `size`
+  drawBestiaryFigure(c, id, x, y, size) {
+    let e, natR, sc;
+    if (BOSSES[id]) {
+      e = makeBoss(id, null, true)[0];
+      natR = id === 'mama' ? 20 : BOSSES[id].r;
+      Object.assign(e, { x: 0, y: 0, z: 0, flash: 0, spawnT: 0, state: id === 'llorona' ? 'cry' : 'idle', t: 1, e: 0, mouth: 1 });
+      if (id === 'mama') Object.assign(e, { type: 'eye', side: 'up', invisible: false });
+    } else {
+      e = makeEnemy(id, 0, 0, { noSeen: true, spawnT: 0 });
+      natR = EN[id].r;
+      Object.assign(e, { x: 0, y: 0, z: 0, flash: 0, spawnT: 0 });
+    }
+    sc = clamp(size / natR, 0.3, 2);
+    c.save(); c.translate(x, y + (e.flying ? size * 0.45 : 0)); c.scale(sc, sc);   // los voladores se dibujan elevados
+    drawEnemy(c, e);
+    c.restore();
+  },
+
   // ---------- Trucos ----------
   openCheats() {
     this.state = 'cheats';
     this.cheatMsg = null;
     if (!this.cheatItem) this.cheatItem = this.cheatIds()[0];
   },
+  // Filtros del menú de trucos: label (botón), short (resumen de la lista) y, si es una mejora, cat (ver `itemCats`)
+  cheatFilters() {
+    const cat = (cat, label) => ({ cat, label: 'Mejora de ' + label, short: CAT_LABELS[cat] });
+    return [
+      { label: 'Todos', short: 'Todos' }, { label: 'Pasivos', short: 'Pasivos' }, { label: 'Activos', short: 'Activos' },
+      { label: 'Familiares', short: 'Familiares' }, { label: 'Tus objetos', short: 'Tus objetos' },
+      cat('life', 'vida'), cat('dmg', 'daño'), cat('tps', 'cadencia'), cat('spd', 'velocidad'), cat('rng', 'alcance'),
+      cat('sht', 'disparo'), cat('lck', 'suerte'),
+      { cat: 'tear', label: 'Efectos de lágrima', short: 'Lágrimas' }, { cat: 'res', label: 'Recursos', short: 'Recursos' },
+      { cat: 'map', label: 'Mapa y secretos', short: 'Mapa' },
+    ];
+  },
   cheatIds() {
-    const f = this.cheatFilter, p = this.player;
+    const f = this.cheatFilter, p = this.player, cat = this.cheatFilters()[f].cat;
     return ITEM_IDS.filter(id => {
       const it = ITEMS[id];
+      if (cat) return it.cats.has(cat);
       if (f === 1) return it.kind === 'p';
       if (f === 2) return it.kind === 'a';
       if (f === 3) return it.spec.fams.length > 0;
       if (f === 4) return p.items.includes(id) || (p.active && p.active.id === id);
       return true;
     });
+  },
+  setCheatFilter(d) {
+    const n = this.cheatFilters().length;
+    this.cheatFilter = (this.cheatFilter + d + n) % n; this.cheatPage = 0;
+    const ids = this.cheatIds();
+    if (!ids.includes(this.cheatItem)) this.cheatItem = ids[0] || null;
+    // la lista cambia de tamaño: la selección sigue en el botón del filtro
+    const { cols, rows } = this.cheatGrid();
+    this.cheatSel = Math.min(ids.length, cols * rows) + this.cheatActions().findIndex(a => a.id === 'filter');
+    Sfx.play('select');
   },
   cheatActions() {
     const r = this.run;
@@ -628,7 +794,7 @@ const G = {
       { id: 'map', label: 'Revelar mapa' },
       { id: 'boss', label: 'Ir a la sala del jefe' },
       { id: 'next', label: 'Siguiente piso' },
-      { id: 'filter', label: `Ver: ${['Todos', 'Pasivos', 'Activos', 'Familiares', 'Tus objetos'][this.cheatFilter]}` },
+      { id: 'filter', label: this.cheatFilters()[this.cheatFilter].label },
       { id: 'back', label: 'Volver al juego' },
     ];
   },
@@ -647,6 +813,10 @@ const G = {
     const key = (...ks) => ks.some(k => Input.take(k));
     const step = this.portrait ? 2 : 1;
     const turn = d => { this.cheatPage = (this.cheatPage + d + pages) % pages; Sfx.play('select'); };
+    // sobre el selector de filtro, izquierda y derecha lo cambian en vez de mover la selección
+    const onFilter = f >= nI && acts[f - nI].id === 'filter';
+    if (onFilter && key('left', 'fleft')) { this.setCheatFilter(-1); return; }
+    if (onFilter && key('right', 'fright')) { this.setCheatFilter(1); return; }
     if (key('left', 'fleft')) { if (f < nI && f % cols === 0) { turn(-1); f = Math.min(f + cols - 1, nI - 1); } else f = (f + n - 1) % n; }
     if (key('right', 'fright')) { if (f < nI && (f % cols === cols - 1 || f === nI - 1)) { turn(1); f = f - (f % cols); } else f = (f + 1) % n; }
     if (key('up', 'fup')) { if (f < nI) { if (f - cols >= 0) f -= cols; } else if (f - step >= nI) f -= step; else f = nI - 1; }
@@ -665,6 +835,7 @@ const G = {
     } else if (hit === 'take') { if (this.cheatItem) this.cheatGive(this.cheatItem); }
     else if (hit === 'prev') turn(-1);
     else if (hit === 'next') turn(1);
+    else if (hit === 'filterprev') this.setCheatFilter(-1);
     else if (hit.startsWith('cheat:')) this.cheatAction(hit.slice(6));
   },
 
@@ -681,7 +852,7 @@ const G = {
   cheatAction(id) {
     const p = this.player, r = this.run;
     if (id === 'back') { this.state = 'playing'; return; }
-    if (id === 'filter') { this.cheatFilter = (this.cheatFilter + 1) % 5; this.cheatPage = 0; Sfx.play('select'); return; }
+    if (id === 'filter') { this.setCheatFilter(1); return; }
     r.cheated = true; Sfx.play('select');
     switch (id) {
       case 'god': r.god = !r.god; this.cheatMsgSet(r.god ? 'Ahora eres invencible' : 'Vuelves a ser mortal'); break;
@@ -711,15 +882,25 @@ const G = {
     this.renderWorld(c);
   },
 
+  // El mundo se dibuja desplazado por la cámara; la viñeta y el velo de tiempo lento van fijos a la pantalla
   renderWorld(c) {
+    c.save(); c.translate(-this.camX, -this.camY);
+    this.drawWorld(c);
+    c.restore();
+    if (this.slowTime > 0) { c.fillStyle = 'rgba(120,160,255,0.08)'; c.fillRect(0, 0, RW, RH); }
+    c.drawImage(this.vig, 0, 0, RW, RH);
+  },
+
+  drawWorld(c) {
     const room = this.room, p = this.player, th = THEMES[FLOORS[this.floorIdx].theme];
-    if (this.bg) c.drawImage(this.bg, 0, 0, RW, RH);
+    if (this.bg) c.drawImage(this.bg, 0, 0, WW, WH);
     for (const k of DIRNAMES) { const d = room.doors[k]; if (d) drawDoor(c, room, k, d, this.doorOpen(d)); }
     if (room.type === 'start' && this.floorIdx === 0) this.drawHints(c);
     if (room.type === 'shop') {
       fillRR(c, tcx(2), tcy(3) - 26, tcx(10) - tcx(2), 52, 6, 'rgba(120,40,30,0.35)', 2, 'rgba(230,190,120,0.3)');
       txt(c, 'TIENDA', CX, Y0 + 18, 16, 'rgba(240,220,170,0.5)', 'center', '');
     }
+    if (ROOM_LABELS[room.type]) txt(c, ROOM_LABELS[room.type], CX, Y0 + 18, 16, 'rgba(240,220,170,0.5)', 'center', '');
     if (room.type === 'angel') { const g = c.createRadialGradient(CX, CY, 10, CX, CY, 200); g.addColorStop(0, 'rgba(255,250,230,0.25)'); g.addColorStop(1, 'rgba(255,250,230,0)'); c.fillStyle = g; c.fillRect(X0, Y0, X1 - X0, Y1 - Y0); }
     const tiles = room.tiles;
     for (let r = 0; r < ROWS; r++) for (let col = 0; col < COLS; col++) {
@@ -728,7 +909,7 @@ const G = {
       else if (t === T.SPIKE) drawSpike(c, tcx(col), tcy(r));
     }
     if (room.trapdoor) drawTrapdoor(c, room.trapdoor);
-    for (const cr of this.creeps) { c.globalAlpha = Math.min(1, cr.t) * 0.7; ell(c, cr.x, cr.y, cr.r, cr.r * 0.6, '#c8b23a'); }
+    for (const cr of this.creeps) { c.globalAlpha = Math.min(1, cr.t) * 0.7; ell(c, cr.x, cr.y, cr.r, cr.r * 0.6, cr.col || '#c8b23a'); }
     c.globalAlpha = 1;
     drawFloorExtras(c);
 
@@ -785,8 +966,6 @@ const G = {
     for (const q of this.parts) { c.globalAlpha = Math.min(1, q.life / q.max * 2); circ(c, q.x, q.y - q.z, q.size, q.color); }
     c.globalAlpha = 1;
     for (const f of this.effects) drawEffect(c, f);
-    if (this.slowTime > 0) { c.fillStyle = 'rgba(120,160,255,0.08)'; c.fillRect(0, 0, RW, RH); }
-    c.drawImage(this.vig, 0, 0, RW, RH);
   },
 
   drawPlayerOrCorpse(c, p) {
@@ -836,6 +1015,7 @@ const G = {
     c.setTransform(1, 0, 0, 1, 0, 0);
     c.fillStyle = '#0b0705'; c.fillRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.state === 'title') { this.setMenuTransform(c); this.drawTitle(c); return; }
+    if (this.state === 'bestiary' && this.bestFrom === 'title') { this.setMenuTransform(c); this.drawBestiary(c); return; }
     let sx = 0, sy = 0;
     if (this.shake > 0 && this.state === 'playing') { const m = Math.min(1, this.shake) * 7; sx = rr(-m, m); sy = rr(-m, m); }
     const k = this.scale * d;
@@ -847,9 +1027,9 @@ const G = {
     drawHUD(c);
     if (this.banner && this.state !== 'paused' && this.state !== 'cheats') {
       const b = this.banner, a = Math.min(1, (b.max - b.t) * 5, b.t * 2.5);
-      drawPaperBanner(c, CX, 98, b.title, b.sub, a, 24);
+      drawPaperBanner(c, RW / 2, 98, b.title, b.sub, a, 24);
     }
-    if (this.floorBanner > 0 && this.state === 'playing' && !this.banner) drawPaperBanner(c, CX, CY - 92, FLOORS[this.floorIdx].name, '', Math.min(1, this.floorBanner), 30);
+    if (this.floorBanner > 0 && this.state === 'playing' && !this.banner) drawPaperBanner(c, RW / 2, RH / 2 - 92, FLOORS[this.floorIdx].name, '', Math.min(1, this.floorBanner), 30);
     if (this.state === 'bossintro') this.drawBossIntro(c);
     if (this.state === 'fade') {
       const f = this.fade, a = 1 - Math.abs(f.t / f.dur * 2 - 1);
@@ -860,6 +1040,7 @@ const G = {
     if (this.touchUI && ['playing', 'slide', 'fade', 'bossintro'].includes(this.state)) this.drawTouch(c);
     if (this.state === 'paused') { this.drawDim(c); this.setMenuTransform(c); this.drawPause(c); }
     if (this.state === 'cheats') { this.drawDim(c, 'rgba(0,0,0,0.82)'); this.setMenuTransform(c); this.drawCheats(c); }
+    if (this.state === 'bestiary') { this.drawDim(c, 'rgba(0,0,0,0.9)'); this.setMenuTransform(c); this.drawBestiary(c); }
     if (this.state === 'dead' || this.state === 'win') { this.drawDim(c, this.state === 'dead' ? 'rgba(20,0,0,0.78)' : 'rgba(0,0,0,0.75)'); this.setMenuTransform(c); this.drawEnd(c); }
   },
 
@@ -881,14 +1062,18 @@ const G = {
       c.save(); c.translate(445 + slide, 225);
       const fake = Object.assign({}, b, { x: 0, y: 0, z: 0, flash: 0, spawnT: 0, state: b.type === 'llorona' ? 'cry' : 'idle', t: 1, e: 0, mouth: 1 });
       if (b.type === 'mama') Object.assign(fake, { type: 'eye', side: 'up', t: 1, invisible: false });
-      const sc = b.type === 'masa' ? 1.1 : b.type === 'corazon' ? 1.05 : b.type === 'mama' ? 2.2 : b.type === 'gusano' ? 2.2 : 1.5;
+      const sc = b.type === 'masa' ? 1.1 : b.type === 'coloso' ? 1.05 : b.type === 'carcelero' ? 1.1 : b.type === 'pira' ? 1.2 : b.type === 'coagulo' ? 1.1 : b.type === 'placenta' ? 1.1 : b.type === 'corazon' ? 1.05 : b.type === 'mama' ? 2.2 : b.type === 'gusano' ? 2.2 : 1.5;
       c.scale(sc, sc);
       drawEnemy(c, fake);
       c.restore();
     }
-    txt(c, this.player.char.name, 150 - slide, 300, 24, '#f4ead8');
-    txt(c, 'VS', CX, 175, 46, '#e8d6b8', 'center', '#2a0a05', FONT_TITLE);
-    txt(c, BOSSES[this.intro.id].name, 445 + slide, 300, 26, '#ff7a64');
+    txt(c, this.player.char.name, 150 - slide, 300, 24, '#f4ead8', 'center');
+    txt(c, 'VS', RW / 2, 175, 46, '#e8d6b8', 'center', '#2a0a05', FONT_TITLE);
+    const info = BOSSES[this.intro.id];
+    txt(c, info.name, 445 + slide, 300, 26, '#ff7a64', 'center');
+    if (info.title) txt(c, info.title, 445 + slide, 324, 14, '#d9a99a', 'center');
+    txt(c, FLOORS[this.floorIdx].name.toUpperCase(), RW / 2, 62, 16, '#b89a82', 'center');
+    if (t > 0.5 && Math.floor(t * 2.5) % 2 === 0) txt(c, this.touchUI ? 'Toca para continuar' : 'Pulsa una tecla para continuar', RW / 2, 346, 12, '#8d7664', 'center');
     c.restore();
   },
 
@@ -1016,9 +1201,10 @@ const G = {
     this.menuButton(c, 'play', Input.touchMode ? 'Jugar' : 'Jugar (Enter)', pb.x, pb.y, pb.w, pb.h, true);
     const s = Store.data, fy = port ? 572 : 326;
     txt(c, `Partidas: ${s.runs}   ·   Victorias: ${s.wins}   ·   Mejor piso: ${s.best}`, W / 2, fy, 13, '#a8977a', 'center', '');
-    if (!Input.touchMode) txt(c, 'Flechas elegir · Q cambiar pestaña · Enter jugar · En partida: WASD mover, flechas disparar, T trucos', W / 2, fy + 14, 10.5, '#8a7a62', 'center', '');
+    if (!Input.touchMode) txt(c, 'Flechas elegir · Q cambiar pestaña · Enter jugar · B bestiario · En partida: WASD mover, flechas disparar, T trucos', W / 2, fy + 14, 10.5, '#8a7a62', 'center', '');
     else txt(c, 'Toca un personaje para elegirlo y otra vez para jugar', W / 2, fy + 18, 13, '#8a7a62', 'center', '');
     txt(c, 'Fan-game inspirado en The Binding of Isaac. Nombres y datos de la wiki de Fandom; arte y sonido originales.', W / 2, H - 7, port ? 8 : 9, '#6a5a46', 'center', '');
+    this.menuButton(c, 'bestiary', Input.touchMode ? 'Bestiario' : 'Bestiario (B)', 10, port ? 12 : 10, port ? 110 : 100, port ? 28 : 24, false);
     const sb = port ? { x: W - 48, y: 12, w: 36, h: 28 } : { x: W - 44, y: 10, w: 34, h: 24 };
     this.menuButtons.push({ id: 'sound', ...sb });
     fillRR(c, sb.x, sb.y, sb.w, sb.h, 5, 'rgba(0,0,0,0.3)', 1, 'rgba(233,220,192,0.3)');
@@ -1060,12 +1246,70 @@ const G = {
       this.drawItemsGrid(c, 30, 280, 8, 37.5, 3);
       opts.forEach((o, i) => this.menuButton(c, o.id, o.label, 24 + (i % 2) * 160, 410 + Math.floor(i / 2) * 50, 152, 42, i === this.menuSel));
       if (this.run.cheated) txt(c, 'Partida con trucos', W / 2, 570, 13, '#ffe27a', 'center', '');
+      txt(c, this.dealText(), W / 2, 596, 11, '#a8977a', 'center', '');
     } else {
       this.drawStats(c, 70, 92, 20, 15);
       txt(c, `Objetos (${this.player.items.length})`, 300, 82, 15, '#e9dcc0', 'left', '');
       this.drawItemsGrid(c, 300, 94, 8, 33, 4);
       opts.forEach((o, i) => this.menuButton(c, o.id, o.label, 30 + (i % 3) * 183, 252 + Math.floor(i / 3) * 38, 173, 32, i === this.menuSel));
-      if (this.run.cheated) txt(c, 'Partida con trucos', W / 2, 342, 12, '#ffe27a', 'center', '');
+      if (this.run.cheated) txt(c, 'Partida con trucos', W / 2, 332, 12, '#ffe27a', 'center', '');
+      txt(c, this.dealText(), W / 2, 349, 11, '#a8977a', 'center', '');
+    }
+  },
+
+  drawBestiary(c) {
+    this.menuButtons = [];
+    const W = this.mw, H = this.mh, port = this.portrait;
+    if (this.bestFrom === 'title') {
+      const g = c.createRadialGradient(W / 2, H * 0.45, 20, W / 2, H * 0.45, Math.max(W, H) * 0.75);
+      c.fillStyle = '#2a1a12'; c.fillRect(-500, -500, W + 1000, H + 1000);
+      g.addColorStop(0, '#5e412d'); g.addColorStop(1, '#120a06');
+      c.fillStyle = g; c.fillRect(0, 0, W, H);
+    }
+    txt(c, 'BESTIARIO', W / 2, port ? 34 : 20, port ? 32 : 24, '#e9dcc0', 'center', '#1a0c06', FONT_TITLE);
+    // pestañas con el progreso de cada una
+    const labs = ['Enemigos', 'Mini-jefes', 'Jefes'], tabW = port ? 112 : 128, tabY = port ? 62 : 38;
+    labs.forEach((lab, i) => {
+      const ids = this.bestiaryIds(i), got = ids.filter(id => this.bestiarySeen(id)).length;
+      this.menuButton(c, 'btab' + i, `${lab} ${got}/${ids.length}`, W / 2 - tabW * 1.5 - 4 + i * (tabW + 4), tabY, tabW, port ? 30 : 22, this.bestTab === i);
+    });
+    // rejilla
+    const ids = this.bestiaryIds(), { cols, cell, gy } = this.bestiaryGrid(), gx = (W - cols * cell) / 2;
+    this.bestSel = clamp(this.bestSel, 0, ids.length - 1);
+    ids.forEach((id, i) => {
+      const x = gx + (i % cols) * cell, y = gy + Math.floor(i / cols) * cell, sel = i === this.bestSel, seen = this.bestiarySeen(id);
+      this.menuButtons.push({ id: 'bent' + i, x, y, w: cell - 3, h: cell - 3 });
+      fillRR(c, x, y, cell - 3, cell - 3, 5, sel ? 'rgba(233,220,192,0.22)' : 'rgba(0,0,0,0.3)', sel ? 2 : 1, sel ? '#e9dcc0' : 'rgba(233,220,192,0.2)');
+      if (seen) {
+        c.save(); c.beginPath(); c.rect(x + 1, y + 1, cell - 5, cell - 5); c.clip();
+        this.drawBestiaryFigure(c, id, x + (cell - 3) / 2, y + (cell - 3) / 2 + 3, (cell - 3) * 0.34);
+        c.restore();
+      } else txt(c, '?', x + (cell - 3) / 2, y + (cell - 3) / 2 + 1, 18, 'rgba(233,220,192,0.3)', 'center', '');
+    });
+    // ficha del elegido
+    const id = ids[this.bestSel], seen = id && this.bestiarySeen(id);
+    const bx = port ? 16 : 40, by = port ? 494 : 252, bw = W - bx * 2, bh = port ? 90 : 94;
+    fillRR(c, bx, by, bw, bh, 8, 'rgba(0,0,0,0.35)', 1, 'rgba(233,220,192,0.2)');
+    if (id && seen) {
+      const info = BOSSES[id] || EN[id], boss = !!BOSSES[id] || !!info.mini;
+      c.save(); c.beginPath(); c.rect(bx + 4, by + 4, 76, bh - 8); c.clip();
+      this.drawBestiaryFigure(c, id, bx + 42, by + bh / 2 + 6, 30);
+      c.restore();
+      const tx = bx + 92;
+      txt(c, info.name, tx, by + 16, port ? 18 : 19, boss ? '#ff7a64' : '#ffe9c8', 'left');
+      let ly = by + 36;
+      if (BOSSES[id] && info.title) { txt(c, info.title, tx, ly, 13, '#d9a99a', 'left', ''); ly += 17; }
+      txt(c, `Vida: ${info.hp}   ·   Derrotado: ${Store.data.bestiary[id]} ${Store.data.bestiary[id] === 1 ? 'vez' : 'veces'}`, tx, ly, 13, '#f4ead8', 'left', '');
+      const lines = this.wrapText(c, 'Aparece en: ' + this.bestiaryWhere(id), bw - 104, 12);
+      lines.slice(0, 2).forEach((ln, i) => txt(c, ln, tx, ly + 17 + i * 15, 12, '#bfae90', 'left', ''));
+    } else if (id) {
+      txt(c, '???', bx + 16, by + 20, 22, 'rgba(233,220,192,0.5)', 'left');
+      txt(c, this.bestTab === 2 ? 'Aún no te has enfrentado a este jefe.' : 'Aún no te has cruzado con este enemigo.', bx + 16, by + 50, 13, '#8a7a62', 'left', '');
+    }
+    if (port) this.menuButton(c, 'bback', 'Volver', W / 2 - 70, 596, 140, 34, true);
+    else {
+      this.menuButton(c, 'bback', Input.touchMode ? 'Volver' : 'Volver (Esc)', W - 118, 10, 108, 24, false);
+      if (!Input.touchMode) txt(c, 'Flechas elegir · Q cambiar pestaña', W / 2, H - 8, 10, '#8a7a62', 'center', '');
     }
   },
 
@@ -1079,6 +1323,8 @@ const G = {
     const nI = pageIds.length;
     const cell = port ? 40 : 32, gx = port ? 20 : 24, gy = port ? 52 : 32;
     txt(c, 'TRUCOS', port ? W / 2 : gx + cols * cell / 2, port ? 28 : 16, port ? 30 : 22, '#e9dcc0', 'center', '#1a0c06', FONT_TITLE);
+    if (port) txt(c, this.dealText(), W / 2, 46, 10, '#a8977a', 'center', '');
+    else txt(c, this.dealText(), 362, 349, 10.5, '#a8977a', 'left', '');
     pageIds.forEach((id, i) => {
       const x = gx + (i % cols) * cell, y = gy + Math.floor(i / cols) * cell, sel = id === this.cheatItem;
       this.menuButtons.push({ id: 'item:' + id, x, y, w: cell, h: cell });
@@ -1093,17 +1339,18 @@ const G = {
     const py = gy + rows * cell + 4;
     this.menuButton(c, 'prev', '◀', gx, py, 34, port ? 24 : 20, false);
     this.menuButton(c, 'next', '▶', gx + cols * cell - 34, py, 34, port ? 24 : 20, false);
-    txt(c, `Página ${this.cheatPage + 1} / ${pages}  ·  ${ids.length} objetos`, gx + cols * cell / 2, py + (port ? 12 : 10), 13, '#bfae90', 'center', '');
+    txt(c, `${this.cheatFilters()[this.cheatFilter].short} · ${ids.length} objetos · pág. ${this.cheatPage + 1}/${pages}`, gx + cols * cell / 2, py + (port ? 12 : 10), 12.5, '#bfae90', 'center', '');
     // ficha del objeto
-    const iy = py + (port ? 30 : 26), iw = cols * cell, ih = port ? 72 : 70;
+    const iy = py + (port ? 30 : 26), iw = cols * cell, ih = port ? 72 : 84;
     fillRR(c, gx, iy, iw, ih, 6, 'rgba(0,0,0,0.4)', 1, 'rgba(233,220,192,0.2)');
     const id = this.cheatItem;
     if (id && ITEMS[id]) {
       const it = ITEMS[id];
       drawIcon(c, id, gx + 22, iy + 24, 1.1);
       txt(c, it.name, gx + 44, iy + 13, 16, '#f4ead8', 'left', '');
-      txt(c, `#${id} · ${it.kind === 'a' ? `Activo (${it.charge} cargas)` : 'Pasivo'}`, gx + 44, iy + 29, 11, '#a8977a', 'left', '');
-      this.wrapText(c, it.desc, iw - 52, 11.5).slice(0, 3).forEach((ln, i) => txt(c, ln, gx + 44, iy + 43 + i * 12.5, 11.5, '#d8c8a8', 'left', ''));
+      const cats = [...it.cats].map(k => CAT_LABELS[k]).join(', ');
+      txt(c, `#${id} · ${it.kind === 'a' ? `Activo (${it.charge} cargas)` : 'Pasivo'}${cats ? ' · ' + cats : ''}`, gx + 44, iy + 29, 11, '#a8977a', 'left', '');
+      this.wrapText(c, it.desc, iw - 52, 11.5).slice(0, port ? 3 : 4).forEach((ln, i) => txt(c, ln, gx + 44, iy + 43 + i * 12.5, 11.5, '#d8c8a8', 'left', ''));
     }
     const ty = iy + ih + 6;
     this.menuButton(c, 'take', 'Coger', gx, ty, port ? 120 : 100, port ? 30 : 26, true);
@@ -1112,8 +1359,13 @@ const G = {
     // acciones
     acts.forEach((a, i) => {
       const sel = this.cheatSel === nI + i;
-      if (port) this.menuButton(c, 'cheat:' + a.id, a.label, 20 + (i % 2) * 164, 428 + Math.floor(i / 2) * 35, 156, 31, sel);
-      else this.menuButton(c, 'cheat:' + a.id, a.label, 362, 22 + i * 29, 222, 26, sel);
+      let x = port ? 20 + (i % 2) * 164 : 362, y = port ? 428 + Math.floor(i / 2) * 35 : 22 + i * 29, w = port ? 156 : 222;
+      const h = port ? 31 : 26;
+      if (a.id === 'filter') {   // selector: ◀ atrás, el botón avanza
+        this.menuButton(c, 'filterprev', '◀', x, y, 26, h, false);
+        x += 30; w -= 30;
+      }
+      this.menuButton(c, 'cheat:' + a.id, a.label, x, y, w, h, sel);
     });
   },
 

@@ -3,23 +3,31 @@
    Constantes del mundo y utilidades generales
    ========================================================= */
 const TAU = Math.PI * 2;
-const TILE = 40, COLS = 13, ROWS = 7;
-const X0 = 40, Y0 = 40, X1 = X0 + COLS * TILE, Y1 = Y0 + ROWS * TILE;
-const RW = X1 + 40, RH = Y1 + 40;           // 600 x 360 (sala con muros)
-const CX = (X0 + X1) / 2, CY = (Y0 + Y1) / 2;
+const TILE = 40, CELL_C = 13, CELL_R = 7;    // una celda del mapa = 13 x 7 casillas
+const X0 = 40, Y0 = 40;
+const RW = 600, RH = 360;                    // pantalla: una sala de una celda ocupa justo esto
+// Tamaño de la sala actual (cambia con setRoomShape): las salas grandes miden varias celdas
+let COLS = CELL_C, ROWS = CELL_R;
+let X1 = X0 + COLS * TILE, Y1 = Y0 + ROWS * TILE;
+let WW = X1 + 40, WH = Y1 + 40;              // mundo de la sala con muros
+let CX = (X0 + X1) / 2, CY = (Y0 + Y1) / 2;
 const DT = 1 / 60;
 
-// Tipos de casilla
-const T = { EMPTY: 0, ROCK: 1, POOP: 2, PIT: 3, SPIKE: 4, FIRE: 5, METAL: 6, TINTED: 7, TNT: 8 };
+// Tipos de casilla (WALL es el hueco de una sala en L: muro macizo)
+const T = { EMPTY: 0, ROCK: 1, POOP: 2, PIT: 3, SPIKE: 4, FIRE: 5, METAL: 6, TINTED: 7, TNT: 8, WALL: 9 };
 
+// Puertas: cada lado tiene una ranura por celda de la sala ('up', 'up1', 'down', 'down1', 'left', ...).
+// Sus posiciones (c, r, x, y) dependen de la sala actual y las rellena setRoomShape.
 const DIRS = {
-  up:    { dx: 0,  dy: -1, c: 6,  r: 0, x: CX, y: Y0, rot: 0 },
-  down:  { dx: 0,  dy: 1,  c: 6,  r: 6, x: CX, y: Y1, rot: Math.PI },
-  left:  { dx: -1, dy: 0,  c: 0,  r: 3, x: X0, y: CY, rot: -Math.PI / 2 },
-  right: { dx: 1,  dy: 0,  c: 12, r: 3, x: X1, y: CY, rot: Math.PI / 2 },
+  up:    { dx: 0,  dy: -1, c: 6,  r: 0, x: 300, y: Y0, rot: 0 },
+  down:  { dx: 0,  dy: 1,  c: 6,  r: 6, x: 300, y: 320, rot: Math.PI },
+  left:  { dx: -1, dy: 0,  c: 0,  r: 3, x: X0, y: 180, rot: -Math.PI / 2 },
+  right: { dx: 1,  dy: 0,  c: 12, r: 3, x: 560, y: 180, rot: Math.PI / 2 },
 };
+const SLOT_NAMES = ['up', 'down', 'left', 'right', 'up1', 'down1', 'left1', 'right1'];
 const OPP = { up: 'down', down: 'up', left: 'right', right: 'left' };
-const DIRNAMES = ['up', 'down', 'left', 'right'];
+const BASE4 = ['up', 'down', 'left', 'right'];
+let DIRNAMES = BASE4;                         // ranuras de la sala actual
 const N4 = [[0, -1], [0, 1], [-1, 0], [1, 0]];
 const N8 = [[0, -1], [0, 1], [-1, 0], [1, 0], [-1, -1], [1, -1], [-1, 1], [1, 1]];
 const DIAG = [[0.707, 0.707], [-0.707, 0.707], [0.707, -0.707], [-0.707, -0.707]];
@@ -69,9 +77,42 @@ function tcx(c) { return X0 + c * TILE + TILE / 2; }
 function tcy(r) { return Y0 + r * TILE + TILE / 2; }
 function txOf(x) { return Math.floor((x - X0) / TILE); }
 function tyOf(y) { return Math.floor((y - Y0) / TILE); }
-function solidWalk(t) { return t === T.ROCK || t === T.POOP || t === T.PIT || t === T.FIRE || t === T.METAL || t === T.TINTED || t === T.TNT; }
-function solidTear(t) { return t === T.ROCK || t === T.POOP || t === T.FIRE || t === T.METAL || t === T.TINTED || t === T.TNT; }
-function solidFlyer(t) { return t === T.METAL || t === T.FIRE; }
+function solidWalk(t) { return t === T.ROCK || t === T.POOP || t === T.PIT || t === T.FIRE || t === T.METAL || t === T.TINTED || t === T.TNT || t === T.WALL; }
+function solidTear(t) { return t === T.ROCK || t === T.POOP || t === T.FIRE || t === T.METAL || t === T.TINTED || t === T.TNT || t === T.WALL; }
+function solidFlyer(t) { return t === T.METAL || t === T.FIRE || t === T.WALL; }
+
+// ---------- Forma de la sala ----------
+function slotBase(name) { return name.replace(/\d+$/, ''); }
+function slotName(base, i) { return i ? base + i : base; }
+function slotIndex(name) { const b = slotBase(name); return name.length > b.length ? +name.slice(b.length) : 0; }
+// Ranuras de puerta posibles de una sala con celdas relativas [[i, j], ...] en una caja de cw x ch celdas
+function roomSlotNames(cells, cw, ch) {
+  const out = [];
+  for (const [i, j] of cells) {
+    if (j === 0) out.push(slotName('up', i));
+    if (j === ch - 1) out.push(slotName('down', i));
+    if (i === 0) out.push(slotName('left', j));
+    if (i === cw - 1) out.push(slotName('right', j));
+  }
+  return out;
+}
+// Pone las constantes del mundo (COLS, ROWS, X1, CX, DIRS, DIRNAMES...) al tamaño de la sala
+function setRoomShape(room) {
+  COLS = room.cols; ROWS = room.rows;
+  X1 = X0 + COLS * TILE; Y1 = Y0 + ROWS * TILE; WW = X1 + 40; WH = Y1 + 40;
+  CX = (X0 + X1) / 2; CY = (Y0 + Y1) / 2;
+  for (const name of SLOT_NAMES) {
+    const base = slotBase(name), i = slotIndex(name), b = DIRS[base];
+    let c, r;
+    if (base === 'up' || base === 'down') { c = Math.min(CELL_C * i + 6, COLS - 1); r = base === 'up' ? 0 : ROWS - 1; }
+    else { r = Math.min(CELL_R * i + 3, ROWS - 1); c = base === 'left' ? 0 : COLS - 1; }
+    DIRS[name] = { dx: b.dx, dy: b.dy, c, r, rot: b.rot,
+      x: base === 'left' ? X0 : base === 'right' ? X1 : tcx(c), y: base === 'up' ? Y0 : base === 'down' ? Y1 : tcy(r) };
+  }
+  DIRNAMES = room.slotNames;
+}
+const UNIT_SHAPE = { cols: CELL_C, rows: CELL_R, slotNames: BASE4 };
+setRoomShape(UNIT_SHAPE);
 
 // Empuja un círculo fuera de las casillas sólidas. Devuelve {hx, hy} si chocó.
 function collideTiles(e, tiles, solidFn) {
@@ -136,7 +177,8 @@ function computeFlow(tiles, tc, tr) {
 // ---------- Guardado ----------
 const Store = {
   key: 'lagrimas_sotano_v1',
-  data: { runs: 0, wins: 0, best: 0, muted: false, music: true, char: 0 },
+  // bestiary: id de enemigo o jefe -> veces derrotado (que exista la clave significa "visto")
+  data: { runs: 0, wins: 0, best: 0, muted: false, music: true, char: 0, bestiary: {} },
   load() { try { const s = localStorage.getItem(this.key); if (s) Object.assign(this.data, JSON.parse(s)); } catch (e) { /* sin almacenamiento */ } },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) { /* sin almacenamiento */ } },
 };

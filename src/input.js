@@ -7,7 +7,7 @@ const KEYMAP = {
   ArrowUp: 'fup', ArrowDown: 'fdown', ArrowLeft: 'fleft', ArrowRight: 'fright',
   KeyE: 'bomb', Space: 'active', KeyQ: 'pill', KeyP: 'pause', Escape: 'pause',
   KeyM: 'mute', Enter: 'confirm', NumpadEnter: 'confirm', KeyR: 'restart',
-  KeyT: 'cheats', Backquote: 'cheats', KeyF: 'swap', ControlLeft: 'swap',
+  KeyB: 'bestiary', KeyT: 'cheats', Backquote: 'cheats', KeyF: 'swap', ControlLeft: 'swap',
 };
 const FIRE_KEYS = { fup: [0, -1], fdown: [0, 1], fleft: [-1, 0], fright: [1, 0] };
 const STICK_R = 52;
