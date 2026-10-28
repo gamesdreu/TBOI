@@ -1,0 +1,724 @@
+# Efectos de cada coleccionable (clave = identificador de la wiki).
+# Formato: CLAVE  tokens...  [# nota propia mostrada en el juego]
+# Estadísticas: dmg+ dmg* tps+ tps* spd+ rng+ (casillas) sht+ lck+   Vida: hp+ hpe+ heal heal+ soul+ black+ setmax:
+# Recursos: coin+ bomb+ key+ drop:tipo*n,...   Lágrimas: +homing +pierce ... (? = probabilidad)   Modo: M:xxx
+# Familiar: fam:xxx   Activo: cN (cargas) c0 (sin carga) once start0 use:efecto,...   Eventos: on:hurt|kill|enter|clear|floor|shoot[?]:efecto
+# Reservas: @t tesoro @b jefe @s tienda @d diablo @a ángel @x secreta @n ninguna    Calidad: q0..q4
+1 tps+0.7 @t q3
+2 +x3 tps*0.51 @t q2
+3 +homing @t q3
+4 dmg+0.5 dmg*1.5 @t q4
+5 rng+1.5 sht+0.6 @t q1
+6 tps+1.5 rng-2.5 +yellow @t q1
+7 dmg+1 +blood @t q3
+8 fam:bobby @t q1
+9 +skatole @t q0
+10 fam:prettyfly fam:prettyfly @t q2
+11 revive:self @t q3
+12 hp+1 heal dmg+0.3 dmg*1.5 rng+1.5 spd+0.3 size+ @t q4
+13 spd+0.2 +viruscontact @t q1
+14 rng+1.5 spd+0.3 @t q1
+15 hp+1 heal @t @b q1
+16 hp+2 heal @b q1
+17 key+99 @x @s q2
+18 coin+99 @x q2
+19 bomb+10 @x @t q1
+20 +flight @t q2
+21 +compass @s @t q1
+22 hp+1 heal+4 @b q0
+23 hp+1 heal+4 @b q0
+24 hp+1 heal+4 @b q0
+25 hp+1 heal+4 @b q0
+26 hp+1 heal+4 @b q0
+27 spd+0.3 @b @t q1
+28 spd+0.3 @b q1
+29 rng+1.5 use:flies:4 once:pickup @b q1
+30 rng+1.5 +contact:12 @b q1
+31 rng+1.5 drop:heart @b q1
+32 tps+0.7 @t q2
+33 c4 use:rflight,nukeboss:40 @a @t q2
+34 c3 use:rdmg:2 +devil @d @t q2
+35 c3 use:nuke:40 @d @t q2
+36 c1 use:poop @t q0
+37 c2 use:megabomb @t q1
+38 c3 use:ring:10 @t q2
+39 c3 use:freeze:4 @t q1
+40 c0 use:kami @t q1
+41 c3 use:fear:5 @t q0
+42 c3 use:bobhead @t q1
+44 c2 use:tele @t q1
+45 c4 use:heal:2 @t q1
+46 lck+1 @t @s q1
+47 c2 use:missile @t q1
+48 +pierce @t q2
+49 c2 use:shoop @t q2
+50 dmg+1 @t q2
+51 dmg+1 +devil @t @d q2
+52 M:fetus @t q3
+53 +magnet @t @s q1
+54 +map @s @t q1
+55 +back? @t q1
+56 c2 use:creep @t q0
+57 fam:distant @t q1
+58 c3 use:shield:10 @t @a q3
+60 +ladder @t @s q0
+62 dmg+0.3 +vampire @d q2
+63 +battery @s q2
+64 +sale @s q2
+65 c3 use:troll:6 @t q1
+66 c2 use:slow:8 @t q1
+67 fam:maggy @t q1
+68 M:laser @t q3
+69 M:choco @t q3
+70 dmg+1 spd+0.2 @t q2
+71 spd+0.3 rng-1.1 size- @t q1
+72 soul+3 tps+0.5 @a @s q1
+73 fam:cube @t @d q2
+74 coin+25 @x @s q1
+75 +phd heal+4 drop:pill @t @a q2
+76 +xray @s q1
+77 c6 use:unicorn:6 @t q1
+78 c6 use:soul:2 +angel @t @a q1
+79 soul+1 dmg+1 spd+0.2 @d q2
+80 dmg+0.5 tps+0.7 soul+2 @d q3
+81 revive:cat setmax:1 @t q2
+82 +flight spd+0.3 @d q2
+83 c6 use:black:1,rdmg:0.7 @d q1
+84 c6 use:trapdoor @t @s q2
+85 c6 use:card @t @s q1
+86 c3 use:monstro @t q1
+87 +loki? @t q2
+88 fam:chubby @t q1
+89 +slow? @t q1
+90 dmg+1 tps+0.2 spd-0.2 @t q2
+91 +compass @s q1
+92 hp+1 heal+2 soul+2 @b q1
+93 c6 use:unicorn:6,fear:6 @t q1
+94 fam:pennies @t q1
+95 fam:robo @t q1
+96 fam:chad @t q1
+97 c4 use:drop:random @t q1
+98 fam:relic @a q2
+99 fam:gish @t q1
+100 fam:lilsteven @t q1
+101 hp+1 heal+2 dmg+0.3 tps+0.2 rng+0.25 spd+0.3 @a q2
+102 c6 use:pill @t @s q1
+103 +poison? @t q1
+104 +split @t q2
+105 c6 use:reroll @t @s q4
+106 bomb+5 +bomb:big @t q2
+107 c6 use:rflight,rdmg:2 @t q1 # Simplificado: vuelo y daño durante la sala
+108 +wafer @t @a q2
+109 +moneypower @s @d q1
+110 rng+0.25 +freeze? @t q1
+111 c1 use:gas @t q0
+112 fam:guardian @a q2
+113 fam:demonbaby @d @t q2
+114 M:knife @d @t q4
+115 +spectral @t q1
+116 +volt9 @s q1
+117 on:hurt:deadbird @t q1
+118 M:brim @d q4
+119 hp+1 heal+10 spd+0.3 @t @b q2
+120 tps+1.7 spd+0.3 dmg*0.9 size- @t q1
+121 hpe+1 dmg+0.3 rng+0.25 spd-0.1 size+ @t q1
+122 +whore @d @t q2
+123 c3 use:tempfam:chubby @t q1
+124 c2 use:randomact @t q1
+125 bomb+5 +bomb:homing @t q2
+126 c1 use:hurt:2,rdmg:1.2 @d q1
+127 once use:refloor @t @x q2
+128 fam:foreveralone @t q1
+129 hpe+2 heal+1 spd-0.2 @b q1
+130 c2 +flight +pony use:dash @t q2
+131 fam:bombbag @t q1
+132 +coal @t q2
+133 c2 use:paw @d q1
+134 +guppytail @d q2
+135 c0 use:ivbag @t @s q0
+136 c2 use:decoy @t q0
+137 bomb+5 c1 use:detonate @t q0 # Simplificado: hace estallar tus bombas al momento
+138 hp+1 heal+2 dmg+0.3 @t @b q1
+139 drop:random @t q0 # No hay baratijas: suelta un recurso
+140 bomb+5 +bomb:poison @t q1
+141 drop:coin*7 @t q1
+142 +scapular @a @t q1
+143 spd+0.3 sht+0.2 @t @b q1
+144 fam:bum @t @s q1
+145 c1 use:flies:3 @d q2
+146 c6 use:hp:1 @a @t q1
+147 c3 use:breakrocks @t q1
+148 on:hurt:flies:3 @t q1
+149 M:ipecac dmg+3 tps*0.45 rng+1 +poison @t q3
+150 +teeth? @t q2
+151 on:kill?:flies:1 @t q1
+152 M:tech2 @t q2
+153 +x4 tps*0.42 @t q2
+154 dmg+1 @t q1
+155 fam:peeper @t q1
+156 on:hurt:charge @t q1
+157 +bloodylust @d @t q2
+158 c6 use:map,drop:soul @t @s q1
+159 +flight +spectral @d q2
+160 c4 use:light:5 @a q2
+161 revive:bluebaby @t @x q2
+162 on:hurt?:shield:7 @a @t q2
+163 fam:ghostbaby @t q1
+164 c1 use:flame @t q1
+165 dmg+1 sht+0.23 @t q1
+166 c6 use:rerollpk @t @s q2
+167 fam:harlequin @t q2
+168 M:epic @t q4
+169 dmg+4 dmg*1.5 tps*0.45 +big @t q3
+170 fam:daddy @t q2
+171 c2 use:nuke:10,slow:10 @t q1
+172 fam:dagger @d q3
+173 +mitre @a q1
+174 fam:rainbow @t q1
+175 c2 use:doors @t @s q1
+176 hp+1 heal+2 sht+0.16 @b q1
+177 c0 use:slot @t @s q1
+178 fam:holywater @a @t q1
+179 +flight hp+1 heal+2 @a q2
+180 on:hurt:gas @t q1
+181 c6 +flight +pony use:dash,light:3 @a q2
+182 dmg*2.3 dmg+1 rng+1.1 tps-0.4 sht-0.25 spd-0.25 hp+1 heal +homing @a q4
+183 tps+0.7 sht+0.16 @t q1
+184 +flight hp+1 heal+2 @a q2
+185 +flight +spectral @a q2
+186 c3 use:hurt:2,nuke:40 @t q1
+187 fam:hairball @d @t q2
+188 fam:abel @t q1
+189 hp+1 heal dmg+0.3 tps+0.2 spd+0.2 rng+0.5 sht+0.2 @t q2
+190 bomb+99 @x q2
+191 +randtear @t @s q2
+192 c2 use:rhoming @t q1
+193 hp+1 heal+2 dmg+0.3 @t @b q1
+194 sht+0.16 drop:card @t q1
+195 drop:pill*4 @t q1
+196 tps+0.4 drop:soul*2 @t q1
+197 dmg+0.5 rng+0.25 @t @a q1
+198 drop:coin,key,bomb,heart,card,pill,random @t @s q1
+199 key+2 +momkey @t q1
+200 +charm? @t q1
+201 dmg+0.3 +confuse? @t q1
+202 +midas @t q2
+203 +humble @s q1
+204 on:hurt?:drop:random @t q1
+205 +sharpplug @t @s q1
+206 dmg+1 tps+0.5 @t q2
+207 fam:bandages @t q1
+208 dmg+1 +champions @t q1
+209 bomb+5 +bomb:confuse @t q1
+210 +leaf @t q2
+211 on:hurt:spiders:2 @t q1
+212 revive:50 @d q2
+213 sht-0.16 +shieldtears @t q1
+214 rng+1.5 on:hurt:trail @t q1
+215 +devil100 @d q3
+216 black+3 dmg+1 @d q2
+217 heal+2 on:shoot?:spiders:1 @t q1
+218 hp+1 heal+2 +regen @b @t q1
+219 hpe+1 on:hurt?:drop:heart @b q1
+220 bomb+5 +bomb:sad @t q1
+221 +bounce @t q2
+222 tps+1 @t q1 # Simplificado: solo el aumento de lágrimas
+223 bomb+5 +bomb:heal +fireimmune @t q2
+224 tps-0.4 rng-0.5 +quad @t q2
+225 on:kill?:drop:half on:hurt?:drop:soul @t q1
+226 hp+1 heal+2 soul+1 black+1 @t q1
+227 coin+3 on:hurt?:drop:coin @t q1
+228 tps+1 +fear? @t q1
+229 M:lung @t q3
+230 dmg+1.5 spd+0.2 +fear? setmax:0 black+6 @d q3
+231 +slow? +trail:tar @t q1
+232 on:hurt:slow:5 @t @s q2
+233 rng+3 +orbitear +spectral @t q1
+234 on:kill:spiders:1 @t q1
+236 +ecoli @t q0
+237 dmg+1.5 tps-0.3 +pierce +big @d @t q2
+238 +angel @a q1
+239 +angel @a q1
+240 +randomstats @t q1
+241 +contract @d q1
+242 +infamy @t q1
+243 +trinity @t q2
+244 +tech5? @t q1
+245 +x2 @t q3
+246 +bluemap @s q1
+247 +bffs @t q2
+248 +hivemind @t q1
+249 +options @t q2
+250 +bogo @s q1
+251 +deck drop:card @t q1
+252 +baggy drop:pill @t q1
+253 hp+1 heal+2 lck+1 @b q1
+254 dmg+0.5 rng+1.25 @t q1
+255 tps+0.5 sht+0.2 @t q1
+256 bomb+5 +bomb:fire @t q1
+257 +burn? @t q2
+258 +missingno @x q2
+259 dmg+1 +fear? @d @t q2
+260 black+1 +devil @d q2
+261 +proptosis @t q3
+262 black+1 on:hurt:lownuke @d q1
+263 c3 use:card @s q1
+264 fam:smartfly @t q1
+265 fam:drybaby @a q1
+266 fam:juicysack @t q1
+267 fam:robo2 @t q1
+268 fam:rotten @t q1
+269 fam:headless @t q1
+270 fam:leech @t q1
+271 fam:mystsack @t q1
+272 fam:bbf @t q1
+273 fam:bobbrain @t q1
+274 on:hurt:bestbud @t q1
+275 fam:lilbrim @d q3
+276 +isaacheart @t q2
+277 fam:lilhaunt @t q1
+278 fam:darkbum @d q1
+279 fam:bigfan @t q1
+280 fam:sissy @t q1
+281 fam:punchbag @t q0
+282 c1 use:jump @t q1
+283 c6 use:reroll,rerollpk @t @s q2
+284 c6 use:d4 @t q2
+285 c2 use:d10 @t q1
+286 c2 use:blankcard @t @s q2
+287 c6 use:map @t q1
+288 c4 use:spiders:5 @t q1
+289 c4 use:redflame @t q2
+290 c0 use:jar +jar @t q1
+291 c6 use:flush @t q1
+292 c6 use:black:1 +devil @d q2
+293 c6 use:krampus @d q2
+294 c1 use:pushback @t q0
+295 c0 use:fingers @s q1
+296 c2 use:convert @s q1
+297 once use:pandora @t q1
+298 c6 use:unicorn:5 @t q1
+299 spd-0.3 +taurus @t q1
+300 spd+0.25 +aries @t q1
+301 soul+3 @t q1
+302 +leo size+ @t q1
+303 on:hurt?:shield:10 +phd @t q1
+304 coin+6 bomb+6 key+6 +libra @t q2
+305 +poison @t q1
+306 spd+0.2 +pierce @t q2
+307 hp+1 heal+2 dmg+0.5 rng+0.75 tps-0.2 coin+1 bomb+1 key+1 @t q1
+308 +trail:holy @t q1
+309 tps+1 +knock +big @t q1
+310 dmg*2 tps*0.66 sht-0.5 @d @t q2
+311 revive:darkjudas @d q2
+312 hp+1 heal+2 +maggybow @t q1
+313 +mantle @a q4
+314 hp+1 heal+2 spd-0.4 +leo @t q1
+315 +homing rng+0.5 @t q1 # Simplificado: las lágrimas atraen y buscan enemigos
+316 M:cursed @d @t q1
+317 +creephit @t q1
+318 fam:gemini @t q1
+319 fam:caineye @t q1
+320 fam:onlyfriend @t q2
+321 fam:chains @t q1
+322 fam:mongo @t q1
+323 c2 use:ring:8 @t q2
+324 c6 use:tele:secret @t q1
+325 c4 use:turret @t q1
+326 c1 use:shield:2 @a q1
+327 on:hurt:lowshield @n q2
+328 on:hurt:lownuke @n q2
+329 M:ludo @t q2
+330 tps*4 dmg*0.2 size- @t q2
+331 dmg+0.5 tps-0.3 rng+1.2 sht-0.3 +homing +auratear @a q4
+332 revive:laz @t q2
+333 +mind @t q2
+334 hp+3 heal @t q2
+335 soul+2 +repel @t q2
+336 +pierce +spectral +big rng-1.5 sht-0.4 @t q1
+337 on:enter?:slow:6 @t q1
+338 c2 use:boomerang @t q1
+339 black+1 rng+1.5 sht+0.16 @d @t q1
+340 spd+0.3 drop:pill size- @t q1
+341 tps+0.7 sht+0.16 @t q1
+342 hp+1 heal+2 tps+0.7 sht-0.16 @t q1
+343 soul+1 lck+1 drop:key*2 @s @t q1
+344 black+1 drop:bomb*3 @d @t q1
+345 dmg+1 rng+1.5 @t q2
+346 hp+1 heal+2 @b q0
+347 once use:dupe @t q3
+348 c4 use:placebo @t @s q1
+349 c1 use:nickel @t q1
+350 on:enter:poisonall @t q1
+351 c3 use:freeze:3,gas @t q1
+352 c4 use:glasscannon @d q2
+353 bomb+5 +bomb:cross @t q1
+354 hp+1 heal+2 drop:random @b q1
+355 rng+1.25 lck+1 soul+1 @b @t q1
+356 +carbattery @s q2
+357 c4 use:dupfam @t q2
+358 +wiz +spectral @t q1
+359 dmg+1.5 +knock @t q2
+360 fam:incubus @d q4
+361 fam:fatereward @a q1
+362 fam:lilchest @t q1
+363 fam:sworn @a q2
+364 fam:friendzone @t q1
+365 fam:lostfly @t q1
+366 bomb+5 +bomb:scatter @t q1
+367 bomb+5 +bomb:sticky @t q1
+368 +epiphora @t q2
+369 +continuum +spectral rng+0.75 @t q1
+370 tps+0.7 rng+1.5 drop:heart,soul,half @t @b q1
+371 on:hurt:troll:6 @d q0
+372 fam:chargedbaby @t q1
+373 +deadeye @t q2
+374 +holy? @a q2
+375 +explosionimmune +shieldtears @t q1
+376 +restock @s q2
+377 +spiderfriend @t q0
+378 +numbertwo @t q1
+379 +spectral +big @t q1
+380 coin+5 +paytoplay @s q1
+381 tps+0.7 @t q1
+382 c3 use:charm:10 @t q1 # Simplificado: enamora a los enemigos de la sala
+383 c1 use:detonatetears @t q1
+384 fam:lilgurdy @t q1
+385 fam:bumbo @t q1
+386 c3 use:d12 @t q1
+387 fam:censer @a q2
+388 fam:keybum @s q1
+389 fam:runebag @t q1
+390 fam:seraphim @a q2
+391 on:hurt:charm:6 @t q1
+392 +zodiac @t q1
+393 +poison? +viruscontact @d q1
+394 +homing tps+0.5 @t q2 # Simplificado: apunta solo a los enemigos
+395 M:techx @t q3
+396 c0 use:tele:start @t q0 # Simplificado: vuelve a la sala inicial
+397 tps+0.5 rng+1.5 sht+0.16 @t q1
+398 +fear? +slow? @t q1
+399 M:maw @d q3
+400 fam:spear @a q2
+401 +stickybomb? @t q1
+402 drop:random*4 +chaos @t q2
+403 fam:spidermod +hpbars @s q1
+404 fam:fartbaby @t q1
+405 fam:gbbug @t q1
+406 c4 use:d8 @t q2
+407 +purity @t q2
+408 on:hurt:athame @d q1
+409 black+2 +emptyvessel @d q2
+410 +evileye? @t q1
+411 +lustyblood @d @t q1
+412 +cambion @d q1
+413 +immaculate @a q1
+414 +moreoptions @t q2
+415 soul+2 +crown @a q3
+416 +deeppockets @s q1
+417 fam:succubus @d q2
+418 +randtear @t q2
+419 c4 use:tele:new @t q1
+420 +trail:black @d q1
+421 c2 use:charm:5 @t q0
+422 c2 use:tele:prev @t q2
+423 +aura:dmg @a q1
+424 +sackhead @s q0
+425 +aura:slow @t q1
+426 fam:obsessed @t q1
+427 c1 use:tnt @t q1
+428 soul+4 heal @t q1
+429 +keeperhead @t @s q1
+430 fam:papafly @t q1
+431 fam:multibaby @t q1
+432 bomb+5 +bomb:glitter @t q1
+433 on:hurt:fear:4 @t q1
+434 c0 use:jarflies +jarflies @t q1
+435 fam:lilloki @t q1
+436 on:hurt:rtps:2 @t q1
+437 c3 use:d7 @t q1
+438 soul+1 tps+0.75 size- @t q1
+439 c4 lck+1 use:drop:random @t q1
+440 +kidney? @t q1
+441 c12 use:megablast @t q4
+442 +darkcrown @d q1
+443 tps+0.3 +teeth? @t q1
+444 +pencil @t q1
+445 dmg+0.3 spd+0.1 @t q1
+446 +deadtooth @t q1
+447 +poison? @t q0
+448 on:hurt?:drop:heart on:hurt:trail @t q1
+449 soul+1 +reflect? @t q1
+450 +greed @s q1
+451 drop:card +tarotcloth @s q1
+452 on:hurt:ring:10 @t q1
+453 rng+1.5 +bones @t q1
+454 drop:card,pill +deeppockets @s q1
+455 rng+1.5 lck+1 drop:coin @t q1
+456 hp+1 heal+4 @b q0
+457 soul+1 +cone? @t q1
+458 drop:random @t q0
+459 +bleed? @t q1
+460 +confuse? @t q1
+461 +slow? on:kill?:flies:1 @t q1
+462 +pierce +homing @d q2
+463 dmg+0.3 +acid? @d q1
+464 soul+2 +glyph @t @a q1
+465 tps+0.35 +analog @t @s q1
+466 +contagion @t q1
+467 fam:finger @t q1
+468 fam:shade @d q1
+469 fam:depression @t q1
+470 fam:hushy @t q1
+471 fam:lilmonstro @t q2
+472 fam:kingbaby @t q1
+473 fam:bigchubby @t q1
+474 c4 use:glasscannon @n q1
+474b fam:tonsil @t q1
+475 once use:planc @d @t q1
+476 c4 use:d1 @t q1
+477 c6 use:void @d @a q3
+478 c1 use:freeze:6 @t q1
+479 c6 use:drop:random @t q0 # No hay baratijas: suelta un recurso
+480 c4 use:flies:3 @t q0
+481 c2 use:datamine @x q0
+482 c6 use:clicker @x q1
+483 once use:mamamega @t q2
+484 c2 use:nuke:15,fear:2 @t q0
+485 c4 use:crooked @t q1
+486 c2 use:fakehurt @t @x q0
+487 c4 use:peeler @d q1
+488 c2 use:metronome @t q1
+489 c2 use:dinfinity @t q2
+490 c12 once start0 use:dropitem*2 @t q2
+491 fam:acidbaby @t q1
+492 lck+1 +compass fam:yolisten @t q1
+493 +adrenaline @t q1
+494 +electric @t q1
+495 +firepepper? @t q1
+496 +needle? @t q1
+497 +camo @t q1
+498 +duality @d @a q2
+499 +eucharist @a q3
+500 fam:sackofsacks @t q1
+501 +gullet @s @d q1
+502 +creephit? @t q1
+503 +needle? fam:littlehorn @d q2
+504 c2 use:turret @t q0
+505 +pokego @t q1
+506 +bleed? dmg+0.5 @t q1 # Simplificado: daño y sangrado
+507 c2 use:nukex:1 @t q1
+508 fam:momrazor @t q1
+509 fam:bloodshot @t q1
+510 c12 use:nuke:60 @t q2 # Simplificado: un gran golpe a toda la sala
+511 fam:angryfly @t q1
+512 c4 use:blackhole @t q2
+513 dmg+0.1 soul+1 +fear? +charm? @t q1
+514 +modem @t q1
+515 once use:dropitem @t q2
+516 c4 use:sprinkler @t q1
+517 bomb+7 +bomb:fast @t q1
+518 fam:buddybox @t q1
+519 fam:lildelirium @t q1
+520 +jumper @t q1
+521 c6 use:coupon @s q1
+522 c2 use:telekinesis @t q1
+523 c4 use:movingbox @t q0
+524 +techzero @t q2
+525 on:hurt:orbit @t q1
+526 fam:sevenseals @d q1
+527 c4 use:drop:random,drop:coin @s q1 # Simplificado: el fantasma te trae recursos
+528 fam:prism @a q2
+529 +bounce rng+2 @t q1
+530 +deathlist @t q1
+531 M:haemo @t q3
+532 +burst @t q1
+533 +pierce +multihit @a q2
+534 +schoolbag @t q2
+535 soul+1 +blanket @t q1
+536 c2 use:altar @d q1
+537 fam:lilspewer drop:pill @t q1
+538 drop:random*3 @t q0
+539 fam:egg @t q1
+540 +flatstone @t q1
+541 hp+1 drop:heart*3 @b q1
+542 fam:slippedrib @t q1
+543 fam:hallowed @a q1
+544 fam:pointyrib @t q1
+545 c4 use:boneorbit:3 @d @t q1
+546 +aura:freeze @t q1
+547 hp+1 tps+0.7 drop:random @t q1
+548 fam:jawbone @t q1
+549 +brittle @t q1
+552 c0 use:trapdoor @n q1
+553 +poison? +stickybomb? @t q1
+554 +aura:fear @t q1
+555 c0 use:goldrazor @s q1
+556 c3 use:rbrim @d q2
+557 c1 use:fortune @t q0
+558 +sore? @t q1
+559 +aura:zap @t q1
+560 on:hurt:ring:10,rtps:1.2 @t q1
+561 tps*4 dmg*0.3 +randtear @t q2
+562 +rockbottom @t q3
+563 bomb+5 +bomb:random @t q1
+564 tps+0.5 sht+0.2 @t q1
+565 fam:bloodpuppy @d q1
+566 on:floor:soul:1 @t q1
+567 +paschal @a q2
+568 on:hurt?:shield:2 @a q1 # Simplificado: escudo al recibir daño
+569 +bloodoath @d q1
+570 +randtear @t q2
+571 spd+0.3 soul+2 +socks @t q1
+572 dmg+1 rng+2 sht-0.16 +homing @d q2
+573 hp+1 heal dmg*1.2 +orbitear? @a q3
+574 +aura:dmg @a q2
+575 fam:intruder @t q1
+576 +dirtymind @t q1
+577 once use:dupe @t q3 # Simplificado: duplica los objetos sin la espada
+578 c3 use:creep:big @t q1
+579 M:sword @a q3
+580 c4 use:doors,drop:chest @t q2 # Simplificado: abre puertas y da un cofre
+581 fam:psyfly @t q1
+582 c1 use:rtps:0.75 @t q1
+583 bomb+5 +bomb:rocket @t q1
+584 c4 use:wisp @a q2
+585 once start0 c12 use:soul:3,dropitem:a*2 @a q2
+586 +angel on:floor:soul:1 @a q2
+588 +sol @t q2
+589 tps+0.5 +bluemap @t q1
+590 spd+0.4 +mercurius @t q2
+591 hp+1 heal+2 +aura:charm @t q1
+592 dmg+0.5 +knock +acid? @t q1
+593 spd+0.2 +aries @t q1
+594 hp+2 heal+4 spd-0.3 +jupiter @t q1
+595 on:enter:saturn @t q1
+596 +freeze? +slow? @t q1
+597 tps+0.5 @t q1 # Simplificado: solo aumento de lágrimas
+598 tps+0.7 size-- @t q1
+599 +none @d q0 # Sin efecto en este juego (maldiciones)
+600 tps+0.4 @t q1
+601 tps+0.7 hp+1 heal+2 +angel @a q1
+602 +membercard @s q1
+603 use:charge once:pickup drop:battery*2 @s q1
+604 c1 use:throwrock @t q1
+605 c2 use:tempfam:peeper @t q1
+606 +rift? @t q1
+607 fam:boiled @t q1
+608 fam:freezer @t q1
+609 c2 use:reroll25 @t q2
+610 on:hurt:monstro @t q1
+611 c1 use:scream @t q1
+612 fam:lostsoul @a q1
+614 hp+1 heal+10 +bomb:blood @d q1
+615 fam:lildumpy @t q1
+616 +firepepper? @t q1
+617 +charm? @t q1 # Simplificado: los enemigos magnetizados se distraen
+618 +charm? @t q1 # Simplificado: los enemigos marcados se distraen
+619 +birthright @t q2
+621 heal +redstew @t q2
+622 once use:d4,dropitem @a q2 # Simplificado: cambia tus objetos y da uno nuevo
+623 key+5 +teeth? @t q1
+624 drop:card*5 @s q1
+625 c6 use:rdmg:5,shield:10 @t q3 # Simplificado: daño enorme e invencible un rato
+626 +none @n q1
+627 +none @n q1
+628 once use:dropitem*3 @x q4 # Simplificado: tres objetos al instante
+629 fam:botfly @t q1
+631 c6 use:halfhp @t q1
+632 lck+2 @t q1
+633 +flight heal soul+2 spd+0.1 @n q2
+634 on:enter:light:2 @d q1
+635 c1 use:jump @t q0
+636 once use:rkey @t q3
+637 +knock +confuse? @t q1
+638 c6 use:eraser @t q1
+639 c4 use:heal:2 @t q1
+640 c3 use:flame @d q1
+641 +trail:blood @d q1
+642 c4 use:magicskin @d q2
+643 soul+2 +flight +revelation @a q3
+644 +consolation @t q1
+645 fam:tinytoma @t q1
+646 bomb+5 +bomb:brim @d q1
+647 +volt45 @t q1
+649 fam:fruityplum @t q1
+650 c3 use:nuke:30 @t q1 # Simplificado: un aliado golpea a toda la sala
+651 fam:star @a q2
+652 fam:cubebaby @t q1
+653 c2 use:nuke:20 @a q1
+654 black+1 +falsephd @d q1
+655 c2 use:unicorn:3 @t q1
+657 on:kill:ringat:6 @t q1
+658 on:hurt:tempfam:mini @t q1
+659 rng+1.5 +big @t q1
+660 on:floor:map @t q1
+661 on:kill?:turret @t q1
+663 +toothnail @t q1
+664 hp+1 heal +bingeeater @t q2
+665 +none @t q0 # Sin efecto en este juego
+667 c0 use:tempfam:strawman once:pickup @t q1
+668 +none @n q0
+669 hp+1 heal+2 dmg+0.5 tps+0.5 spd+0.2 rng+0.5 sht+0.1 lck+1 @t q2
+670 +optionsq @t q1
+671 +candyheart @t q1
+672 +poundflesh @d q1
+673 +redemption @a q1
+674 revive:ghost @t q2
+675 on:hurt:doors,map @t q1
+676 +emptyheart @t q1
+677 on:hurt:shield:3,rflight @t q1
+678 +homing +pierce dmg+0.5 @d q3 # Simplificado: fetos que persiguen
+679 fam:lilabaddon @d q1
+680 +back? @t q1
+681 fam:lilportal @t q1
+682 fam:wormfriend @t q1
+683 on:kill?:boneorbit:1 @t q1
+684 on:kill?:boom:40:20 @d q1
+685 c3 use:wisp @a q1
+686 +soullocket @a q1
+687 c6 use:tempfam:chubby @t q1
+688 revive:child @t q1
+689 +glitchcrown @t q3
+690 +bellyjelly @t q1
+691 +sacredorb @a q2
+692 +none @d q1 # Sin efecto en este juego
+693 fam:swarm @t q2
+694 dmg+0.75 +heartbreak @d q1
+695 on:hurt:gust @d q1
+696 +aura:light @a q2
+697 +none @t q1 # Sin efecto en este juego
+698 fam:twisted fam:twisted @t q3
+699 +azazelrage @d q1
+700 +none @t q1 # Sin efecto en este juego
+701 on:floor:drop:chest @t q1
+702 on:hurt:wisp @a q1
+703 c1 use:rdmg:2,rflight @t q1 # Simplificado: te transformas un rato
+704 c6 use:unicorn:5,rdmg:3 @t q2
+705 c1 use:shield:1,nukex:2 @n q2
+706 c2 use:abyss @n q2
+707 hp+1 heal+4 @b q0
+708 dmg+1 @t q1
+709 c2 use:dash @t q1
+710 c0 use:craft @n q1 # Simplificado: convierte los recursos de la sala en un objeto
+711 c1 use:flip @n q1
+712 c6 use:wisp @n q2
+713 c2 use:sumpt @n q1
+714 +none @n q0
+715 +none @n q0
+716 coin+3 key+1 +keepersack @s q1
+717 on:enter?:spiders:2 @t q1
+719 c4 use:keeperbox @s q1
+720 c6 use:drop:random @t q1
+721 +tmtrainer @d q2
+722 c2 use:freeze:5 @n q1
+723 c6 use:spindown @t q2
+724 on:hurt:drop:half @t q1
+725 +none @t q1 # Sin efecto en este juego
+726 +none @t q1 # Sin efecto en este juego
+727 bomb+5 +bomb:ghost @t q1
+728 c3 use:tempfam:incubus @t q1
+729 c3 use:turret @t q1
+730 dmg+0.75 lck+1 @t q1
+731 dmg+0.5 rng+1 sht-0.1 @t q1
+732 dmg+1 tps+0.3 drop:card @t q1

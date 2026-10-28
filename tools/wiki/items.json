@@ -1,0 +1,5014 @@
+[
+{
+"key": "1",
+"id": 1,
+"name": "Cebolla triste",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "2",
+"id": 2,
+"name": "El Ojo Interior",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "3",
+"id": 3,
+"name": "Doblador de cucharas",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "4",
+"id": 4,
+"name": "Cabeza de Cricket",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "5",
+"id": 5,
+"name": "Mi reflejo",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "6",
+"id": 6,
+"name": "Número 1",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "7",
+"id": 7,
+"name": "Sangre del mártir",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "8",
+"id": 8,
+"name": "Hermano Bobby",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "9",
+"id": 9,
+"name": "Escatol",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "10",
+"id": 10,
+"name": "Halo de moscas",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "11",
+"id": 11,
+"name": "¡+1!",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "12",
+"id": 12,
+"name": "Hongo Mágico",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "13",
+"id": 13,
+"name": "El virus",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "14",
+"id": 14,
+"name": "Furia por esteroides",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "15",
+"id": 15,
+"name": "Menor que tres",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "16",
+"id": 16,
+"name": "Hígado crudo",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "17",
+"id": 17,
+"name": "Llave esquelética",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "18",
+"id": 18,
+"name": "Un dólar",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "19",
+"id": 19,
+"name": "¡Buum!",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "20",
+"id": 20,
+"name": "Transcendencia",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "21",
+"id": 21,
+"name": "La Brújula",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "22",
+"id": 22,
+"name": "Almuerzo",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "23",
+"id": 23,
+"name": "Cena",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "24",
+"id": 24,
+"name": "Postre",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "25",
+"id": 25,
+"name": "Desayuno",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "26",
+"id": 26,
+"name": "Carne podrida",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "27",
+"id": 27,
+"name": "Cuchara de madera",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "28",
+"id": 28,
+"name": "El cinturón",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "29",
+"id": 29,
+"name": "Ropa interior de Mamá",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "30",
+"id": 30,
+"name": "Tacones de Mamá",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "31",
+"id": 31,
+"name": "Labial de Mamá",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "32",
+"id": 32,
+"name": "Percha de Alambre",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "33",
+"id": 33,
+"name": "La Biblia",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "34",
+"id": 34,
+"name": "Libro de Belial",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "35",
+"id": 35,
+"name": "El Necronomicón",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "36",
+"id": 36,
+"name": "La Popó",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "37",
+"id": 37,
+"name": "Sr. Buum",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "38",
+"id": 38,
+"name": "Cabeza de Tammy",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "39",
+"id": 39,
+"name": "Sostén de Mamá",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "40",
+"id": 40,
+"name": "¡Kamikaze!",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "41",
+"id": 41,
+"name": "Toallita de Mamá",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "42",
+"id": 42,
+"name": "Cabeza podrida de Bob",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "44",
+"id": 44,
+"name": "¡Teletransporte!",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "45",
+"id": 45,
+"name": "Delicioso Corazón",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "46",
+"id": 46,
+"name": "Pie de la suerte",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "47",
+"id": 47,
+"name": "Control Remoto de Doctor",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "48",
+"id": 48,
+"name": "Flecha de Cupido",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "49",
+"id": 49,
+"name": "Kamehame... ¡¿Eeeeeeh?!",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "50",
+"id": 50,
+"name": "Steven",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "51",
+"id": 51,
+"name": "Pentáculo",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "52",
+"id": 52,
+"name": "Dr. Fetus",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "53",
+"id": 53,
+"name": "Magneto",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "54",
+"id": 54,
+"name": "Mapa del tesoro",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "55",
+"id": 55,
+"name": "Ojo de Mamá",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "56",
+"id": 56,
+"name": "Accidente de Limón",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "57",
+"id": 57,
+"name": "Admiración lejana",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "58",
+"id": 58,
+"name": "Libro de las Sombras",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "60",
+"id": 60,
+"name": "La escalera",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "62",
+"id": 62,
+"name": "Encanto del Vampiro",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "63",
+"id": 63,
+"name": "La Batería",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "64",
+"id": 64,
+"name": "Rebajas de Steam",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "65",
+"id": 65,
+"name": "Recetario de Anarquista",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "66",
+"id": 66,
+"name": "El reloj de arena",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "67",
+"id": 67,
+"name": "Hermana Maggy",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "68",
+"id": 68,
+"name": "Tecnología",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "69",
+"id": 69,
+"name": "Batido de chocolate",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "70",
+"id": 70,
+"name": "Hormonas de crecimiento",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "71",
+"id": 71,
+"name": "Honguito",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "72",
+"id": 72,
+"name": "Rosario",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "73",
+"id": 73,
+"name": "Cubo de Carne",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "74",
+"id": 74,
+"name": "Un cuarto",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "75",
+"id": 75,
+"name": "PHD",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "76",
+"id": 76,
+"name": "Visión de rayos X",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "77",
+"id": 77,
+"name": "Mi pequeño unicornio",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "78",
+"id": 78,
+"name": "Libro de Revelaciones",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "79",
+"id": 79,
+"name": "La marca",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "80",
+"id": 80,
+"name": "El pacto",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "81",
+"id": 81,
+"name": "Gato muerto",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "82",
+"id": 82,
+"name": "Señor del Abismo",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "83",
+"id": 83,
+"name": "El clavo",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "84",
+"id": 84,
+"name": "¡Necesitamos Ir Más Profundo!",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "85",
+"id": 85,
+"name": "Mazo de Cartas",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "86",
+"id": 86,
+"name": "Diente de Monstro",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "87",
+"id": 87,
+"name": "Cuernos de Loki",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "88",
+"id": 88,
+"name": "Pequeño Chubby",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "89",
+"id": 89,
+"name": "Picadura de araña",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "90",
+"id": 90,
+"name": "La Roca pequeña",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "91",
+"id": 91,
+"name": "Sombrero de espeleólogo",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "92",
+"id": 92,
+"name": "Súper Vendaje",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "94",
+"id": 94,
+"name": "Bolsa de centavos",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "95",
+"id": 95,
+"name": "Robo-Baby",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "96",
+"id": 96,
+"name": "Pequeño C.H.A.D.",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "97",
+"id": 97,
+"name": "Libro de los Pecados",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "98",
+"id": 98,
+"name": "La Reliquia",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "99",
+"id": 99,
+"name": "Pequeño Gish",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "100",
+"id": 100,
+"name": "Pequeño Steven",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "101",
+"id": 101,
+"name": "El Halo",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "102",
+"id": 102,
+"name": "Botella de Píldoras de Mamá",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "103",
+"id": 103,
+"name": "El Resfriado Común",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "104",
+"id": 104,
+"name": "El parásito",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "105",
+"id": 105,
+"name": "El D6",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "106",
+"id": 106,
+"name": "Sr. Mega",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "107",
+"id": 107,
+"name": "Las Tijeras Dentadas",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "108",
+"id": 108,
+"name": "La Hostia",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "109",
+"id": 109,
+"name": "Dinero = poder",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "110",
+"id": 110,
+"name": "Lentillas de Mamá",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "111",
+"id": 111,
+"name": "El frijol",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "112",
+"id": 112,
+"name": "Ángel Guardián",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "113",
+"id": 113,
+"name": "Bebé Demonio",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "115",
+"id": 115,
+"name": "Tabla Ouija",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "116",
+"id": 116,
+"name": "9 Voltios",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "117",
+"id": 117,
+"name": "Ave Muerta",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "118",
+"id": 118,
+"name": "Azufre",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "119",
+"id": 119,
+"name": "Bolsa de Sangre",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "120",
+"id": 120,
+"name": "Odd Mushroom (Thin)",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "121",
+"id": 121,
+"name": "Odd Mushroom (Large)",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "122",
+"id": 122,
+"name": "Ramera de Babilonia",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "123",
+"id": 123,
+"name": "Manual de monstruos",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "124",
+"id": 124,
+"name": "Manuscritos del Mar Muerto",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "125",
+"id": 125,
+"name": "Bobby-Bomba",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "126",
+"id": 126,
+"name": "Cuchilla",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "127",
+"id": 127,
+"name": "Olvídame Ya",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "128",
+"id": 128,
+"name": "Siempre solo",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "129",
+"id": 129,
+"name": "Cubo de manteca",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "130",
+"id": 130,
+"name": "Un poni",
+"kind": "a",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "131",
+"id": 131,
+"name": "Bolsa de Bombas",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "132",
+"id": 132,
+"name": "Un Trozo de Carbón",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "133",
+"id": 133,
+"name": "Pata de Guppy",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "134",
+"id": 134,
+"name": "Cola de Guppy",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "135",
+"id": 135,
+"name": "Bolsa I.V.",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "136",
+"id": 136,
+"name": "Mejor Amigo",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "137",
+"id": 137,
+"name": "Detonador remoto",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "138",
+"id": 138,
+"name": "Estigma",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "139",
+"id": 139,
+"name": "Bolso de Mamá",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "140",
+"id": 140,
+"name": "Maldición de Bob",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "141",
+"id": 141,
+"name": "Chico del desfile",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "142",
+"id": 142,
+"name": "Escapulario",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "143",
+"id": 143,
+"name": "Bola Rápida",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "144",
+"id": 144,
+"name": "Amigo Pordiosero",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "145",
+"id": 145,
+"name": "Cabeza de Guppy",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "146",
+"id": 146,
+"name": "Carta de Plegaria",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "147",
+"id": 147,
+"name": "Pico de Notch",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "148",
+"id": 148,
+"name": "Infestación",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "149",
+"id": 149,
+"name": "Ipecac",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "150",
+"id": 150,
+"name": "Amor Rudo",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "151",
+"id": 151,
+"name": "Miasis",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "152",
+"id": 152,
+"name": "Tecnología 2",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "153",
+"id": 153,
+"name": "Araña mutante",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "154",
+"id": 154,
+"name": "Exfoliación química",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "155",
+"id": 155,
+"name": "El fisgón",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "156",
+"id": 156,
+"name": "Hábito",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "157",
+"id": 157,
+"name": "Lujuria de Sangre",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "158",
+"id": 158,
+"name": "Bola de cristal",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "159",
+"id": 159,
+"name": "Espíritu de la noche",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "160",
+"id": 160,
+"name": "Desgarra el Cielo",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "161",
+"id": 161,
+"name": "Anj",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "162",
+"id": 162,
+"name": "Cruz celta",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "163",
+"id": 163,
+"name": "Bebé fantasma",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "164",
+"id": 164,
+"name": "La Vela",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "165",
+"id": 165,
+"name": "Gato de nueve colas",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "166",
+"id": 166,
+"name": "D20",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "167",
+"id": 167,
+"name": "Bebé Arlequín",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "168",
+"id": 168,
+"name": "Fetus Épico",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "169",
+"id": 169,
+"name": "Polifemo",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "170",
+"id": 170,
+"name": "Papá Patas-largas",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "171",
+"id": 171,
+"name": "Trasero Aracnido",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "172",
+"id": 172,
+"name": "Daga de sacrificio",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "173",
+"id": 173,
+"name": "Mitra",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "174",
+"id": 174,
+"name": "Bebé arcoíris",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "175",
+"id": 175,
+"name": "Llave de papá",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "176",
+"id": 176,
+"name": "Células madre",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "177",
+"id": 177,
+"name": "Tragamonedas portátil",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "178",
+"id": 178,
+"name": "Agua bendita",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "179",
+"id": 179,
+"name": "Destino",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "180",
+"id": 180,
+"name": "El frijol negro",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "181",
+"id": 181,
+"name": "Poni Blanco",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "182",
+"id": 182,
+"name": "Sagrado corazón",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "183",
+"id": 183,
+"name": "Mondadientes",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "184",
+"id": 184,
+"name": "Santo Grial",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "185",
+"id": 185,
+"name": "Paloma muerta",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "186",
+"id": 186,
+"name": "Derechos de sangre",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "187",
+"id": 187,
+"name": "Bola de pelo de Guppy",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "188",
+"id": 188,
+"name": "Abel",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "189",
+"id": 189,
+"name": "Súper Fan de SMB",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "190",
+"id": 190,
+"name": "Piro",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "191",
+"id": 191,
+"name": "Billete de 3 dólares",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "192",
+"id": 192,
+"name": "Telepatía para Tontos",
+"kind": "a",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "193",
+"id": 193,
+"name": "¡CARNE!",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "194",
+"id": 194,
+"name": "Bola 8 mágica",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "195",
+"id": 195,
+"name": "Monedero de Mamá",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "196",
+"id": 196,
+"name": "Squeezy",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "197",
+"id": 197,
+"name": "Jugo de Jesús",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "198",
+"id": 198,
+"name": "Caja",
+"kind": "p",
+"game": "Wrath_of_the_Lamb"
+},
+{
+"key": "199",
+"id": 199,
+"name": "Llave de Mamá",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "200",
+"id": 200,
+"name": "Sombra de ojos de Mamá",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "201",
+"id": 201,
+"name": "Barra de hierro",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "202",
+"id": 202,
+"name": "Toque de Midas",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "203",
+"id": 203,
+"name": "Humbleing Bundle",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "204",
+"id": 204,
+"name": "Riñonera",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "205",
+"id": 205,
+"name": "Enchufe Afilado",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "206",
+"id": 206,
+"name": "Guillotina",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "207",
+"id": 207,
+"name": "Bola de vendas",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "208",
+"id": 208,
+"name": "Cinturón de campeón",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "209",
+"id": 209,
+"name": "Bombas de Trasero",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "210",
+"id": 210,
+"name": "Hoja Roída",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "211",
+"id": 211,
+"name": "Bebé-araña",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "212",
+"id": 212,
+"name": "Collar de Guppy",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "213",
+"id": 213,
+"name": "Lentilla perdida",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "214",
+"id": 214,
+"name": "Anémico",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "215",
+"id": 215,
+"name": "Cabeza de cabra",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "216",
+"id": 216,
+"name": "Manto Ceremonial",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "217",
+"id": 217,
+"name": "Peluca de Mamá",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "218",
+"id": 218,
+"name": "Placenta",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "219",
+"id": 219,
+"name": "Vendaje Viejo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "220",
+"id": 220,
+"name": "Bombas Tristes",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "221",
+"id": 221,
+"name": "Pegamento Elástico",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "222",
+"id": 222,
+"name": "Anti-Gravedad",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "223",
+"id": 223,
+"name": "Piromaníaco",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "224",
+"id": 224,
+"name": "Cuerpo de Cricket",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "225",
+"id": 225,
+"name": "Máscara BDSM",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "226",
+"id": 226,
+"name": "Loto Negra",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "227",
+"id": 227,
+"name": "El Cochinito",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "228",
+"id": 228,
+"name": "Perfume de Mamá",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "229",
+"id": 229,
+"name": "Pulmón de Monstro",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "230",
+"id": 230,
+"name": "Abaddón",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "231",
+"id": 231,
+"name": "Bola de alquitrán",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "232",
+"id": 232,
+"name": "Cronómetro",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "233",
+"id": 233,
+"name": "Mini-Planeta",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "234",
+"id": 234,
+"name": "Infestación 2",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "236",
+"id": 236,
+"name": "E. Coli",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "237",
+"id": 237,
+"name": "Toque de la Muerte",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "238",
+"id": 238,
+"name": "Trozo de Llave 1",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "239",
+"id": 239,
+"name": "Trozo de Llave 2",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "240",
+"id": 240,
+"name": "Tratamiento experimental",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "241",
+"id": 241,
+"name": "Contrato de Abajo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "242",
+"id": 242,
+"name": "Infamia",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "243",
+"id": 243,
+"name": "Escudo de Trinidad",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "244",
+"id": 244,
+"name": "Tech.5",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "245",
+"id": 245,
+"name": "20/20",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "246",
+"id": 246,
+"name": "Mapa azul",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "247",
+"id": 247,
+"name": "Amigos X siempre",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "248",
+"id": 248,
+"name": "Mente de Colmena",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "249",
+"id": 249,
+"name": "Hay opciones",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "250",
+"id": 250,
+"name": "Bombas 2x1",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "251",
+"id": 251,
+"name": "Mazo inicial",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "252",
+"id": 252,
+"name": "Pequeña bolsa",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "253",
+"id": 253,
+"name": "Costra mágica",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "254",
+"id": 254,
+"name": "Coágulo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "255",
+"id": 255,
+"name": "Tornillo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "256",
+"id": 256,
+"name": "Bombas Ardientes",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "257",
+"id": 257,
+"name": "Mente en llamas",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "258",
+"id": 258,
+"name": "Missing No.",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "259",
+"id": 259,
+"name": "Materia oscura",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "260",
+"id": 260,
+"name": "Vela negra",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "261",
+"id": 261,
+"name": "Proptosis",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "262",
+"id": 262,
+"name": "Hoja 2 faltante",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "263",
+"id": 263,
+"name": "Runa limpia",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "264",
+"id": 264,
+"name": "Mosca Inteligente",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "265",
+"id": 265,
+"name": "Bebé Seco",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "266",
+"id": 266,
+"name": "Nido Jugoso",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "267",
+"id": 267,
+"name": "Robo-Baby 2.0",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "268",
+"id": 268,
+"name": "Bebé Podrido",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "269",
+"id": 269,
+"name": "Bebé sin Cabeza",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "270",
+"id": 270,
+"name": "Sanguijuela",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "271",
+"id": 271,
+"name": "Bolsa misteriosa",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "272",
+"id": 272,
+"name": "Mosca Hermosa",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "273",
+"id": 273,
+"name": "Cerebro de Bob",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "274",
+"id": 274,
+"name": "Gran Amigo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "275",
+"id": 275,
+"name": "Mini-Azufre",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "276",
+"id": 276,
+"name": "Corazón de Isaac",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "277",
+"id": 277,
+"name": "Mini-Espectro",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "278",
+"id": 278,
+"name": "Pordiosero Oscuro",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "279",
+"id": 279,
+"name": "Gran Fan",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "280",
+"id": 280,
+"name": "Sissy Patitas-Largas",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "281",
+"id": 281,
+"name": "Saco de boxeo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "282",
+"id": 282,
+"name": "Cómo saltar",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "283",
+"id": 283,
+"name": "D100",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "284",
+"id": 284,
+"name": "D4",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "285",
+"id": 285,
+"name": "D10",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "286",
+"id": 286,
+"name": "Carta en Blanco",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "287",
+"id": 287,
+"name": "Libro de Secretos",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "288",
+"id": 288,
+"name": "Caja de Arañas",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "289",
+"id": 289,
+"name": "Vela roja",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "290",
+"id": 290,
+"name": "El Jarro",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "291",
+"id": 291,
+"name": "¡Flush!",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "292",
+"id": 292,
+"name": "Biblia Satánica",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "293",
+"id": 293,
+"name": "Cabeza de Krampus",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "294",
+"id": 294,
+"name": "Frijol Mantequilla",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "295",
+"id": 295,
+"name": "Dedos mágicos",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "296",
+"id": 296,
+"name": "Conversor",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "297",
+"id": 297,
+"name": "Caja de Pandora",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "298",
+"id": 298,
+"name": "Paso de Unicornio",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "299",
+"id": 299,
+"name": "Tauro",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "300",
+"id": 300,
+"name": "Aries",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "301",
+"id": 301,
+"name": "Cáncer",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "302",
+"id": 302,
+"name": "Leo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "303",
+"id": 303,
+"name": "Virgo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "304",
+"id": 304,
+"name": "Libra",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "305",
+"id": 305,
+"name": "Escorpio",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "306",
+"id": 306,
+"name": "Sagitario",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "307",
+"id": 307,
+"name": "Capricornio",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "308",
+"id": 308,
+"name": "Acuario",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "309",
+"id": 309,
+"name": "Piscis",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "310",
+"id": 310,
+"name": "Rímel de Eva",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "311",
+"id": 311,
+"name": "Sombra de Judas",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "312",
+"id": 312,
+"name": "Moño de Maggy",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "313",
+"id": 313,
+"name": "Manto sagrado",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "314",
+"id": 314,
+"name": "Curvas Gruesas",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "315",
+"id": 315,
+"name": "Atractor extraño",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "316",
+"id": 316,
+"name": "Ojo maldito",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "317",
+"id": 317,
+"name": "Líquido misterioso",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "318",
+"id": 318,
+"name": "Géminis (Objeto)",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "319",
+"id": 319,
+"name": "El otro ojo de Caín",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "320",
+"id": 320,
+"name": "Único amigo de ???",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "321",
+"id": 321,
+"name": "Cadenas de Sansón",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "322",
+"id": 322,
+"name": "Bebé Mongo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "323",
+"id": 323,
+"name": "Lágrimas de Isaac",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "324",
+"id": 324,
+"name": "Undefined",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "325",
+"id": 325,
+"name": "Tijeras",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "326",
+"id": 326,
+"name": "Respiración de vida",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "327",
+"id": 327,
+"name": "La Polaroid",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "328",
+"id": 328,
+"name": "El Negativo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "329",
+"id": 329,
+"name": "La técnica de Ludovico",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "330",
+"id": 330,
+"name": "Leche de Soya",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "331",
+"id": 331,
+"name": "Deidad",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "332",
+"id": 332,
+"name": "Harapos de Lázaro",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "333",
+"id": 333,
+"name": "La Mente",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "334",
+"id": 334,
+"name": "El Cuerpo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "335",
+"id": 335,
+"name": "El Alma",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "336",
+"id": 336,
+"name": "Cebolla Muerta",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "337",
+"id": 337,
+"name": "Reloj Roto",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "338",
+"id": 338,
+"name": "El Búmeran",
+"kind": "a",
+"game": "Rebirth"
+},
+{
+"key": "339",
+"id": 339,
+"name": "El Gancho",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "340",
+"id": 340,
+"name": "Píldora de Cafeína",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "341",
+"id": 341,
+"name": "Foto destruida",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "342",
+"id": 342,
+"name": "Hongo Azul",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "343",
+"id": 343,
+"name": "Llave de casa",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "344",
+"id": 344,
+"name": "Caja de Fósforos",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "345",
+"id": 345,
+"name": "Synthol",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "346",
+"id": 346,
+"name": "Un Bocadillo",
+"kind": "p",
+"game": "Rebirth"
+},
+{
+"key": "347",
+"id": 347,
+"name": "Diplopia",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "348",
+"id": 348,
+"name": "Placebo",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "349",
+"id": 349,
+"name": "Moneda de Madera",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "350",
+"id": 350,
+"name": "Shock tóxico",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "351",
+"id": 351,
+"name": "Mega Frijol",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "352",
+"id": 352,
+"name": "Cañón de cristal",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "353",
+"id": 353,
+"name": "Bomber Boy",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "354",
+"id": 354,
+"name": "Crack Jacks",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "355",
+"id": 355,
+"name": "Perlas de Mamá",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "356",
+"id": 356,
+"name": "Batería de Coche",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "357",
+"id": 357,
+"name": "Cajón de Amigos",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "358",
+"id": 358,
+"name": "El genio",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "359",
+"id": 359,
+"name": "Clavos de 8 Pulgadas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "360",
+"id": 360,
+"name": "Íncubo",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "361",
+"id": 361,
+"name": "Premio del destino",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "362",
+"id": 362,
+"name": "Mini-Cofre",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "363",
+"id": 363,
+"name": "Protector fiel",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "364",
+"id": 364,
+"name": "Solo Amigos",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "365",
+"id": 365,
+"name": "Mosca perdida",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "366",
+"id": 366,
+"name": "Bombas de dispersión",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "367",
+"id": 367,
+"name": "Bombas Pegajosas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "368",
+"id": 368,
+"name": "Epífora",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "369",
+"id": 369,
+"name": "Continuo",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "370",
+"id": 370,
+"name": "Sr. Muñeca",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "371",
+"id": 371,
+"name": "Maldición de la torre",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "372",
+"id": 372,
+"name": "Bebé recargado",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "373",
+"id": 373,
+"name": "Ojo Muerto",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "374",
+"id": 374,
+"name": "Luz sagrada",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "375",
+"id": 375,
+"name": "Sombrero Host",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "376",
+"id": 376,
+"name": "Reponer",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "377",
+"id": 377,
+"name": "Nido repleto",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "378",
+"id": 378,
+"name": "Número 2",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "379",
+"id": 379,
+"name": "Pupila Doble",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "380",
+"id": 380,
+"name": "Pay To Play",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "381",
+"id": 381,
+"name": "Bendición del Edén",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "382",
+"id": 382,
+"name": "Bola amiga",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "383",
+"id": 383,
+"name": "Detonador de lágrimas",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "384",
+"id": 384,
+"name": "Mini-Gurdy",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "385",
+"id": 385,
+"name": "Bumbo",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "386",
+"id": 386,
+"name": "D12",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "387",
+"id": 387,
+"name": "Incensario",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "388",
+"id": 388,
+"name": "Pordiosero de Llaves",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "389",
+"id": 389,
+"name": "Bolsa de Runas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "390",
+"id": 390,
+"name": "Serafín",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "391",
+"id": 391,
+"name": "Traición",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "392",
+"id": 392,
+"name": "Zodíaco",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "393",
+"id": 393,
+"name": "Beso de Serpiente",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "394",
+"id": 394,
+"name": "En la Mira",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "395",
+"id": 395,
+"name": "Tech X",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "396",
+"id": 396,
+"name": "Bisturí Ventricular",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "397",
+"id": 397,
+"name": "Rayo tractor",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "398",
+"id": 398,
+"name": "Carne de Dioses",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "399",
+"id": 399,
+"name": "Fauces del Vacío",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "400",
+"id": 400,
+"name": "Lanza del destino",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "401",
+"id": 401,
+"name": "Explosivo",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "402",
+"id": 402,
+"name": "Caos",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "403",
+"id": 403,
+"name": "SpiderMod",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "404",
+"id": 404,
+"name": "Bebé Tira-Pedos",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "405",
+"id": 405,
+"name": "Error crítico",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "406",
+"id": 406,
+"name": "D8",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "407",
+"id": 407,
+"name": "Pureza",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "408",
+"id": 408,
+"name": "Athame",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "409",
+"id": 409,
+"name": "Recipiente vacío",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "410",
+"id": 410,
+"name": "Mal de Ojo",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "411",
+"id": 411,
+"name": "Sangre lujuriosa",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "412",
+"id": 412,
+"name": "Impura Concepción",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "413",
+"id": 413,
+"name": "Inmaculada Concepción",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "414",
+"id": 414,
+"name": "Más opciones",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "415",
+"id": 415,
+"name": "Corona de la luz",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "416",
+"id": 416,
+"name": "Bolsillos profundos",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "417",
+"id": 417,
+"name": "Súcubo",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "418",
+"id": 418,
+"name": "Pastel de frutas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "419",
+"id": 419,
+"name": "Teletransporte 2.0",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "420",
+"id": 420,
+"name": "Polvo Oscuro",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "421",
+"id": 421,
+"name": "Frijol Rojo",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "422",
+"id": 422,
+"name": "Reloj de Arena brillante",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "423",
+"id": 423,
+"name": "Círculo de protección",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "424",
+"id": 424,
+"name": "Cara de Bolsa",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "425",
+"id": 425,
+"name": "Luz Nocturna",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "426",
+"id": 426,
+"name": "Fan obsesionado",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "427",
+"id": 427,
+"name": "Mine Crafter",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "428",
+"id": 428,
+"name": "Pijama",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "429",
+"id": 429,
+"name": "Cabeza de Keeper",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "430",
+"id": 430,
+"name": "Mosca Papá",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "431",
+"id": 431,
+"name": "Bebé multidimensional",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "432",
+"id": 432,
+"name": "Bombas Brillantes",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "433",
+"id": 433,
+"name": "Mi sombra",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "434",
+"id": 434,
+"name": "Jarra de Moscas",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "435",
+"id": 435,
+"name": "Mini-Loki",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "436",
+"id": 436,
+"name": "¡Leche!",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "437",
+"id": 437,
+"name": "D7",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "438",
+"id": 438,
+"name": "Chupón",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "439",
+"id": 439,
+"name": "Caja de Mamá",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "440",
+"id": 440,
+"name": "Piedra de Riñón",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "441",
+"id": 441,
+"name": "Mega Ráfaga",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "442",
+"id": 442,
+"name": "Corona del Príncipe Oscuro",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "443",
+"id": 443,
+"name": "¡Manzana!",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "444",
+"id": 444,
+"name": "Lápiz",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "445",
+"id": 445,
+"name": "Diente de Perro",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "446",
+"id": 446,
+"name": "Diente Muerto",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "447",
+"id": 447,
+"name": "Frijol Persistente",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "448",
+"id": 448,
+"name": "Pedazo de vidrio",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "449",
+"id": 449,
+"name": "Placa Metálica",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "450",
+"id": 450,
+"name": "Ojo de Codicia",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "451",
+"id": 451,
+"name": "Tela de Tarot",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "452",
+"id": 452,
+"name": "Venas Varicosas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "453",
+"id": 453,
+"name": "Fractura Compuesta",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "454",
+"id": 454,
+"name": "Polidactilia",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "455",
+"id": 455,
+"name": "Moneda perdida de papá",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "456",
+"id": 456,
+"name": "Bocadillo nocturno",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "457",
+"id": 457,
+"name": "Cabeza de Cono",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "458",
+"id": 458,
+"name": "Ombligo",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "459",
+"id": 459,
+"name": "Infección sinusal",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "460",
+"id": 460,
+"name": "Glaucoma",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "461",
+"id": 461,
+"name": "Parasitoide",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "462",
+"id": 462,
+"name": "Ojo de Belial",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "463",
+"id": 463,
+"name": "Ácido sulfúrico",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "464",
+"id": 464,
+"name": "Glifo del equilibrio",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "465",
+"id": 465,
+"name": "Mando Analógico",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "466",
+"id": 466,
+"name": "Contagio",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "467",
+"id": 467,
+"name": "¡Dedo!",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "468",
+"id": 468,
+"name": "Sombra",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "469",
+"id": 469,
+"name": "Depresión",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "470",
+"id": 470,
+"name": "Shhh",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "471",
+"id": 471,
+"name": "Mini-Monstro",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "472",
+"id": 472,
+"name": "Rey Bebé",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "473",
+"id": 473,
+"name": "Gran Chubby",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "474",
+"id": 474,
+"name": "Cañón de cristal roto",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "474b",
+"id": 474,
+"name": "Amígdala",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "475",
+"id": 475,
+"name": "Plan C.",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "476",
+"id": 476,
+"name": "D1",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "477",
+"id": 477,
+"name": "Vacío",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "478",
+"id": 478,
+"name": "Pausa",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "479",
+"id": 479,
+"name": "Fundidora",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "480",
+"id": 480,
+"name": "Abono",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "481",
+"id": 481,
+"name": "Dataminer",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "482",
+"id": 482,
+"name": "Control Remoto",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "483",
+"id": 483,
+"name": "¡Mamá Mega!",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "484",
+"id": 484,
+"name": "Espera... ¿qué?",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "485",
+"id": 485,
+"name": "Moneda Doblada",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "486",
+"id": 486,
+"name": "Hoja sin Filo",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "487",
+"id": 487,
+"name": "Pelador de Papas",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "488",
+"id": 488,
+"name": "Metrónomo",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "489",
+"id": 489,
+"name": "D infinito",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "490",
+"id": 490,
+"name": "Alma de Edén",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "491",
+"id": 491,
+"name": "Bebé ácido",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "492",
+"id": 492,
+"name": "YO LISTEN!",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "493",
+"id": 493,
+"name": "Adrenalina",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "494",
+"id": 494,
+"name": "Escalera de Jacob",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "495",
+"id": 495,
+"name": "Pimiento fantasma",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "496",
+"id": 496,
+"name": "Eutanasia",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "497",
+"id": 497,
+"name": "Interior Camuflado",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "498",
+"id": 498,
+"name": "Dualidad",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "499",
+"id": 499,
+"name": "Eucaristía",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "500",
+"id": 500,
+"name": "Bolsa de Bolsas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "501",
+"id": 501,
+"name": "Esófago de Codicia",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "502",
+"id": 502,
+"name": "Grano grande",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "503",
+"id": 503,
+"name": "Cuernito",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "504",
+"id": 504,
+"name": "Nugget café",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "505",
+"id": 505,
+"name": "Poke Go",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "506",
+"id": 506,
+"name": "Apuñala espaldas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "507",
+"id": 507,
+"name": "Pajilla afilada",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "508",
+"id": 508,
+"name": "Afeitadora de Mamá",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "509",
+"id": 509,
+"name": "Ojo Dispara-lágrimas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "510",
+"id": 510,
+"name": "Delirious",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "511",
+"id": 511,
+"name": "Mosca Enojada",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "512",
+"id": 512,
+"name": "Agujero negro",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "513",
+"id": 513,
+"name": "Bozo",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "514",
+"id": 514,
+"name": "Modem Roto",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "515",
+"id": 515,
+"name": "Regalo misterioso",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "516",
+"id": 516,
+"name": "Aspersor",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "517",
+"id": 517,
+"name": "Bombas Rápidas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "518",
+"id": 518,
+"name": "Compañero Encajonado",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "519",
+"id": 519,
+"name": "Mini-Delirio",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "520",
+"id": 520,
+"name": "Cables de Salto",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "521",
+"id": 521,
+"name": "Cupón",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "522",
+"id": 522,
+"name": "Telequinesia",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "523",
+"id": 523,
+"name": "Caja de mudanza",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "524",
+"id": 524,
+"name": "Tecnología Cero",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "525",
+"id": 525,
+"name": "Lepra",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "526",
+"id": 526,
+"name": "Los 7 Sellos",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "527",
+"id": 527,
+"name": "¡Sr. YO!",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "528",
+"id": 528,
+"name": "Prisma angelical",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "529",
+"id": 529,
+"name": "¡Pop!",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "530",
+"id": 530,
+"name": "Lista de la muerte",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "531",
+"id": 531,
+"name": "Hemolacria",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "532",
+"id": 532,
+"name": "Lacrifagia",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "533",
+"id": 533,
+"name": "Trisagio",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "534",
+"id": 534,
+"name": "Mochila",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "535",
+"id": 535,
+"name": "Manto",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "536",
+"id": 536,
+"name": "Altar de sacrificio",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "537",
+"id": 537,
+"name": "Mini-vómitos",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "538",
+"id": 538,
+"name": "Canicas",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "539",
+"id": 539,
+"name": "Huevo misterioso",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "540",
+"id": 540,
+"name": "Piedra plana",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "541",
+"id": 541,
+"name": "Médula",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "542",
+"id": 542,
+"name": "Costilla deslizante",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "543",
+"id": 543,
+"name": "Suelo Santificado",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "544",
+"id": 544,
+"name": "Costilla con Punta",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "545",
+"id": 545,
+"name": "Libro de los Muertos",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "546",
+"id": 546,
+"name": "Anillo de papá",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "547",
+"id": 547,
+"name": "Papeles del divorcio",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "548",
+"id": 548,
+"name": "Hueso de Mandíbula",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "549",
+"id": 549,
+"name": "Huesos frágiles",
+"kind": "p",
+"game": "Afterbirth"
+},
+{
+"key": "552",
+"id": 552,
+"name": "Pala de Mamá",
+"kind": "a",
+"game": "Afterbirth"
+},
+{
+"key": "553",
+"id": 553,
+"name": "Mucormicosis",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "554",
+"id": 554,
+"name": "Muy aterrador",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "555",
+"id": 555,
+"name": "Hoja dorada",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "556",
+"id": 556,
+"name": "Sulfuro",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "557",
+"id": 557,
+"name": "Galleta de la fortuna",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "558",
+"id": 558,
+"name": "Dolor de ojo",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "559",
+"id": 559,
+"name": "120 voltios",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "560",
+"id": 560,
+"name": "Duele...",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "561",
+"id": 561,
+"name": "Leche de almendras",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "562",
+"id": 562,
+"name": "Fondo rocoso",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "563",
+"id": 563,
+"name": "Nancy Bombas",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "564",
+"id": 564,
+"name": "Una barra de jabón",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "565",
+"id": 565,
+"name": "Cachorro de sangre",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "566",
+"id": 566,
+"name": "Atrapasueños",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "567",
+"id": 567,
+"name": "Cirio pascual",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "568",
+"id": 568,
+"name": "Intervención divina",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "569",
+"id": 569,
+"name": "Juramento de sangre",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "570",
+"id": 570,
+"name": "Galleta de plastilina",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "571",
+"id": 571,
+"name": "Medias huérfanas",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "572",
+"id": 572,
+"name": "Ojo de lo Oculto",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "573",
+"id": 573,
+"name": "Corazón inmaculado",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "574",
+"id": 574,
+"name": "Ostensorio",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "575",
+"id": 575,
+"name": "El intruso",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "576",
+"id": 576,
+"name": "Mente sucia",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "577",
+"id": 577,
+"name": "Damocles",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "578",
+"id": 578,
+"name": "Limonada gratis",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "579",
+"id": 579,
+"name": "Espada espiritual",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "580",
+"id": 580,
+"name": "Llave Roja",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "581",
+"id": 581,
+"name": "Mosca psíquica",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "582",
+"id": 582,
+"name": "Hongo Mareante",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "583",
+"id": 583,
+"name": "Cohete en un jarro",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "584",
+"id": 584,
+"name": "Libro de virtudes",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "585",
+"id": 585,
+"name": "Caja de alabastro",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "586",
+"id": 586,
+"name": "La escalerilla",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "588",
+"id": 588,
+"name": "Sol",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "589",
+"id": 589,
+"name": "Luna",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "590",
+"id": 590,
+"name": "Mercurius",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "591",
+"id": 591,
+"name": "Venus",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "592",
+"id": 592,
+"name": "Terra",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "593",
+"id": 593,
+"name": "Mars",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "594",
+"id": 594,
+"name": "Jupiter",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "595",
+"id": 595,
+"name": "Saturnus",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "596",
+"id": 596,
+"name": "Uranus",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "597",
+"id": 597,
+"name": "Neptunus",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "598",
+"id": 598,
+"name": "Pluto",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "599",
+"id": 599,
+"name": "Cabeza vudú",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "600",
+"id": 600,
+"name": "Gotas para los ojos",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "601",
+"id": 601,
+"name": "Acto de contrición",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "602",
+"id": 602,
+"name": "Tarjeta de miembro",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "603",
+"id": 603,
+"name": "Bateria externa",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "604",
+"id": 604,
+"name": "Brazalete de Mamá",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "605",
+"id": 605,
+"name": "Cuchara heladera",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "606",
+"id": 606,
+"name": "Grieta ocular",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "607",
+"id": 607,
+"name": "Bebé hervido",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "608",
+"id": 608,
+"name": "Bebé congelante",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "609",
+"id": 609,
+"name": "D6 eterno",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "610",
+"id": 610,
+"name": "Pecho de ave",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "611",
+"id": 611,
+"name": "Laringe",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "612",
+"id": 612,
+"name": "Alma perdida",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "614",
+"id": 614,
+"name": "Bombas de sangre",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "615",
+"id": 615,
+"name": "Mini-Dumpy",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "616",
+"id": 616,
+"name": "Ojo de pájaro",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "617",
+"id": 617,
+"name": "Magnetita",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "618",
+"id": 618,
+"name": "Tomate podrido",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "619",
+"id": 619,
+"name": "Primogenitura",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "621",
+"id": 621,
+"name": "Guisado rojo",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "622",
+"id": 622,
+"name": "Génesis",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "623",
+"id": 623,
+"name": "Llave afilada",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "624",
+"id": 624,
+"name": "Pack potenciador",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "625",
+"id": 625,
+"name": "Mega Hongo",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "626",
+"id": 626,
+"name": "Pieza de Cuchillo 1",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "627",
+"id": 627,
+"name": "Pieza de Cuchillo 2",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "628",
+"id": 628,
+"name": "Acta de defunción",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "629",
+"id": 629,
+"name": "Mosca-bot",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "631",
+"id": 631,
+"name": "Cuchillo de carnicero",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "632",
+"id": 632,
+"name": "Nazar",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "633",
+"id": 633,
+"name": "Dogma",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "634",
+"id": 634,
+"name": "Purgatorio",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "635",
+"id": 635,
+"name": "Puntadas",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "636",
+"id": 636,
+"name": "Tecla R",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "637",
+"id": 637,
+"name": "Gotas de Knockout",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "638",
+"id": 638,
+"name": "Borrador",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "639",
+"id": 639,
+"name": "Corazón asqueroso",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "640",
+"id": 640,
+"name": "Urna de almas",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "641",
+"id": 641,
+"name": "Aceldama",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "642",
+"id": 642,
+"name": "Piel Mágica",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "643",
+"id": 643,
+"name": "Revelación",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "644",
+"id": 644,
+"name": "Premio consuelo",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "645",
+"id": 645,
+"name": "Mini-toma",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "646",
+"id": 646,
+"name": "Bombas de azufre",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "647",
+"id": 647,
+"name": "4,5 voltios",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "649",
+"id": 649,
+"name": "Ciruela frutal",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "650",
+"id": 650,
+"name": "Flauta ciruela",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "651",
+"id": 651,
+"name": "Estrella de Belén",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "652",
+"id": 652,
+"name": "Bebé en cubo",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "653",
+"id": 653,
+"name": "Vade retro",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "654",
+"id": 654,
+"name": "PHD falso",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "655",
+"id": 655,
+"name": "Gira para Ganar",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "657",
+"id": 657,
+"name": "Vasculitis",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "658",
+"id": 658,
+"name": "Célula gigante",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "659",
+"id": 659,
+"name": "Tropicamida",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "660",
+"id": 660,
+"name": "Cartomancia",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "661",
+"id": 661,
+"name": "Quinteto",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "663",
+"id": 663,
+"name": "Diente y Uña",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "664",
+"id": 664,
+"name": "Comedor compulsivo",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "665",
+"id": 665,
+"name": "Ojo de Guppy",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "667",
+"id": 667,
+"name": "Hombre de trapo",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "668",
+"id": 668,
+"name": "Nota de papá",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "669",
+"id": 669,
+"name": "Salchicha",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "670",
+"id": 670,
+"name": "¿Opciones?",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "671",
+"id": 671,
+"name": "Dulce de Corazón",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "672",
+"id": 672,
+"name": "Una libra de carne",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "673",
+"id": 673,
+"name": "Redención",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "674",
+"id": 674,
+"name": "Grilletes espirituales",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "675",
+"id": 675,
+"name": "Orbe Roto",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "676",
+"id": 676,
+"name": "Corazón vacío",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "677",
+"id": 677,
+"name": "Proyección astral",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "678",
+"id": 678,
+"name": "Cesárea",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "679",
+"id": 679,
+"name": "Mini-Abaddón",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "680",
+"id": 680,
+"name": "Venganza de Moctezuma",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "681",
+"id": 681,
+"name": "Mini-Portal",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "682",
+"id": 682,
+"name": "Gusano amigo",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "683",
+"id": 683,
+"name": "Espuelas de hueso",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "684",
+"id": 684,
+"name": "Alma hambrienta",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "685",
+"id": 685,
+"name": "Jarro de Fuegos Fatuos",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "686",
+"id": 686,
+"name": "Medallón de alma",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "687",
+"id": 687,
+"name": "Buscador de amigos",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "688",
+"id": 688,
+"name": "Niño interior",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "689",
+"id": 689,
+"name": "Corona con falla",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "690",
+"id": 690,
+"name": "Belly Jelly",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "691",
+"id": 691,
+"name": "Orbe Sagrado",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "692",
+"id": 692,
+"name": "Vínculo de Sangre",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "693",
+"id": 693,
+"name": "La enjambre",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "694",
+"id": 694,
+"name": "Corazón roto",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "695",
+"id": 695,
+"name": "Ventarrón sangriento",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "696",
+"id": 696,
+"name": "Salvación",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "697",
+"id": 697,
+"name": "Gemelo desvaneciente",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "698",
+"id": 698,
+"name": "Dúo retorcido",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "699",
+"id": 699,
+"name": "Furia de Azazel",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "700",
+"id": 700,
+"name": "Cámara de ecos",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "701",
+"id": 701,
+"name": "Tumba de Isaac",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "702",
+"id": 702,
+"name": "Espíritu vengativo",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "703",
+"id": 703,
+"name": "Esaú Jr.",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "704",
+"id": 704,
+"name": "¡Berserk!",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "705",
+"id": 705,
+"name": "Artes oscuras",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "706",
+"id": 706,
+"name": "Abismo",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "707",
+"id": 707,
+"name": "Banquete",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "708",
+"id": 708,
+"name": "Engrapadora",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "709",
+"id": 709,
+"name": "¡Suplex!",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "710",
+"id": 710,
+"name": "Bolsa de crafteo",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "711",
+"id": 711,
+"name": "Cambio",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "712",
+"id": 712,
+"name": "Lemegeton",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "713",
+"id": 713,
+"name": "Sumptorium",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "714",
+"id": 714,
+"name": "Llamado",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "715",
+"id": 715,
+"name": "Vaso de recolección",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "716",
+"id": 716,
+"name": "Bolsa de Keeper",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "717",
+"id": 717,
+"name": "Parientes de Keeper",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "719",
+"id": 719,
+"name": "Caja de Keeper",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "720",
+"id": 720,
+"name": "Jarra para todo",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "721",
+"id": 721,
+"name": "TMTRAINER",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "722",
+"id": 722,
+"name": "Anima Sola",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "723",
+"id": 723,
+"name": "Dado reductor",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "724",
+"id": 724,
+"name": "Hipercoagulación",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "725",
+"id": 725,
+"name": "IBS",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "726",
+"id": 726,
+"name": "Hemoptisis",
+"kind": "p",
+"game": "The_Binding_of_Isaac"
+},
+{
+"key": "727",
+"id": 727,
+"name": "Bombas fantasma",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "728",
+"id": 728,
+"name": "Gello",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "729",
+"id": 729,
+"name": "Ataque decapitado",
+"kind": "a",
+"game": "Repentance"
+},
+{
+"key": "730",
+"id": 730,
+"name": "Ojo de vidrio",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "731",
+"id": 731,
+"name": "Orzuelo",
+"kind": "p",
+"game": "Repentance"
+},
+{
+"key": "732",
+"id": 732,
+"name": "Anillo de Mamá",
+"kind": "p",
+"game": "Repentance"
+}
+]
