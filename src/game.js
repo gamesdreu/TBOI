@@ -228,6 +228,9 @@ const G = {
   },
 
   // ---------- Partida ----------
+  difficulty() { return clamp(Store.data.diff | 0, 0, DIFF_LEVELS.length - 1); },
+  cycleDifficulty() { Store.data.diff = (this.difficulty() + 1) % DIFF_LEVELS.length; Store.save(); Sfx.play('select'); },
+
   startRun() {
     const ch = CHARS[this.charSel];
     Store.data.char = this.charSel; Store.save();
@@ -239,6 +242,7 @@ const G = {
       bossesUsed: [], pillMap: PILL_COLORS.map((_, i) => order[i]), pillKnown: PILL_COLORS.map(() => false),
       kills: 0, time: 0, floorHit: false, killedBy: '', cheated: false, god: false, dmgx: false,
       noHitStreak: 0, dealsTaken: 0, devilDeals: 0, angelDeals: 0,   // jefes seguidos sin daño y tratos aceptados (ver dealChance)
+      diff: this.difficulty(),   // nivel elegido en el título (índice de DIFF_LEVELS)
     };
     for (const id of [...(ch.items || []), ch.active]) if (id) this.run.pool.delete(id);
     this.floorIdx = 0;
@@ -665,10 +669,12 @@ const G = {
     if (Input.take('down') || Input.take('fdown')) sel(i + cols);
     if (Input.take('pill') || Input.take('swap')) this.switchTab();
     if (Input.take('bestiary')) { this.openBestiary(); return; }
+    if (Input.take('difficulty')) this.cycleDifficulty();
     if (Input.take('confirm') || Input.take('active') || Input.take('bomb')) { this.startRun(); return; }
     const hit = this.tapHit();
     if (hit === 'play') this.startRun();
     else if (hit === 'bestiary') this.openBestiary();
+    else if (hit === 'difficulty') this.cycleDifficulty();
     else if (hit === 'tab0' || hit === 'tab1') { if (+hit.slice(3) !== this.charTab) this.switchTab(); }
     else if (hit && hit.startsWith('char')) {
       const j = +hit.slice(4);
@@ -1199,9 +1205,12 @@ const G = {
     // jugar
     const pb = port ? { x: 80, y: 500, w: 200, h: 44 } : { x: W / 2 - 80, y: 286, w: 160, h: 30 };
     this.menuButton(c, 'play', Input.touchMode ? 'Jugar' : 'Jugar (Enter)', pb.x, pb.y, pb.w, pb.h, true);
+    const dl = `Dificultad: ${DIFF_LEVELS[this.difficulty()].name}`;
+    if (port) this.menuButton(c, 'difficulty', dl, pb.x, pb.y + pb.h + 2, pb.w, 20, false);
+    else this.menuButton(c, 'difficulty', Input.touchMode ? dl : dl + ' (Tab)', pb.x + pb.w + 12, pb.y, 190, pb.h, false);
     const s = Store.data, fy = port ? 572 : 326;
     txt(c, `Partidas: ${s.runs}   ·   Victorias: ${s.wins}   ·   Mejor piso: ${s.best}`, W / 2, fy, 13, '#a8977a', 'center', '');
-    if (!Input.touchMode) txt(c, 'Flechas elegir · Q cambiar pestaña · Enter jugar · B bestiario · En partida: WASD mover, flechas disparar, T trucos', W / 2, fy + 14, 10.5, '#8a7a62', 'center', '');
+    if (!Input.touchMode) txt(c, 'Flechas elegir · Q cambiar pestaña · Enter jugar · Tab dificultad · B bestiario · En partida: WASD mover, flechas disparar, T trucos', W / 2, fy + 14, 10.5, '#8a7a62', 'center', '');
     else txt(c, 'Toca un personaje para elegirlo y otra vez para jugar', W / 2, fy + 18, 13, '#8a7a62', 'center', '');
     txt(c, 'Fan-game inspirado en The Binding of Isaac. Nombres y datos de la wiki de Fandom; arte y sonido originales.', W / 2, H - 7, port ? 8 : 9, '#6a5a46', 'center', '');
     this.menuButton(c, 'bestiary', Input.touchMode ? 'Bestiario' : 'Bestiario (B)', 10, port ? 12 : 10, port ? 110 : 100, port ? 28 : 24, false);
@@ -1239,7 +1248,7 @@ const G = {
     const W = this.mw, port = this.portrait, opts = this.pauseOptions();
     txt(c, 'PAUSA', W / 2, port ? 56 : 30, port ? 40 : 32, '#e9dcc0', 'center', '#1a0c06', FONT_TITLE);
     const seed = this.run.seed.toString(36).toUpperCase().padStart(7, '0');
-    txt(c, `${this.player.char.name}   ·   ${FLOORS[this.floorIdx].name}   ·   Semilla ${seed}`, W / 2, port ? 96 : 58, 14, '#a8977a', 'center', '');
+    txt(c, `${this.player.char.name}   ·   ${FLOORS[this.floorIdx].name}   ·   ${DIFF_LEVELS[this.run.diff | 0].name}   ·   Semilla ${seed}`, W / 2, port ? 96 : 58, 14, '#a8977a', 'center', '');
     if (port) {
       this.drawStats(c, 105, 125, 22, 16);
       txt(c, `Objetos (${this.player.items.length})`, 30, 268, 16, '#e9dcc0', 'left', '');
@@ -1380,7 +1389,7 @@ const G = {
     drawPlayer(c, Object.assign({}, this.player, { faceDir: 'down', shootAnim: 1, iframes: 0, holdT: 0, shield: 0, mantleUp: false, size: 1 }), W / 2, by + 104, 1.8);
     const lines = [
       won ? 'Has escapado del sótano.' : `Te mató: ${r.killedBy}`,
-      `Llegaste a: ${FLOORS[this.floorIdx].name}`,
+      `Llegaste a: ${FLOORS[this.floorIdx].name}  ·  ${DIFF_LEVELS[r.diff | 0].name}`,
       `Tiempo: ${mm}:${ss}   ·   Enemigos: ${r.kills}   ·   Objetos: ${this.player.items.length}`,
     ];
     lines.forEach((ln, i) => txt(c, ln, W / 2, by + 150 + i * 20, 16, '#3a2a1a', 'center', ''));

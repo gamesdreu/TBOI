@@ -30,6 +30,7 @@ Se juega mejor con el móvil en horizontal, aunque también funciona en vertical
 | Cambiar activo (Mochila) | F | Botón pequeño junto al objeto | RT |
 | Trucos | T o º | Pausa → Trucos | — |
 | Pausa | P / Esc | Botón de pausa | Start |
+| Dificultad | Tab (título) | Botón «Dificultad» del título | — |
 | Bestiario | B (título y pausa) | Botón «Bestiario» del título | — |
 | Silencio | M | En la pausa | Select |
 
@@ -76,6 +77,8 @@ mantén la dirección de disparo y suéltala para lanzar el ataque.
   jefes sin daño, salas especiales visitadas, tratos aceptados y objetos que la modifican), ofertas
   variadas (corazones, almas, monedas o llaves; pasivos y activos) y la probabilidad actual visible en
   la pausa y en el menú de trucos. Ver `docs/TRATOS.md`.
+- **Dificultad** a elegir al empezar (Fácil, Normal o Difícil; botón en el título o tecla Tab): cambia la vida de enemigos y
+  jefes y cuántos enemigos hay por sala. Ver `docs/DIFICULTAD.md`.
 - **Bestiario** (tecla B, o botón en el título): enemigos, mini-jefes y jefes que has visto, con su
   vida, dónde aparecen y cuántas veces los has derrotado.
 - **22 cartas del tarot** y **17 efectos de píldora** que se identifican al tomarlas.

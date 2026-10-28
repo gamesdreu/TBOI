@@ -493,3 +493,15 @@ _(Se añade una línea por cada tarea completada: fecha, tarea, archivos tocados
   ninguna categoría y siguen en Todos/Pasivos/Activos. Comprobado en el navegador: los filtros con sus cifras, el teclado sobre
   el botón, el botón ◀, la ficha con el objeto de descripción más larga y la etiqueta de cada botón (acortadas las largas para
   que quepan en vertical). Tocados: `src/items.js`, `src/game.js`.
+- 2026-10-28 · **Extra: dificultad al iniciar partida** · Tres niveles —Fácil, Normal y Difícil— que se eligen en el título (botón
+  «Dificultad» o tecla Tab; se guarda en `Store.data.diff` y la partida lo fija en `run.diff`) y se ven en la pausa y en la pantalla
+  final. Cada nivel multiplica la vida de enemigos, mini-jefes y jefes (×0,8 / ×1 / ×1,25) y el presupuesto de enemigos de las salas
+  normales (×0,85 / ×1 / ×1,12); `DIFF_LEVELS` y `diffMul` en `src/data.js`, aplicados en `makeEnemy` y `makeBoss`
+  (`src/entities.js`) y en `genNormal` (`src/gen.js`). Fuera de una partida vale 1, así que los validadores y el simulador miden
+  Normal. `tools/difficulty.mjs` admite `--dificultad=0|1|2`. Medido con la herramienta: tiempo de limpieza estimado ~0,8× en Fácil
+  y ~1,3× en Difícil, y Normal igual que antes (−4 % a +6 %). Mi primera versión (×0,75/×0,8 y ×1,35/×1,2) daba ×0,6 y ×1,6 y la
+  suavicé. Al probarla destapé que las herramientas tienen un `G.run` sin `diff` y caían en Fácil: ahora «sin diff» cuenta como
+  Normal. Comprobado en el juego: vida del Gaper 12,8 / 16 / 20 y del Glotón 332 / 415 / 519 en el piso 4, Tab alterna los tres
+  niveles y los guarda, la partida toma el elegido y la pausa lo muestra. No cambia el daño que recibe el jugador ni los objetos.
+  Tocados: `src/data.js`, `src/entities.js`, `src/gen.js`, `src/game.js`, `src/util.js`, `src/input.js`, `tools/difficulty.mjs`,
+  `docs/DIFICULTAD.md`, `README.md`.

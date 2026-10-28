@@ -178,7 +178,7 @@ function computeFlow(tiles, tc, tr) {
 const Store = {
   key: 'lagrimas_sotano_v1',
   // bestiary: id de enemigo o jefe -> veces derrotado (que exista la clave significa "visto")
-  data: { runs: 0, wins: 0, best: 0, muted: false, music: true, char: 0, bestiary: {} },
+  data: { runs: 0, wins: 0, best: 0, muted: false, music: true, char: 0, diff: 1, bestiary: {} },
   load() { try { const s = localStorage.getItem(this.key); if (s) Object.assign(this.data, JSON.parse(s)); } catch (e) { /* sin almacenamiento */ } },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) { /* sin almacenamiento */ } },
 };

@@ -2,9 +2,10 @@
 // Todo sale del código real (EN, CHAMPIONS, DIFFICULTY, pisos generados); lo único supuesto es el daño por segundo del
 // jugador y la vida efectiva de los enemigos con mecánicas especiales (tabla EFECTIVA). Método en docs/DIFICULTAD.md.
 //
-// Uso: node tools/difficulty.mjs [pisos por nivel, por defecto 150] [--crecimiento=0.25] [--sala=3]
+// Uso: node tools/difficulty.mjs [pisos por nivel, por defecto 150] [--crecimiento=0.25] [--sala=3] [--dificultad=1]
 //   --crecimiento: cuánto sube el daño por segundo del jugador por piso (0,25 = +25 % por piso)
 //   --sala: segundos fijos por sala (moverse, esquivar) que se suman al tiempo de limpieza
+//   --dificultad: nivel de la partida (0 Fácil, 1 Normal, 2 Difícil); cambia la vida y el presupuesto de enemigos
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -30,6 +31,9 @@ const ctx = vm.createContext({ console, Math, Uint8Array, Int16Array, Set, Map, 
 vm.runInContext(['util', 'data'].map(src).join('\n') + stubs + ['rooms', 'gen'].map(src).join('\n'), ctx);
 const get = e => vm.runInContext(e, ctx);
 const EN = get('EN'), FLOORS = get('FLOORS'), CH = get('CHAMPIONS'), D = get('DIFFICULTY');
+const NIVEL = opt('dificultad', 1);
+get('G').run.diff = NIVEL;
+const HPN = get('DIFF_LEVELS')[NIVEL].hp;   // multiplicador de vida del nivel (el del presupuesto ya lo aplica gen.js)
 
 // Vida efectiva = vida × mul (parte del tiempo que no se le puede dañar o que se protege) + vida de las crías que deja o llama.
 // Son estimaciones razonadas, no medidas: `mul` es 1 / (fracción del ciclo en que se le puede golpear).
@@ -53,7 +57,7 @@ const EFECTIVA = {
 const ORIGINALES = ['fly', 'afly', 'pooter', 'gaper', 'horf', 'clotty', 'spider', 'charger', 'hopper', 'boomfly', 'host', 'fatty', 'mulligan', 'globin', 'bigspider', 'hive', 'leaper'];
 
 function ehp(id, fi = 0) {
-  const e = EFECTIVA[id] || {}, sc = 1 + fi * D.hpPerFloor;
+  const e = EFECTIVA[id] || {}, sc = (1 + fi * D.hpPerFloor) * HPN;
   let v = EN[id].hp * sc * (e.mul || 1) + (e.extra || 0) * sc;
   for (const [h, n] of Object.entries(e.hijos || {})) v += EN[h].hp * sc * n;
   return v;
@@ -91,7 +95,7 @@ for (let fi = 0; fi < FLOORS.length; fi++) {
       for (const sp of r.spawns) {
         const c = sp.champ ? 1.7 : 1;                       // los campeones tienen de 1,4 a 2 veces más vida
         const e = ehp(sp.type, fi) * c;
-        enem++; vidaBruta += EN[sp.type].hp * (1 + fi * D.hpPerFloor) * c; vidaEf += e; coste += EN[sp.type].cost; if (sp.champ) camp++;
+        enem++; vidaBruta += EN[sp.type].hp * (1 + fi * D.hpPerFloor) * HPN * c; vidaEf += e; coste += EN[sp.type].cost; if (sp.champ) camp++;
         peso[sp.type] = (peso[sp.type] || 0) + e;
       }
     }

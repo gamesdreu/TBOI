@@ -530,7 +530,7 @@ function genNormal(room, fi, theme) {
     const types = [weighted(pool, grng)];
     if (grng() < 0.45) types.push(weighted(pool, grng));
     const D = DIFFICULTY;
-    let budget = (D.budgetBase + fi * D.budgetPerFloor + grng() * D.budgetSpread) * D.budgetFloorMul[fi] * area;
+    let budget = (D.budgetBase + fi * D.budgetPerFloor + grng() * D.budgetSpread) * D.budgetFloorMul[fi] * area * diffMul('budget');
     shuffle(far, grng);
     while (budget > 0 && room.spawns.length < 10 * area && far.length) {
       const type = pick(types, grng);

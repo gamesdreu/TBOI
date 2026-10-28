@@ -210,7 +210,7 @@ function computeFlow(tiles, tc, tr) {
 const Store = {
   key: 'lagrimas_sotano_v1',
   // bestiary: id de enemigo o jefe -> veces derrotado (que exista la clave significa "visto")
-  data: { runs: 0, wins: 0, best: 0, muted: false, music: true, char: 0, bestiary: {} },
+  data: { runs: 0, wins: 0, best: 0, muted: false, music: true, char: 0, diff: 1, bestiary: {} },
   load() { try { const s = localStorage.getItem(this.key); if (s) Object.assign(this.data, JSON.parse(s)); } catch (e) { /* sin almacenamiento */ } },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) { /* sin almacenamiento */ } },
 };
@@ -375,7 +375,7 @@ const KEYMAP = {
   ArrowUp: 'fup', ArrowDown: 'fdown', ArrowLeft: 'fleft', ArrowRight: 'fright',
   KeyE: 'bomb', Space: 'active', KeyQ: 'pill', KeyP: 'pause', Escape: 'pause',
   KeyM: 'mute', Enter: 'confirm', NumpadEnter: 'confirm', KeyR: 'restart',
-  KeyB: 'bestiary', KeyT: 'cheats', Backquote: 'cheats', KeyF: 'swap', ControlLeft: 'swap',
+  KeyB: 'bestiary', Tab: 'difficulty',KeyT: 'cheats', Backquote: 'cheats', KeyF: 'swap', ControlLeft: 'swap',
 };
 const FIRE_KEYS = { fup: [0, -1], fdown: [0, 1], fleft: [-1, 0], fright: [1, 0] };
 const STICK_R = 52;
@@ -579,6 +579,18 @@ const BOSS_DROPS = {
 // budgetFloorMul corrige el presupuesto de cada piso (1 = sin cambio) para que el tiempo de limpieza suba de forma
 // pareja: las reservas de Profundidades I y Cuevas I tienen enemigos más duros y sin él darían un escalón
 const DIFFICULTY = { hpPerFloor: 0.2, budgetBase: 2.2, budgetPerFloor: 0.75, budgetSpread: 1.8, budgetFloorMul: [1, 1, 0.94, 1, 0.87, 0.92, 1, 1] };
+// Nivel de dificultad que elige el jugador al empezar la partida (run.diff es el índice). hp multiplica la vida de enemigos,
+// mini-jefes y jefes; budget el presupuesto de enemigos de las salas normales (las plantillas con enemigos fijos solo cambian de vida).
+// Normal es la escala de DIFFICULTY sin tocar. Fuera del juego (herramientas) no hay partida y vale 1.
+const DIFF_LEVELS = [
+  { id: 'easy', name: 'Fácil', hp: 0.8, budget: 0.85 },
+  { id: 'normal', name: 'Normal', hp: 1, budget: 1 },
+  { id: 'hard', name: 'Difícil', hp: 1.25, budget: 1.12 },
+];
+function diffMul(k) {
+  const lv = typeof G !== 'undefined' && G && G.run && G.run.diff != null ? DIFF_LEVELS[G.run.diff] : null;
+  return lv ? lv[k] : 1;
+}
 
 // Variantes de campeón (cualquier enemigo puede serlo). w = peso al sortear; hp y r multiplican la vida y el radio;
 // speed multiplica la velocidad. Efectos propios: veloz (más rápido), explosivo (explota al morir), tóxico (deja
@@ -2441,7 +2453,7 @@ function genNormal(room, fi, theme) {
     const types = [weighted(pool, grng)];
     if (grng() < 0.45) types.push(weighted(pool, grng));
     const D = DIFFICULTY;
-    let budget = (D.budgetBase + fi * D.budgetPerFloor + grng() * D.budgetSpread) * D.budgetFloorMul[fi] * area;
+    let budget = (D.budgetBase + fi * D.budgetPerFloor + grng() * D.budgetSpread) * D.budgetFloorMul[fi] * area * diffMul('budget');
     shuffle(far, grng);
     while (budget > 0 && room.spawns.length < 10 * area && far.length) {
       const type = pick(types, grng);
@@ -3451,7 +3463,7 @@ function bestiaryKill(id) {
 function makeEnemy(type, x, y, o = {}) {
   const d = EN[type] || { hp: 10, r: 12, speed: 60 };
   if (!o.noSeen && EN[type]) bestiarySee(type);
-  const sc = 1 + G.floorIdx * DIFFICULTY.hpPerFloor;
+  const sc = (1 + G.floorIdx * DIFFICULTY.hpPerFloor) * diffMul('hp');
   const e = {
     type, x, y, vx: 0, vy: 0, kx: 0, ky: 0, r: d.r, hp: d.hp * sc, maxHp: d.hp * sc,
     flying: !!d.fly, speed: d.speed, t: Math.random() * 1.5, t2: rr(0.8, 2.2), state: 0,
@@ -3481,7 +3493,7 @@ function makeBoss(id, side, quiet) {
   const b = BOSSES[id];
   if (!quiet) bestiarySee(id);
   const final = id === 'mama' || id === 'corazon';
-  const sc = final ? 1 : 1 + G.floorIdx * 0.22;
+  const sc = (final ? 1 : 1 + G.floorIdx * 0.22) * diffMul('hp');
   const pos = id === 'corazon' ? { x: CX, y: CY } : bossPos(side, id === 'masa' ? 170 : 120);
   const e = makeEnemy('boss', pos.x, pos.y, { spawnT: 0.4 });
   Object.assign(e, { type: id, boss: true, kb: 0, hp: b.hp * sc, maxHp: b.hp * sc, r: b.r, name: b.name, flying: !!b.fly, state: 'idle', t2: 1.0 });
@@ -3604,7 +3616,7 @@ function damageEnemy(e, dmg, src, silent, force) {
 function killEnemy(e) {
   if (e.dead) return;
   if (e.type === 'globin' && e.state !== 'goo') {
-    Object.assign(e, { state: 'goo', hp: 7 * (1 + G.floorIdx * DIFFICULTY.hpPerFloor), t2: 4, contact: false, vx: 0, vy: 0, poison: 0, burn: 0, bleed: 0 });
+    Object.assign(e, { state: 'goo', hp: 7 * (1 + G.floorIdx * DIFFICULTY.hpPerFloor) * diffMul('hp'), t2: 4, contact: false, vx: 0, vy: 0, poison: 0, burn: 0, bleed: 0 });
     bloodBurst(e.x, e.y, 6); Sfx.play('kill');
     return;
   }
@@ -8669,6 +8681,9 @@ const G = {
   },
 
   // ---------- Partida ----------
+  difficulty() { return clamp(Store.data.diff | 0, 0, DIFF_LEVELS.length - 1); },
+  cycleDifficulty() { Store.data.diff = (this.difficulty() + 1) % DIFF_LEVELS.length; Store.save(); Sfx.play('select'); },
+
   startRun() {
     const ch = CHARS[this.charSel];
     Store.data.char = this.charSel; Store.save();
@@ -8680,6 +8695,7 @@ const G = {
       bossesUsed: [], pillMap: PILL_COLORS.map((_, i) => order[i]), pillKnown: PILL_COLORS.map(() => false),
       kills: 0, time: 0, floorHit: false, killedBy: '', cheated: false, god: false, dmgx: false,
       noHitStreak: 0, dealsTaken: 0, devilDeals: 0, angelDeals: 0,   // jefes seguidos sin daño y tratos aceptados (ver dealChance)
+      diff: this.difficulty(),   // nivel elegido en el título (índice de DIFF_LEVELS)
     };
     for (const id of [...(ch.items || []), ch.active]) if (id) this.run.pool.delete(id);
     this.floorIdx = 0;
@@ -9106,10 +9122,12 @@ const G = {
     if (Input.take('down') || Input.take('fdown')) sel(i + cols);
     if (Input.take('pill') || Input.take('swap')) this.switchTab();
     if (Input.take('bestiary')) { this.openBestiary(); return; }
+    if (Input.take('difficulty')) this.cycleDifficulty();
     if (Input.take('confirm') || Input.take('active') || Input.take('bomb')) { this.startRun(); return; }
     const hit = this.tapHit();
     if (hit === 'play') this.startRun();
     else if (hit === 'bestiary') this.openBestiary();
+    else if (hit === 'difficulty') this.cycleDifficulty();
     else if (hit === 'tab0' || hit === 'tab1') { if (+hit.slice(3) !== this.charTab) this.switchTab(); }
     else if (hit && hit.startsWith('char')) {
       const j = +hit.slice(4);
@@ -9640,9 +9658,12 @@ const G = {
     // jugar
     const pb = port ? { x: 80, y: 500, w: 200, h: 44 } : { x: W / 2 - 80, y: 286, w: 160, h: 30 };
     this.menuButton(c, 'play', Input.touchMode ? 'Jugar' : 'Jugar (Enter)', pb.x, pb.y, pb.w, pb.h, true);
+    const dl = `Dificultad: ${DIFF_LEVELS[this.difficulty()].name}`;
+    if (port) this.menuButton(c, 'difficulty', dl, pb.x, pb.y + pb.h + 2, pb.w, 20, false);
+    else this.menuButton(c, 'difficulty', Input.touchMode ? dl : dl + ' (Tab)', pb.x + pb.w + 12, pb.y, 190, pb.h, false);
     const s = Store.data, fy = port ? 572 : 326;
     txt(c, `Partidas: ${s.runs}   ·   Victorias: ${s.wins}   ·   Mejor piso: ${s.best}`, W / 2, fy, 13, '#a8977a', 'center', '');
-    if (!Input.touchMode) txt(c, 'Flechas elegir · Q cambiar pestaña · Enter jugar · B bestiario · En partida: WASD mover, flechas disparar, T trucos', W / 2, fy + 14, 10.5, '#8a7a62', 'center', '');
+    if (!Input.touchMode) txt(c, 'Flechas elegir · Q cambiar pestaña · Enter jugar · Tab dificultad · B bestiario · En partida: WASD mover, flechas disparar, T trucos', W / 2, fy + 14, 10.5, '#8a7a62', 'center', '');
     else txt(c, 'Toca un personaje para elegirlo y otra vez para jugar', W / 2, fy + 18, 13, '#8a7a62', 'center', '');
     txt(c, 'Fan-game inspirado en The Binding of Isaac. Nombres y datos de la wiki de Fandom; arte y sonido originales.', W / 2, H - 7, port ? 8 : 9, '#6a5a46', 'center', '');
     this.menuButton(c, 'bestiary', Input.touchMode ? 'Bestiario' : 'Bestiario (B)', 10, port ? 12 : 10, port ? 110 : 100, port ? 28 : 24, false);
@@ -9680,7 +9701,7 @@ const G = {
     const W = this.mw, port = this.portrait, opts = this.pauseOptions();
     txt(c, 'PAUSA', W / 2, port ? 56 : 30, port ? 40 : 32, '#e9dcc0', 'center', '#1a0c06', FONT_TITLE);
     const seed = this.run.seed.toString(36).toUpperCase().padStart(7, '0');
-    txt(c, `${this.player.char.name}   ·   ${FLOORS[this.floorIdx].name}   ·   Semilla ${seed}`, W / 2, port ? 96 : 58, 14, '#a8977a', 'center', '');
+    txt(c, `${this.player.char.name}   ·   ${FLOORS[this.floorIdx].name}   ·   ${DIFF_LEVELS[this.run.diff | 0].name}   ·   Semilla ${seed}`, W / 2, port ? 96 : 58, 14, '#a8977a', 'center', '');
     if (port) {
       this.drawStats(c, 105, 125, 22, 16);
       txt(c, `Objetos (${this.player.items.length})`, 30, 268, 16, '#e9dcc0', 'left', '');
@@ -9821,7 +9842,7 @@ const G = {
     drawPlayer(c, Object.assign({}, this.player, { faceDir: 'down', shootAnim: 1, iframes: 0, holdT: 0, shield: 0, mantleUp: false, size: 1 }), W / 2, by + 104, 1.8);
     const lines = [
       won ? 'Has escapado del sótano.' : `Te mató: ${r.killedBy}`,
-      `Llegaste a: ${FLOORS[this.floorIdx].name}`,
+      `Llegaste a: ${FLOORS[this.floorIdx].name}  ·  ${DIFF_LEVELS[r.diff | 0].name}`,
       `Tiempo: ${mm}:${ss}   ·   Enemigos: ${r.kills}   ·   Objetos: ${this.player.items.length}`,
     ];
     lines.forEach((ln, i) => txt(c, ln, W / 2, by + 150 + i * 20, 16, '#3a2a1a', 'center', ''));

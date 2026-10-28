@@ -80,3 +80,24 @@ enemigos más baratos por vida. Subirles el coste las haría más ligeras (menos
   objetos del jugador. Sirve para comparar pisos y enemigos entre sí, no para predecir segundos reales.
 - Los campeones cuentan con 1,7 veces la vida (la media de sus variantes).
 - Los jefes, las salas especiales y las salas de reto no entran en esta tabla.
+
+## Dificultad de la partida (nivel que se elige al empezar)
+
+En el título hay un botón **Dificultad** (también la tecla **Tab**) que alterna entre Fácil, Normal y Difícil; la elección se guarda
+y se aplica a las partidas nuevas (`run.diff`). Se ve en la pausa y en la pantalla final. Los niveles están en `DIFF_LEVELS`
+(`src/data.js`) y `diffMul('hp' | 'budget')` da el multiplicador (vale 1 fuera de una partida, así que las herramientas miden
+Normal salvo que se les pida otro nivel):
+
+| Nivel | Vida de enemigos, mini-jefes y jefes | Presupuesto de enemigos por sala | Tiempo de limpieza estimado |
+| --- | --- | --- | --- |
+| Fácil | ×0,80 | ×0,85 | ~0,8× (−16 % a −26 % frente a la curva) |
+| Normal | ×1 | ×1 | la curva objetivo (±6 %) |
+| Difícil | ×1,25 | ×1,12 | ~1,3× (+17 % a +35 % frente a la curva) |
+
+Notas: la vida se multiplica en `makeEnemy` y `makeBoss` (`src/entities.js`), así que cubre también a las crías y a los campeones; el
+presupuesto, en `genNormal` (`src/gen.js`), de modo que las plantillas con enemigos fijos (tarea 1.2) y las salas especiales
+cambian solo de vida, no de cantidad. No cambia el daño que recibe el jugador, los objetos ni los tratos. Para medir un nivel:
+
+```bash
+node tools/difficulty.mjs 100 --dificultad=2
+```

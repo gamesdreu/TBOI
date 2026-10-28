@@ -48,6 +48,18 @@ const BOSS_DROPS = {
 // budgetFloorMul corrige el presupuesto de cada piso (1 = sin cambio) para que el tiempo de limpieza suba de forma
 // pareja: las reservas de Profundidades I y Cuevas I tienen enemigos más duros y sin él darían un escalón
 const DIFFICULTY = { hpPerFloor: 0.2, budgetBase: 2.2, budgetPerFloor: 0.75, budgetSpread: 1.8, budgetFloorMul: [1, 1, 0.94, 1, 0.87, 0.92, 1, 1] };
+// Nivel de dificultad que elige el jugador al empezar la partida (run.diff es el índice). hp multiplica la vida de enemigos,
+// mini-jefes y jefes; budget el presupuesto de enemigos de las salas normales (las plantillas con enemigos fijos solo cambian de vida).
+// Normal es la escala de DIFFICULTY sin tocar. Fuera del juego (herramientas) no hay partida y vale 1.
+const DIFF_LEVELS = [
+  { id: 'easy', name: 'Fácil', hp: 0.8, budget: 0.85 },
+  { id: 'normal', name: 'Normal', hp: 1, budget: 1 },
+  { id: 'hard', name: 'Difícil', hp: 1.25, budget: 1.12 },
+];
+function diffMul(k) {
+  const lv = typeof G !== 'undefined' && G && G.run && G.run.diff != null ? DIFF_LEVELS[G.run.diff] : null;
+  return lv ? lv[k] : 1;
+}
 
 // Variantes de campeón (cualquier enemigo puede serlo). w = peso al sortear; hp y r multiplican la vida y el radio;
 // speed multiplica la velocidad. Efectos propios: veloz (más rápido), explosivo (explota al morir), tóxico (deja

@@ -988,7 +988,7 @@ function bestiaryKill(id) {
 function makeEnemy(type, x, y, o = {}) {
   const d = EN[type] || { hp: 10, r: 12, speed: 60 };
   if (!o.noSeen && EN[type]) bestiarySee(type);
-  const sc = 1 + G.floorIdx * DIFFICULTY.hpPerFloor;
+  const sc = (1 + G.floorIdx * DIFFICULTY.hpPerFloor) * diffMul('hp');
   const e = {
     type, x, y, vx: 0, vy: 0, kx: 0, ky: 0, r: d.r, hp: d.hp * sc, maxHp: d.hp * sc,
     flying: !!d.fly, speed: d.speed, t: Math.random() * 1.5, t2: rr(0.8, 2.2), state: 0,
@@ -1018,7 +1018,7 @@ function makeBoss(id, side, quiet) {
   const b = BOSSES[id];
   if (!quiet) bestiarySee(id);
   const final = id === 'mama' || id === 'corazon';
-  const sc = final ? 1 : 1 + G.floorIdx * 0.22;
+  const sc = (final ? 1 : 1 + G.floorIdx * 0.22) * diffMul('hp');
   const pos = id === 'corazon' ? { x: CX, y: CY } : bossPos(side, id === 'masa' ? 170 : 120);
   const e = makeEnemy('boss', pos.x, pos.y, { spawnT: 0.4 });
   Object.assign(e, { type: id, boss: true, kb: 0, hp: b.hp * sc, maxHp: b.hp * sc, r: b.r, name: b.name, flying: !!b.fly, state: 'idle', t2: 1.0 });
@@ -1141,7 +1141,7 @@ function damageEnemy(e, dmg, src, silent, force) {
 function killEnemy(e) {
   if (e.dead) return;
   if (e.type === 'globin' && e.state !== 'goo') {
-    Object.assign(e, { state: 'goo', hp: 7 * (1 + G.floorIdx * DIFFICULTY.hpPerFloor), t2: 4, contact: false, vx: 0, vy: 0, poison: 0, burn: 0, bleed: 0 });
+    Object.assign(e, { state: 'goo', hp: 7 * (1 + G.floorIdx * DIFFICULTY.hpPerFloor) * diffMul('hp'), t2: 4, contact: false, vx: 0, vy: 0, poison: 0, burn: 0, bleed: 0 });
     bloodBurst(e.x, e.y, 6); Sfx.play('kill');
     return;
   }
